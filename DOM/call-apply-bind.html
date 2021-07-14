@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fun() {
+            console.log('this.name', this.name);
+        };
+        let cat = {
+            name: "aaa"
+        }
+        let dog = {
+            name: 'bbb',
+            sayName() {
+                console.log(this.name)
+            },
+            eat(food1,food2) {
+                console.log("我喜欢吃" + food1+food2)
+            }
+        }
+        //call可以调用函数
+        fun.call(cat)
+        //call可以改变函数中this的指向
+        dog.sayName()  //bbb
+        dog.sayName.call(cat)  //aaa
+        dog.eat('ccc')
+        dog.eat.call(cat,'ddd','eee')
+        //apply传参是通过数组
+        dog.eat.apply(cat,['ddd','eee'])
+        //bind不会调用函数，apply会调用参数
+       let aa=  dog.eat.bind(cat,'ddd','eee')
+       aa()
+    </script>
+</body>
+
+</html>
