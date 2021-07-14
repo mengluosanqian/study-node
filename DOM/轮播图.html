@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="next">
+			next
+		</div>
+		<div class="prev">
+			prev
+		</div>
+		<div>
+			<div></div>
+		</div>
+		<div class="outer">
+			<ul class="ulstyle">
+				<li>
+					<img src="./img/1.jpg" />
+				</li>
+				<li>
+					<img src="./img/2.jpg" />
+				</li>
+				<li>
+					<img src="./img/3.jpg" />
+				</li>
+				<li>
+					<img src="./img/4.jpg" />
+				</li>
+
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/next.js"></script>
+		<script type="text/javascript" src="js/prev.js"></script>
+		<script>
+			var outer = document.querySelector('.outer')
+			var ulstyle = document.querySelector('.ulstyle')
+			var next = document.querySelector('.next')
+			var prev = document.querySelector('.prev')
+			var lis = document.querySelectorAll('li')
+			var index = 0
+
+			console.log(lis[index])
+			prev.addEventListener('mousemove', function() {
+				//console.log(next.style)
+				next.style.display = 'block'
+				prev.style.display = 'block'
+			})
+			next.addEventListener('mousemove', function() {
+				//console.log(next.style)
+				next.style.display = 'block'
+				prev.style.display = 'block'
+			})
+			outer.addEventListener('mousemove', function() {
+				//console.log(next.style)
+				next.style.display = 'block'
+				prev.style.display = 'block'
+			})
+			outer.addEventListener('mouseout', function() {
+				//console.log(next.style)
+				next.style.display = 'none'
+				prev.style.display = 'none'
+			})
+			ulstyle.style.left = '0px'
+			
+			
+			
+			next.addEventListener('click',nextclick)
+			prev.onclick = prevclick
+			
+		</script>
+		<style>
+			.prev {
+				position: absolute;
+				left: 320px;
+				top: 240px;
+				z-index: 9;
+				display: none;
+				background-color: #ddd;
+			}
+
+			.next {
+				position: absolute;
+				left: 770px;
+				top: 240px;
+				z-index: 9;
+				display: none;
+				background-color: #ddd;
+			}
+
+			.outer {
+				width: 500px;
+				height: 300px;
+				position: relative;
+				left: 300px;
+				top: 100px;
+				overflow: hidden;
+
+			}
+
+			ul {
+				display: block;
+				list-style-type: disc;
+				margin-block-start: 0;
+				margin-block-end: 0;
+				margin-inline-start: 0px;
+				margin-inline-end: 0px;
+				padding-inline-start: 0px;
+
+			}
+
+			.ulstyle {
+				/*去除li的点*/
+				list-style: none;
+				/*开启绝对定位 */
+				position: absolute;
+				/*设置ul的宽度*/
+				width: 2500px;
+				left: 0px;
+
+			}
+
+			.ulstyle li {
+				/*为图片设置浮动*/
+				float: left;
+			}
+		</style>
+	</body>
+</html>

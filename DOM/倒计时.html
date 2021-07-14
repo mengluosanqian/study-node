@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box" style="text-align: center;">
+			<div class="innerBox" id="h"></div>
+			<div class="innerBox" id="m"></div>
+			<div class="innerBox" id="s"></div>
+
+		</div>
+		<div class="success">
+			倒计时结束
+		</div>
+		<style>
+			.success {
+				display: none;
+				font-size: 32px;
+				font-weight: 600;
+				color: aqua;
+			}
+
+			.box {
+				display: block;
+				text-align: center;
+			}
+
+			.innerBox {
+				/* display: flex; */
+				width: 80px;
+				height: 80px;
+				line-height: 80px;
+				background-color: black;
+				margin-left: 16px;
+				float: left;
+				color: aliceblue;
+				font-size: 32px;
+				font-weight: 600;
+				text-align: center;
+
+			}
+		</style>
+		<!-- <script type="text/javascript" src="js/countdown.js"></script> -->
+		<script>
+			var hh = document.querySelector('#h')
+			var mm = document.querySelector('#m')
+			var ss = document.querySelector('#s')
+			var countdown = function() {
+				var date = new Date();
+				var now = date.getTime()
+				var str = "2021/7/13 00:00:00";
+				var endDate = new Date(str).getTime();
+				var cha = endDate - now
+				d = Math.floor(cha / 1000 / 60 / 60 / 24)
+				h = Math.floor(cha / 1000 / 60 / 60 % 24)
+				m = Math.floor(cha / 1000 / 60 % 60)
+				s = Math.floor(cha / 1000 % 60)
+
+				if (h < 10) {
+					h = '0' + h
+				}
+				if (m < 10) {
+					m = '0' + m
+				}
+				if (s < 10) {
+					s = '0' + s
+				}
+
+				hh.innerHTML = h
+				mm.innerHTML = m
+				ss.innerHTML = s
+				stop()
+			}
+			countdown()
+			var timer = setInterval(countdown, 1000)
+			var stop = function() {
+				if (ss.innerHTML == '00'  && hh.innerHTML == '00' && mm.innerHTML == '00') {
+					clearInterval(timer)
+					var box = document.querySelector('.box')
+					box.style.display = 'none'
+					var success = document.querySelector('.success')
+					success.style.display = 'block'
+				}
+			}
+		</script>
+	</body>
+</html>

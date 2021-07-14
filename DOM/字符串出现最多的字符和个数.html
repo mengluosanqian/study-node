@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/* var a = "estthistprojecthelloworld!";
+
+			var arr = a.split('')
+
+			var b = 0;
+			let obj = {}
+			arr.forEach((item) => {
+				obj[item] = obj[item] ? obj[item] + 1 : 1
+				b = item
+				console.log(b)
+			})
+			var maxNum = 0
+			
+			for(var i in obj){
+				
+				if(obj[i] > maxNum){				
+					maxNum = obj[i]
+				}
+			}
+			console.log(maxNum,b) */
+			var str = 'estthistprojecthelloworld';
+			    var obj = {};
+			    var arr = [];
+			    var letter;
+			    for(var i = 0,len = str.length;i<len;i++){
+			            letter = str[i];
+			        if(!obj[letter]){   // 第一次放进去
+			            obj[letter] = 1;
+			        }else{  
+			            obj[letter]++;
+			            }
+			    }
+			    var max_key,max_num=0;
+			    for(key in obj){
+			        if(max_num <obj[key]){
+			            max_num = obj[key];
+			            max_key = key;
+			        }
+			    }
+			        document.write('字母：'+max_key+'　次数：'+max_num);
+		
+		</script>
+	</body>
+</html>

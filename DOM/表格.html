@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<style>
+			ul {
+				width: 500px;
+				border: 1px solid black;
+				display: flex;
+
+			}
+
+			li {
+				flex: 1;
+				display: inline-block;
+				border-left: 1px solid black;
+			}
+
+			li:first-child {
+				border-left: 0px solid black;
+			}
+
+			ul {
+				display: block;
+				list-style-type: disc;
+				-webkit-margin-before: 0em;
+				-webkit-margin-after: 0em;
+				-webkit-margin-start: 0px;
+				-webkit-margin-end: 0px;
+				-webkit-padding-start: 0px;
+			}
+
+			.ulstyle {
+				/*去除li的点*/
+				list-style: none;
+				/*开启绝对定位 */
+				position: absolute;
+				/*设置ul的宽度*/
+				width: 200px;
+				left: 0px;
+
+			}
+
+			.tablebox {
+				position: relative;
+				/* top: 200px;
+			left: 100px; */
+				height: 200px;
+			}
+		</style>
+		<script>
+			
+
+
+			var datas = [{
+				name: 's1',
+				age: 18
+			}, {
+				name: 's2',
+				age: 17
+			}, {
+				name: 's3',
+				age: 15
+			}]
+
+			var table = document.createElement('table')
+			table.setAttribute('border', '1')
+			var thead = document.createElement('thead')
+			thead.innerHTML = "<td>姓名</td><td>年龄</td><td>操作</td>"
+			var tbody = document.createElement('tbody')
+
+			for (var i = 0; i < datas.length; i++) {
+				var tr = document.createElement('tr')
+				for (var j in datas[i]) { //j得到的是属性名，obj[j]得到的是属性值
+					var td = document.createElement('td')
+					td.innerHTML = datas[i][j]
+
+					
+					tr.appendChild(td)
+
+				}
+				var del = document.createElement('td')
+				del.innerHTML = '<a href="javascript:;">删除</a>'
+				tr.appendChild(del)
+				tbody.appendChild(tr)
+			}
+			table.appendChild(thead)
+			table.appendChild(tbody)
+			document.body.appendChild(table)
+			var as = document.querySelectorAll('a')
+			console.log(as)
+			for(var k = 0 ; k< as.length;k++){
+				//console.log(as[k])
+				as[k].onclick = function(){
+					console.log(111)
+					tbody.removeChild(this.parentNode.parentNode)
+				}
+			}
+		</script>
+
+	</body>
+</html>

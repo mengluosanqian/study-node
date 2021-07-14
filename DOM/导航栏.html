@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="images" >
+			<ul class="ulstyle">
+				
+			</ul>
+			
+			
+			
+		</div>
+		<ul>
+			<li>标题一</li>
+			<li>标题二</li>
+			<li>标题三</li>
+		</ul>
+	</body>
+	<style>
+		ul li {
+			list-style-type: none;
+			float: left;
+			
+			padding: 5px;
+		}
+
+
+		ul {
+			border: 1px solid #000000;
+			height: 30px;
+			width: 240px;
+			padding-inline-start: 0px;
+		}
+
+		li {
+			border-right: 1px solid #000000;
+		}
+	</style>
+	<script>
+	
+	var images = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg']
+	var ul = document.querySelector('.ulstyle')
+	for(var j in images){
+		console.log(images[j])
+		var li = document.createElement('li')
+		var a= images[j]
+		li.innerHTML = '<img src="img/1.jpg">'
+		li.style.display = 'none'
+		ul.appendChild(li)
+		
+	}
+	var lis = document.querySelectorAll('li')
+	for(var i = 4;i<lis.length;i++){
+		
+		lis[i].onclick = function(){
+			console.log(this,'this')
+			
+			var ulss=  document.querySelector('.ulstyle').querySelectorAll('li')
+			console.log('123',ulss[i-4])
+			ulss[i-4].style.display = 'block'
+		}
+		
+	}
+	</script>
+</html>

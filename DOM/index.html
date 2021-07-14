@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script>
+			(function fn() {
+				console.log(this, 'first this') //window
+			})()
+
+			/* 	var myobject = {
+					foo: "bar",
+					func: function() {
+						var self = this;
+						console.log(this.foo);   //bar
+						console.log(self.foo);   //bar
+
+						(function() {
+							console.log(this.foo); //undefined
+							console.log(self.foo); //bar
+						})();
+					}
+				};
+				myobject.func(); */
+			/* var obj={
+			a:1,
+			fn(){
+				return ()=>{
+					console.log(this.a)
+				}
+			}
+		}
+		var b = obj.fn
+		b()() */
+			/* var obj ={
+			  a:1,
+			  fn(){
+			
+			    return ()=>{
+			      console.log(this.a)
+			    }
+			  }
+			}
+			var b = obj.fn();
+			b(); */
+			/*  */
+			/* var obj = {
+				a: 1,
+				fn: function() {
+					a:3
+					return ()=>{
+						console.log(this)
+					}
+				}
+			};
+			obj.fn()() */
+
+			/* 	var obj = {
+				name: "A",
+				getname: () => {
+					return () => {
+						console.log(this.name);
+					};
+				},
+				objx: {
+					name: "B",
+					getname() {
+						let name = 'c'
+						return () => {
+							console.log(this.name);
+						}
+					}
+				}
+			};
+			obj.getname()();
+			obj.objx.getname()();
+ */
+			// let obj = {
+			// 	name: "A",
+			// 	getname: () => {
+			// 		return () => {
+			// 			console.log(this.name); //指向window
+			// 		};
+			// 	},
+			// 	objx: {
+			// 		name: "B",
+			// 		getname: () => {
+			// 			console.log(this.name); //指向window
+			// 		}
+			// 	}
+			// };
+			// obj.getname()();
+			// obj.objx.getname();
+			var obj = {
+				getname () {
+					setInterval(
+
+						() => {
+							console.log(this);
+						}, 1000)
+				}
+			}
+			obj.getname()
+		</script>
+
+	</body>
+</html>
