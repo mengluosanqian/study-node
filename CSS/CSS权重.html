@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+  <!-- 权重计算规则
+        css selector 分为 4 种 type: a, b, c, d. 他们的数目计算规则为:
+        a: 如果 css 属性声明是写在 style=“” 中的, 则数目为 1, 否则为 0
+        b: id 选择器的数目
+        c: class 选择器, 属性选择器(如 type=“text”), 伪类选择器(如: ::hover) 的数目
+        d: 标签名(如: p, div), 伪类 (如: :before)的数目
+        在比较不同 css selector 的权重时, 按照 a => b => c => d 的顺序进行比较. 
+    -->
+
+    <!-- 
+        样式的冲突： 当我们通过不同的选择器，选中相同的元素并且对相同的样式设置不同的值，此时就发生了样式的冲突。
+        选择器的优先级
+        内联样式	    1，0，0，0
+        id选择器	    0，1，0，0
+        类和伪类选择器	 0，0，1，0
+        元素选择器	    0，0，0，1
+        通配选择器	    0，0，0，0（任何选择器都可以覆盖其样式）
+        继承的样式	    没有优先级
+        !important	   最高的优先级，甚至超过内联样式
+     -->
+    <div class="father" id="bb">
+        <div class="son" id="aa">
+            <p class="pp">1111</p>
+        </div>
+    </div>
+
+    <style>
+        
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            margin-top: 100px;
+        }
+        .son p{
+            color: red;
+        }
+        p{
+            color: blue;
+        }
+        .father .son p{
+            color: yellow;
+        }
+        #aa {
+            color: violet;
+        }
+        /* #bb .son p{
+            color: black;
+        } */
+    </style>
+</body>
+
+</html>

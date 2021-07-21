@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 塌陷问题 -->
+    <!-- （1）父元素和子元素都设置了同方向的margin-top值，两个属性之间没有其他内容进行隔离，导致两个属性相遇，发生margin塌陷。
+        （2）本身父元素与上一个元素的距离是0，子元素如果设置了垂直方向的上边距，会带着父级元素一起掉下来
+        解决方法：
+        （1）为父盒子设置border，为外层添加border后父子盒子就不是真正意义上的贴合  （可以设置成透明：border：1px solid transparent）。
+        （2）为父盒子添加overflow：hidden；
+        （3）为父盒子设定padding值；
+        （4）为父盒子添加position：fixed；
+        （5）为父盒子添加 display：table；
+        （6）利用伪元素给子元素的前面添加一个空元素
+    -->
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <div>----------------------</div>
+    <div>块级元素：div,h1-h6,p,pre,ul,ol,li,form,table,label等</div>
+    <div>行内元素：a,img,span，i（斜体）,em（强调）,sub(下标)，sup（上标）等。</div>
+    <div>行块级元素：(button,input，textarea,select), img等</div>
+    <!-- 常见的块级元素(自动换行， 可设置高宽 )有：
+            div,h1-h6,p,pre,ul,ol,li,form,table,label等
+         常见的行内元素（无法自动换行，无法设置宽高）有：
+            a,img,span，i（斜体）,em（强调）,sub(下标)，sup（上标）等。
+         常见的行块级元素(拥有内在尺寸，可设置高宽，不会自动换行 )有：
+            (button,input，textarea,select), img等 -->
+    <div class="divstyle">
+        <div class="sondiv"></div>
+        <span class="sonspan">1111</span>
+    </div>
+    <style>
+        .divstyle{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            /* 子元素水平居中 */
+            text-align: center; 
+        }
+        .sondiv {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            /* 对于块级元素，可采用以下方法实现水平居中 */
+            margin:  0 auto;
+        }
+        .sonspan{
+            margin-top: 100px;
+            font-size: 24px;
+        }
+        .father {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            margin-top: 50px;
+            /* 塌陷解决方法一：父层加border隔开 */
+            /* border: 1px solid transparent; */
+            /* 塌陷解决方法二：为父盒子添加overflow：hidden  常用 */
+            overflow: hidden;
+            /* 其余解决塌陷方法待补充 */
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            margin-top: 100px;
+        }
+    </style>
+</body>
+
+</html>
