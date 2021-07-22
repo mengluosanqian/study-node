@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动</title>
+</head>
+
+<body>
+    <div>
+        <!-- 浮动的元素最重要特性
+            1.脱离标准普通流的控制（浮）移动到指定位置（动），俗称脱标
+            2.浮动的盒子不再保留原来的位置 
+        -->
+        <div class="box1">
+            <div class="box1-child">1111
+                <div class="box1-child-child"></div>
+            </div>
+            <!-- 给box1-child加浮动，只影响div，不会使内部文字浮动 -->
+        </div>
+        <div class="box2">
+
+        </div>
+        <div class="box3">
+
+        </div>
+    </div>
+    <style>
+        .box1 {
+            width: 400px;
+            height: 200px;
+            background-color: yellowgreen;
+            float: left;
+            /* 给第一个盒子加上浮动后，第二个盒子会浮动到第一个盒子的位置上 */
+            /* 只给第一个第三个盒子加上浮动，第二个盒子会浮动到第一个盒子的位置上，由于浮动只会影响后面标准流，
+               故第三个盒子的浮动对第二个盒子不生效 */
+
+        }
+
+        .box1-child {
+            width: 200px;
+            /* 如果块级盒子没有设置宽度，默认宽度和父级一样宽，但是添加浮动后，他的大小根据内容来决定 */
+            float: right;
+            background-color: red;
+        }
+        .box1-child-child {
+            width: 100px;
+            height: 20px;
+            /* 浮动元素的子孩子宽高需要自己指定，如果不指定，则按照实际内容宽高来展示 */
+            float: right;
+            background-color: blue;
+            z-index: 2;
+        }
+        .box2 {
+            /* float: left; */
+            /* 浮动的盒子只会影响后面标准流，不会影响前面的 */
+            /* 只给第二个盒子加上浮动，不会浮动到第一个盒子上，但是后面的第三个盒子会浮动到原来第二个盒子那里 */
+            width: 300px;
+            height: 300px;
+            background-color: blueviolet;
+        }
+
+        .box3 {
+            width: 200px;
+            height: 400px;
+            background-color: chocolate;
+            float: left;
+            /* 三个盒子都添加浮动后，再不超过父组件的宽度的情况下，按标准流的方式排列 */
+        }
+    </style>
+</body>
+
+</html>
