@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 为什么要清除浮动 -->
+    <!-- 清除浮动主要是为了解决，父元素因为子级元素浮动引起的内部高度为0的问题 -->
+    <div class="fahter clearfix">
+        <div class="big">big</div>
+        <div class="small">small</div>
+        <!-- 第一种方法：额外标签法 -->
+        <!-- 优点：通俗易懂，方便，缺点：添加无意义标签，语义化差 -->
+        <!-- <div class="clear">额外标签法</div> -->
+    </div>
+    <div class="footer"></div>
+    <style>
+        .fahter {
+            width: 400px;
+            border: 1px solid deeppink;
+            /* 第二种方法：父级添加overflow: hidden; */
+            /* 优点：代码简洁，缺点：内容增多的时候容易造成不会自动换行导致内容被隐藏掉，无法显示要溢出的元素 */
+            /* overflow: hidden; */
+        }
+
+        /* 第三种方法：使用after伪元素清除浮动（推荐使用） */
+        /* 优点：符合闭合浮动思想，结构语义化正确，缺点：ie6-7不支持伪元素：after，使用zoom:1触发hasLayout */
+        .clearfix:after {
+            /*伪元素是行内元素 正常浏览器清除浮动方法*/
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+            /*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+        }
+
+        /* 第四种方法：使用before和after双伪元素清除浮动 */
+/* 优点：代码更简洁，缺点：用zoom:1触发hasLayout. */
+        .clearfix:after,
+        .clearfix:before {
+            content: "";
+            display: table;
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .big {
+            width: 200px;
+            height: 200px;
+            background: darkorange;
+            float: left;
+        }
+
+        .small {
+            width: 120px;
+            height: 120px;
+            background: darkmagenta;
+            float: left;
+        }
+
+        .footer {
+            width: 900px;
+            height: 100px;
+            background: darkslateblue;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</body>
+
+</html>
