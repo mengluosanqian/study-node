@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="father">
+        <img src="../images/faqi.png">
+        <span>333333</span>
+    </div>
+    <hr>
+    <div>
+        <!-- resize 防拖拽 -->
+        <textarea rows="3" style="resize: none;"></textarea>
+    </div>
+    <hr>
+    <div>
+
+        <div>
+            <label> 有轮廓线
+                <input style="width: 300px; ">
+            </label>
+        </div>
+        <div>
+            <label> 无轮廓线
+                <input style="width: 300px; outline: none;">
+            </label>
+        </div>
+
+    </div>
+    <style>
+        .father {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /* 鼠标样式 */
+            cursor: pointer;
+            /* pointer 小手 default 默认 move 移动 text 默认 not-allowed 禁止 */
+        }
+
+        img {
+            /* width: 24px; */
+            vertical-align: middle;
+            /* 直接给图片添加这个属性即可 */
+        }
+    </style>
+</body>
+
+</html>

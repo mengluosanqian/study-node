@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精灵图</title>
+</head>
+
+<body>
+    <!-- 1、精灵图技术产生的目的：很多大型网页在首次加载的时候都需要加载很多的小图片，
+        而考虑到在同一时间，服务器拥堵的情况下，为了解决这一问题，
+        采用了精灵图这一技术来缓解加载时间过长从而影响用户体验的这个问题。
+        2、精灵图技术的本质：所谓精灵图就是把很多的小图片合并到一张较大的图片里，
+        所以在首次加载页面的时候，就不用加载过多的小图片，只需要加载出来将小图片合并起来的那一张大图片也就是精灵图即可，
+        这样在一定程度上减少了页面的加载速度，也一定程度上缓解了服务器的压力。 
+    -->
+    <div class="jinglingtu">
+
+    </div>
+    <style>
+        .jinglingtu {
+            /* display: inline-block; */
+            width: 100px;
+            height: 100px;
+            background: url('../images/jinglingtu.jpg') no-repeat;
+            background-position: -300px -400px;
+            /* 背景图片移动必须在图片url下面，否则不会生效 */
+            /* 上 - 下 + 左 - 右 + */
+        }
+    </style>
+</body>
+
+</html>
