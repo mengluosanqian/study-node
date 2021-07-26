@@ -63,7 +63,8 @@
         color: yellow;
     }
     .demo2 li:nth-child(2n+1){
-        /* 第奇数个（1,3,5……）孩子（同理2n为第偶数个（2,4,6）孩子） */
+        /* 2n+1 写成 odd也可以 */
+        /* 第奇数个（1,3,5……）孩子（同理2n为第偶数个（2,4,6）孩子，或者写成even） */
         /* n+x 从第x个开始 注意：n不能改成其他字母 */
         background-color: green;
     }
@@ -83,6 +84,14 @@
    }
    .demo li:nth-child(3){
        color: blue;
+   }
+   .demo :nth-of-type(2){
+      /* 如果不指定类型，nth-of-type会把所有类型的第二个元素样式进行修改 */
+       color: red;
+   }
+   .demo :nth-child(2){
+      /* 如果不指定类型，nth-child会改变父级第二个元素样式 */
+       color: red;
    }
 </style>
 
