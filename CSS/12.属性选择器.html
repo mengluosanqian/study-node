@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="icon1">111</div>
+    <div class="icon2">222</div>
+    <div class="icon3test">333</div>
+    <div class="icon4 important ">444</div>
+    <div class="icon5 new test">555</div>
+    <div class="icon6">666</div>
+    <hr>
+    <ul class="demo2">
+        <li>第一个li</li>
+        <li>第二个li</li>
+        <li>第三个li</li>
+        <li>第四个li</li>
+        <li>第五个li</li>
+        <li>第六个li</li>
+        <li>第七个li</li>
+
+    </ul>
+    <hr>
+    <ul class="demo">
+        <p>第一个p</p>
+        <div>第二个div</div>
+        <li>第三个li</li>
+        <li>第四个li</li>
+        <li>第五个li</li>
+        <li>第六个li</li>
+        <li>第七个li</li>
+    </ul>
+<style>
+    div[class^="icon"]{
+        font-size: 32px;
+    }
+    div[class~="important"]{
+        color: red;
+    }
+    div[class$="test"]{
+        background-color: green;
+    }
+    div[class*="test"]{
+       text-decoration: underline;
+    }
+   .demo2 li:first-child{  
+        /* 第一个子孩子 */
+        color: red;
+    }
+    .demo2 li:last-child{
+        /* 最后一个孩子 */
+        color: blue;
+    }
+    .demo2 li:nth-child(5){
+        /* 第五个孩子 */
+        color: yellow;
+    }
+    .demo2 li:nth-child(2n+1){
+        /* 第奇数个（1,3,5……）孩子（同理2n为第偶数个（2,4,6）孩子） */
+        /* n+x 从第x个开始 注意：n不能改成其他字母 */
+        background-color: green;
+    }
+    .demo2 li:nth-of-type(3){
+        /* 第三个孩子 */
+        color: lawngreen;
+    }
+    /* nth-of-type 和  nth-child 区别 */
+   .demo li:nth-of-type(2){
+       /* ele:nth-of-type(n)是指父元素下第n个ele元素 所以示例指的是第二个li元素 */
+       color: red;
+   }
+   .demo li:nth-child(2){
+       /* ele:nth-child(n)是指父元素下第n个元素且这个元素为ele，若不是，则选择失败 */
+       /* 有因此，示例中第二个元素不是li，匹配失败，样式不生效 */
+       color: green;
+   }
+   .demo li:nth-child(3){
+       color: blue;
+   }
+</style>
+
+
+    <!-- 
+        ["def"]                     选择属性值为"defr"的元素
+        [abc^="def"]	            选择 abc 属性值以 "def" 开头的所有元素
+        [abc$="def"]	            选择 abc 属性值以 "def" 结尾的所有元素
+        [abc*="def"]	            选择 abc 属性值中包含子串 "def" 的所有元素 
+        [class~="important"]        选择 class 属性中包含 important 的元素("~=" 属性选择器能用于任何属性)
+    -->
+</body>
+
+</html>
