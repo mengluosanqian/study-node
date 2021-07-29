@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪元素选择器</title>
+</head>
+
+<body>
+    <div class="myname">一个</div>
+    <!-- 错误用法，伪元素选择器只能用于块级元素 -->
+    <input class="myname">
+    <!-- ::first-line选择元素的第一行，比如说改变每个段落的第一行文本的样式，我们就可以使用这个
+        ::before和::after这两个主要用来给元素的前面或后面插入内容，
+        这两个常用"content"配合使用，见过最多的就是清除浮动 
+    -->
+
+    <hr>
+    <!-- 下拉图标 -->
+    <div class="xiala">
+        <input >
+    </div>
+    <!--  -->
+    <style>
+        .xiala {
+            width: 300px;
+            height:30px;
+            position: relative;
+        }
+        .xiala input{
+            width: 100%;
+        }
+        .xiala::after{
+            display: block;
+            position: absolute;
+            content: '<';
+            transform: rotate(90deg);
+            height: 30px;
+            line-height: 30px;
+            top: -2px;
+            right: 10px;
+
+        }
+        input {
+            display: inline-block;
+        }
+
+        .myname::before {
+            /* 生成的元素是一个内联级别的元素，因此当我们要指定高度和宽度时，必须首先使用display:block声明将其定义为一个块元素。 */
+            width: 300px;
+            content: '这是';
+            color: blue;
+            
+        }
+
+        .myname::after {
+            /* 使用display:block声明将其定义为一个块元素后可以指定宽高 */
+            display: block;
+            width: 200px;
+            content: '伪元素选择器';
+            color: red;
+        }
+
+        /* 伪元素清除浮动 */
+        /* .c1::after {
+            content: "";
+            height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        } */
+    </style>
+</body>
+
+</html>

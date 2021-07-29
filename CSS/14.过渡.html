@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡</title>
+</head>
+
+<body>
+    <!-- %是根据自身宽度来对比的，实现水平垂直居中 -->
+    <div class="juzhong">
+
+    </div>
+    <div class="jindutiao">
+        <!-- 进度条 -->
+    </div>
+    <hr>
+    <div>
+        <div class="box">
+            <!-- 盒子 移动 -->
+        </div>
+        <!-- 图片移动 -->
+        <div class="pic">
+            <img src="../images/jinglingtu.jpg">
+        </div>
+
+    </div>
+    <hr>
+    <div class="roate">
+        <!-- 旋转 -->
+    </div>
+    <style>
+        .roate{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-left: 300px;
+            
+            transform-origin:right bottom;/* 谁动格谁加 */
+            /* transform-origin: x-axis y-axis z-axis; */
+            /* 值	                            描述
+            x-axis	                定义视图被置于 X 轴的何处。可能的值：
+                                            left
+                                            center
+                                            right
+                                            length
+                                            %
+            y-axis	                定义视图被置于 Y 轴的何处。可能的值：
+                                            top
+                                            center
+                                            bottom
+                                            length
+                                            %
+            z-axis	                定义视图被置于 Z 轴的何处。可能的值：
+                                            length */
+        }
+        .roate:hover{
+            transform: rotate(360deg);
+            transition-duration: 2s;
+        }
+        /* 实现水平居中的一种方式 */
+        .juzhong {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* 50% 默认为盒子的宽高的一半，即50px */
+            background-color: brown;
+        }
+
+        .box {
+            width: 120px;
+            height: 50px;
+            border: 1px solid red;
+            transform: translate(0, 0);
+        }
+
+        .pic {
+            margin-top: 30px;
+            width: 112px;
+            height: 100px;
+            border: 1px solid blue;
+            overflow: hidden;
+            position: relative;
+            transform: translate(0, 0);
+        }
+
+        .pic img {
+            transform: translate(0px, 0);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .pic :hover {
+            transform: translate(-1000px, 0);
+            transition-duration: 2s;
+            transition-timing-function: linear;
+        }
+
+        .box:hover {
+            border: 1px solid blue;
+            transform: translate(100px, 0);
+            /* transform 不会影响其他元素位置、对行内元素没有效果、%是根据自身宽度来对比的 */
+            transition-duration: 2s;
+        }
+
+        .jindutiao {
+            width: 10px;
+            height: 30px;
+            background-color: red;
+            transition-property: width;
+            transition-duration: 2s;
+            transition-timing-function: linear;
+            transition-delay: 1s;
+            /* transition: width 2s linear 1s; 简写 */
+        }
+
+        .jindutiao:hover {
+            width: 300px;
+        }
+    </style>
+</body>
+
+</html>
