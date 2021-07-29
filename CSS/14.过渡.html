@@ -31,14 +31,29 @@
     <div class="roate">
         <!-- 旋转 -->
     </div>
+    <hr>
+    <div class="scaled">
+        <!-- 缩放 -->
+    </div>
     <style>
+        .scaled{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-top: 100px;
+            margin-left: 200px;
+        }
+        .scaled:hover{
+           transform: scale(2,2);
+           transition-duration: 2s;
+        }
         .roate{
             width: 100px;
             height: 100px;
             background-color: red;
             margin-left: 300px;
             
-            transform-origin:right bottom;/* 谁动格谁加 */
+            transform-origin:right bottom;/* 谁动给谁加 */
             /* transform-origin: x-axis y-axis z-axis; */
             /* 值	                            描述
             x-axis	                定义视图被置于 X 轴的何处。可能的值：
