@@ -1,12 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动画</title>
 </head>
+
 <body>
-    
+    <div class="theanimation"> </div>
+    <div class="move"> </div>
+    <div class="city">
+        <div class="icon"></div>
+        <div class="pulse1"></div>
+        <div class="pulse2"></div>
+        <div class="pulse3"></div>
+    </div>
+    <hr>
+    <div class="buchang">
+
+    </div>
+    <style>
+        @keyframes buchang {
+            0%{
+                width: 0px;
+            }
+            100%{
+                width: 300px;
+            }
+        }
+        @keyframes kuoda {
+            0% {}
+            70%{
+                width: 40px;
+                height: 40px;
+                opacity: 1;
+            }
+            100%{
+                width: 70px;
+                height: 70px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(0px);
+            }
+
+            to {
+                transform: translateX(600px);
+            }
+        }
+
+        @keyframes theanimation {
+            0% {
+                top: 0px;
+                left: 0px;
+                background: red;
+            }
+
+            25% {
+                top: 0px;
+                left: 100px;
+                background: blue;
+            }
+
+            50% {
+                top: 100px;
+                left: 100px;
+                background: yellow;
+            }
+
+            75% {
+                top: 100px;
+                left: 0px;
+                background: green;
+            }
+
+            100% {
+                top: 0px;
+                left: 0px;
+                background: red;
+            }
+        }
+        .buchang{
+            width: 0px;
+            height: 30px;
+            background-color: red;
+            animation: buchang 2s steps(10) forwards;
+        }
+        .city {
+            margin-top: 100px;
+            margin-left: 100px;
+            position: relative;
+        }
+
+        .icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+
+        .city div[class^="pulse"] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 12px red;
+            border-radius: 50%;
+            animation: kuoda 2s linear infinite;
+            /* 为什么用动画不用scale? scale也会把阴影扩大 */
+        }
+        .pulse2{  
+            /* 直接这样写由于权重问题不会生效 */
+            /* 可以直接加!important，也可以加权重 */
+            animation-delay: 0.7s !important;
+        }
+        .pulse3{
+            animation-delay: 1.4s !important;
+        }
+        .theanimation {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: relative;
+            animation: theanimation 4s infinite alternate;
+            /* 简写 */
+        }
+
+        .move {
+            width: 100px;
+            height: 100px;
+            background: red;
+            /* position: relative; */
+            animation: move 4s infinite alternate;
+        }
+    </style>
 </body>
+
 </html>
