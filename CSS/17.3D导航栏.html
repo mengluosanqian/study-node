@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 3d 导航栏 -->
+    <div class="daohanglan">
+        <div class="front"></div>
+        <div class="back"></div>
+    </div>
+    <style>
+        body {
+            perspective: 300px;
+            /* 透视，呈现3d效果必备的，近大远小 */
+        }
+
+        .daohanglan {
+            width: 150px;
+            height: 50px;
+            position: relative;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+
+        }
+
+        .daohanglan:hover {
+            transform: rotateX(90deg);
+            transition: all .4s;
+        }
+
+        .daohanglan div {
+
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: black;
+            font-size: 30px;
+            line-height: 50px;
+        }
+
+        .front {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: red;
+            transform: translateZ(25px);
+        }
+
+        .back {
+            position: absolute;
+            top: 25px;
+            left: 0px;
+            background-color: blue;
+            transform: rotateX(-90deg);
+
+        }
+    </style>
+</body>
+
+</html>

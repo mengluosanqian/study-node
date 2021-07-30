@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d转换</title>
+</head>
+<body>
+    <div class="father">
+        <div class="son1"></div>
+        <div class="son2"></div>
+    </div>
+    <hr>
+    <!-- 双面翻转盒子 -->
+    <div class="box">
+        <div class="qian">3d翻转</div>
+        <div class="hou">效果测试</div>
+    </div>
+    <hr>
+    
+    <style>
+        body{
+            perspective: 300px;
+            /* 透视，呈现3d效果必备的，近大远小 */
+        }
+       
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            transition: all 0.4s;
+            transform-style: preserve-3d;
+        }
+        .box:hover{
+            transform: rotateY(180deg);
+        }
+        .box div{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height:100%;
+            text-align: center;
+            color: black;
+            font-size: 30px;
+            line-height: 200px;
+            border-radius: 50%;
+        }
+        .qian{
+            background-color: red;
+            z-index: 1;
+        }
+        .hou{
+            background-color: blue;
+            transform: rotateY(180deg);
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            /* 子元素是否开启三维空间，默认是flat，不开启 */
+        }
+        .father:hover{
+            transform: rotateY(45deg)
+        }
+        .son1{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+        }
+        .son2{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: blue;
+            transform: rotateX(60deg);
+        }
+    </style>
+</body>
+</html>
