@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bootstrap</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <!-- 安装bootstrap  npm install bootstrap@3-->
+    <!-- 基本使用 -->
+    <button class="btn btn-primary" name="insertwork" id="insertwork" value="添加岗位信息">添加岗位信息</button>
+    <input name="workername" type="text" class="form-control" placeholder="请输入要查询的岗位名称">
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="active">
+                <td>001</td>
+                <td>郭靖</td>
+                <td>25</td>
+            </tr>
+            <tr class="success">
+                <td>002</td>
+                <td>黄蓉</td>
+                <td>23</td>
+            </tr>
+            <tr class="info">
+                <td>003</td>
+                <td>杨过</td>
+                <td>24</td>
+            </tr>
+            <tr class="warning">
+                <td>004</td>
+                <td>黄老邪</td>
+                <td>54</td>
+            </tr>
+            <tr class="danger">
+                <td>005</td>
+                <td>欧阳锋</td>
+                <td>42</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="text-muted">.text-muted 效果</div>
+    <div class="text-primary">.text-primary效果</div>
+    <div class="text-success">.text-success效果</div>
+    <div class="text-info">.text-info效果</div>
+    <div class="text-warning">.text-warning效果</div>
+    <div class="text-danger">.text-danger效果</div>
+    <hr>
+    <hr>
+    <!-- 栅格布局 -->
+    <!-- 超小设备手机（<768px）	    小型设备平板电脑（≥768px）	中型设备台式电脑（≥992px）	大型设备台式电脑（≥1200px）     -->
+    <!-- .col-xs-	                    .col-sm-	                   .col-md-	                 .col-lg-           -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-1 col-sm-3 col-md-4 col-lg-12" style="background-color: red;">11</div>
+            <div class="col-xs-1 col-sm-9 col-md-8 col-lg-12" style="background-color: blue;">11</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" style="background-color: red;">11</div>
+            <div class="col-md-4" style="background-color: blue;">11</div>
+            <div class="col-md-4" style="background-color: yellow;">11</div>
+        </div>
+    </div>
+    <style>
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+
+        .col {
+            /* width: 100px;
+            height: 30px; */
+            /* background-color: red; */
+            border: 1px solid black;
+        }
+    </style>
+</body>
+
+</html>
