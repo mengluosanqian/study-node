@@ -1,17 +1,85 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<div class="box"></div>
-		<style>
-		.box{
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<!-- <div class="outer"> -->
+		<div id="dingwei" class="box dingwei"></div>
+
+	<!-- </div> -->
+	<style>
+		.box {
 			width: 100px;
 			height: 100px;
 			background-color: crimson;
 		}
-		</style>
-	</body>
+		/* 第一种方案  绝对定位*/
+		/* 第二种方法 也是采用绝对定位，但是采用margin方法，此种方法需要知道box的宽高 */
+		/* body {
+			position: relative;
+		}
+
+		.dingwei {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);// 二选一
+			margin-top: -50px;
+			margin-left: -50px;
+		} */
+		/* 第三种方法 left、top、right、bottom都设置为0，并且让margin:auto ,同样采用绝对定位  */
+		/* body {
+			position: relative;
+		}
+		.dingwei {
+			position: absolute; 
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+		} */
+		/* 第四种方法 采用flex布局 */
+
+		/* .outer {
+			height: calc(100vh - 100px);
+			width:calc(100vw - 100px);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		} */
+		/* 第五种方法 table-cell */
+		/* .outer {
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			width: calc(100vw - 100px);
+			height:calc(100vh - 100px);
+		}
+		.dingwei {
+			display: inline-block;
+		} */
+		body {
+			position: relative;
+			width: 100vw;
+			height: 100vh;
+		}
+		.dingwei {
+			position: absolute;
+		}
+	</style>
+	<script>
+		// 第六种方案 采用js计算的方法
+		var dingwei = document.querySelector('#dingwei')
+		console.log(dingwei.offsetHeight);
+		// dingwei.style.position = 'absolute'
+		dingwei.style.left = (document.body.scrollWidth - dingwei.offsetWidth) / 2 + 'px'
+		dingwei.style.top = (document.body.scrollHeight - dingwei.offsetHeight) / 2 + 'px'
+	</script>
+</body>
+
 </html>
