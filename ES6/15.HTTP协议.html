@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP</title>
+</head>
+<body>
+    <button>请求</button>
+    <div id="result"></div>
+    <script>
+        // http协议 [超文本传输协议]，详细规定了浏览器和万维网服务器之间相互通信的规则
+
+        // 请求报文
+        // 行  POST   /s?ie=utf-8   HTTP/1.1
+        //    方式    url           协议
+        // 头   host
+        //      cookie
+        //      Content-type：application/x-www-form-urlencoded
+        //      User-Agent：chrome 83
+        // 空行
+        // 体   username=admin&password=admin
+
+        // 响应报文
+        // 行  HTTP/1.1  200  OK
+        // 头  Content-type: text/html;charset=utf-8
+        //     Content-length:2048
+        //     Content-encoding:gzip
+        // 空行
+        // 体
+
+        const btn = document.getElementsByTagName('button')[0];
+        const result = document.querySelector('#result')
+        btn.onclick= function () {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 2.初始化 设置请求的方法url和参数
+            xhr.open('GET','http://127.0.0.1:8000/server?a=100&b=20') //127.0.0.1:8000指的是本地，也可以用localhost
+            // 3.发送
+            xhr.send()
+            // 4.事件绑定 处理服务端返回的结果
+            // readystate 是 xhr对象中的属性 表示状态 0 1 2 3 4
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status >= 200 && xhr.status <= 300) {
+                        // 1.响应行
+                        console.log(xhr.status); //状态码
+                        console.log(xhr.statusText); // 状态字符串
+                        console.log(xhr.getAllResponseHeaders()); //所有响应头
+                        console.log(xhr.response); //响应体
+                        result.innerHTML = xhr.response
+                    } 
+                }
+            }
+        }
+    </script>
+    <style>
+        #result{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</body>
+</html>
