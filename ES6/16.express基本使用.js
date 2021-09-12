@@ -14,3 +14,5 @@ app.listen(8000, ()=>{
     console.log('服务已启动');
 })
 // 5.浏览器查看 127.0.0.1:8000
+
+// 使用nodemon 自动重启服务  npm install -g nodemon

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <button>get</button>
+    <button>post</button>
+    <button>ajax</button>
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const btn1 = document.getElementsByTagName('button')[1];
+        const btn2 = document.getElementsByTagName('button')[2];
+        btn.onclick = function () {
+            axios.get('http://127.0.0.1:8000/server',{
+                params: {
+                    id:100,
+                    vip:7
+                },
+                headers: {
+                    name: 'aaa'
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
