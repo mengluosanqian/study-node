@@ -11,11 +11,18 @@ app.get('/server', (request, response) => {
     // 设置响应体
     response.send('HELLO EXPRESS')
 })
-app.get('axios-server', (request, response) => {
-    // 设置响应头
+app.all('/axios-server', (request, response) => {
+    /// app.post('/server',(request,response) => {
+    // 设置响应头,允许跨域
     response.setHeader('Access-Control-Allow-Origin', '*')
+    response.setHeader('Access-Control-Allow-Headers', '*')
+    // 响应一个数据
+    const data = {
+        name: '张三'
+    };
+    let str = JSON.stringify(data)
     // 设置响应体
-    response.send('HELLO EXPRESS')
+    response.send(str) //只接受字符串类型
 })
 //all可以接收任意类型的请求
 app.all('/server', (request, response) => {
@@ -42,6 +49,15 @@ app.get('/delay', (request, response) => {
         response.send('HELLO IE - 2')
     }, 3000)
 })
+
+app.all('/cors-server', (request, response) => {
+    //设置响应头
+    response.setHeader('Access-Control-Allow-Origin', '*')
+    response.setHeader('Access-Control-Allow-Headers', '*')
+    response.setHeader('Access-Control-Allow-Method', '*')
+    response.send('hello') //只接受字符串类型
+})
+
 
 // 4.监听端口启动服务
 app.listen(8000, () => {
