@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式</title>
+</head>
+<body>
+    <script>
+        // 用于匹配字符串中字符组合的模式，在JavaScript中，正则表达式也是对象
+        // 作用：匹配、替换、提取
+        // 特点：逻辑性和功能性特别强、可以迅速用极简单的方式达到字符串的复杂控制
+        // 创建正则表达式：
+        // 1.利用regExp对象来创建正则表达式
+        var regexp = new RegExp(/123/)
+        console.log(regexp);
+        // 2.利用字面量进行创建
+        var rg = /abc/;
+        console.log(rg);
+        // 测试正则表达式test
+        console.log(rg.test('12'));
+        // 特殊字符（元字符）
+        // 边界符 ^ $ 
+        var rg1 = /^abc/;  //必须以abc开头
+        console.log(rg.test('abc'));
+        console.log(rg1.test('acbabc'));
+        var rg2 = /^abc$/;  //精确匹配
+        console.log(rg2.test('abcaa'));
+        console.log(rg2.test('abc'));
+        console.log('--------------------------------------');
+        // 字符类 []
+        var rg3 = /[abc]/  //只要包含有abc中一个就可以
+        console.log(rg3.test('zxc'));
+        console.log(rg3.test('baby'));
+        var rg4 = /^[abc]$/  //只有是abc中一个才可以
+        console.log(rg4.test('abc'));
+        console.log(rg4.test('a'));
+        var rg5 = /^[a-z]$/  //26个字母任何一个字母都可以  - 表示范围
+        console.log('--------------------------------------');
+        // 字符组合
+        var rg6 = /^[a-zA-Z0-9_-]$/
+        console.log(rg6.test('a'));
+        console.log(rg6.test('!'));
+        var rg7 = /^[^a-zA-Z0-9_-]$/  //如果[]中有^,表示取反
+        console.log(rg7.test('a'));
+        console.log(rg7.test('!'));
+
+        // 量词符：用来设定某个模式出现的次数
+        // * 相当于>=0，可以出现0次或者很多次
+        console.log('--------------------------------------');
+        var reg = /^a*$/
+        console.log(reg.test(''));
+        console.log(reg.test('aa'));
+        // + 相当于>=0，可以出现1次或者很多次
+        var reg1 = /^a+$/
+        console.log(reg1.test(''));
+        console.log(reg1.test('aa'));
+        // ? 相当于0或者1
+        var reg2 = /^a?$/
+        console.log(reg2.test(''));
+        console.log(reg2.test('aa'));
+        //{3} 重复3次
+        var reg3 = /^a{3}$/
+        console.log(reg3.test('aa'));
+        console.log(reg3.test('aaa'));
+        console.log(reg3.test('aaaa'));
+        // {3,} 重复3次以上
+        var reg4 = /^a{3,}$/
+        console.log(reg4.test('aa'));
+        console.log(reg4.test('aaa'));
+        console.log(reg4.test('aaaa'));
+        // {3,16} 大于等于3并且小于等于16
+        var reg5 = /^a{3,6}$/
+        console.log(reg5.test('aa'));
+        console.log(reg5.test('aaa'));
+        console.log(reg5.test('aaaaaaaaaaaaa'));
+        var reg6 = /^abc{3}$/ //表示只是让{}前的一个重复3次
+        console.log(reg6.test('abc'));
+        console.log(reg6.test('abcabcabc'));
+        console.log(reg6.test('abccc'));
+        // 正则替换 replace
+        var str = 'abc 和 efg abc abc' 
+        var newSTR = str.replace(/abc|efg/g,'baby')  //不能加空格，空格也会匹配
+        console.log(newSTR);
+        // 正则表达式参数
+        // g 全局匹配
+        // i 忽略大小写
+        // gi 全局匹配、忽略大小写
+
+        // 预订类
+        //  \d  [0-9] 匹配数字
+        //  \D  [^0-9] 匹配非数字
+        //  \w  [a-zA-Z0-9_] 匹配大小写字母、数字和下划线
+        //  \W  [^a-zA-Z0-9_] 匹配非大小写字母、数字和下划线
+        //  \s  [\t\r\n\v\f] 匹配空格（包括换行符、制表符、空格符等）
+        //  \S  [^\t\r\n\v\f] 匹配非空格
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP</title>
+</head>
+
+<body>
+    <button>请求get</button>
+    <button>请求post</button>
+    <button>IE缓存问题</button>
+    <button>请求超时与网络异常</button>
+    <button>取消请求</button>
+    <div id="result"></div>
+    <script>
+        // http协议 [超文本传输协议]，详细规定了浏览器和万维网服务器之间相互通信的规则
+
+        // 请求报文
+        // 行  POST   /s?ie=utf-8   HTTP/1.1
+        //    方式    url           协议
+        // 头   host
+        //      cookie
+        //      Content-type：application/x-www-form-urlencoded
+        //      User-Agent：chrome 83
+        // 空行
+        // 体   username=admin&password=admin
+
+        // 响应报文
+        // 行  HTTP/1.1  200  OK
+        // 头  Content-type: text/html;charset=utf-8
+        //     Content-length:2048
+        //     Content-encoding:gzip
+        // 空行
+        // 体
+
+        const btn = document.getElementsByTagName('button')[0];
+        const btn1 = document.getElementsByTagName('button')[1];
+        const btn2 = document.getElementsByTagName('button')[2];
+        const btn3 = document.getElementsByTagName('button')[3];
+        const btn4 = document.getElementsByTagName('button')[4];
+        let isSending = false;
+        const result = document.querySelector('#result')
+        btn.onclick = function () {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 2.初始化 设置请求的方法url和参数
+            xhr.open('GET', 'http://127.0.0.1:8000/server?a=100&b=20') //127.0.0.1:8000指的是本地，也可以用localhost
+            // 3.发送
+            xhr.send()
+            // 4.事件绑定 处理服务端返回的结果
+            // readystate 是 xhr对象中的属性 表示状态 0 1 2 3 4
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 300) {
+                        // 1.响应行
+                        console.log(xhr.status); //状态码
+                        console.log(xhr.statusText); // 状态字符串
+                        console.log(xhr.getAllResponseHeaders()); //所有响应头
+                        console.log(xhr.response); //响应体
+                        result.innerHTML = xhr.response
+                    }
+                }
+            }
+        }
+        btn1.onclick = function () {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 设置响应体数据的类型
+            xhr.responseType = 'json'
+            // 2.初始化 设置请求的方法url和参数
+            xhr.open('post', 'http://127.0.0.1:8000/server') //127.0.0.1:8000指的是本地，也可以用localhost
+            // 设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            xhr.setRequestHeader('name', 'aaaa')
+            // 3.发送
+            // 传递参数方式，两种形式均可
+            xhr.send('a=200&b=10&c=100')
+            // xhr.send('a:200&b:10&c:100')
+            // 4.事件绑定 处理服务端返回的结果
+            // readystate 是 xhr对象中的属性 表示状态 0 1 2 3 4
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 300) {
+                        // 1.响应行
+                        console.log(xhr.status); //状态码
+                        console.log(xhr.statusText); // 状态字符串
+                        console.log(xhr.getAllResponseHeaders()); //所有响应头
+                        console.log(xhr.response); //响应体
+
+                        // 手动对数据进行转化
+                        // let data = JSON.parse(xhr.response) 
+                        // result.innerHTML =  data.name 
+                        // 自动转化
+                        result.innerHTML = xhr.response.name
+                    }
+                }
+            }
+        }
+        //ie缓存问题
+        btn2.onclick = function () {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 2.初始化 设置请求的方法url和参数
+            xhr.open('GET', 'http://127.0.0.1:8000/ie?t=' + Date.now()) //127.0.0.1:8000指的是本地，也可以用localhost
+            // 3.发送
+            xhr.send()
+            // 4.事件绑定 处理服务端返回的结果
+            // readystate 是 xhr对象中的属性 表示状态 0 1 2 3 4
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 300) {
+                        // 1.响应行
+                        console.log(xhr.status); //状态码
+                        console.log(xhr.statusText); // 状态字符串
+                        console.log(xhr.getAllResponseHeaders()); //所有响应头
+                        console.log(xhr.response); //响应体
+                        result.innerHTML = xhr.response
+                    }
+                }
+            }
+        }
+        // 异常处理
+        btn3.onclick = function () {
+            const xhr = new XMLHttpRequest();
+            xhr.timeout = 2000;
+            xhr.ontimeout = function () {
+                console.log('超时')
+            }
+            xhr.open('GET', 'http://127.0.0.1:8000/delay') //127.0.0.1:8000指的是本地，也可以用localhost
+
+            xhr.send()
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 300) {
+                        result.innerHTML = xhr.response
+
+                    }
+                }
+            }
+        }
+        // 重复请求取消
+        btn4.onclick = function () {
+            if (isSending) {
+                x.abort(); //取消请求
+            }
+            const xhr = new XMLHttpRequest();
+            isSending = true
+            xhr.open('GET', 'http://127.0.0.1:8000/delay') //127.0.0.1:8000指的是本地，也可以用localhost
+            xhr.send()
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 300) {
+                        result.innerHTML = xhr.response
+                        isSending = false
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</body>
+
+</html>

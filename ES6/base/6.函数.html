@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+<body>
+    <button>btn</button>
+    <script>
+        // 函数的定义方式
+        // 1.自定义函数（命名函数）
+        function name(params) {
+            
+        }
+        // 2.函数表达式（匿名函数）
+        var fun = function() {}
+
+        // 3.利用new Function('param1','param2','函数体') 里面参数必须是字符串格式
+        var f = new Function('a','b','console.log(a+b)')
+        f(1,2)
+        // 4. 所有函数都是Function的实例（对象）
+
+        // 函数的调用方式
+        // 1.普通函数
+        function fn() {
+            console.log(this,'1');
+        };
+        // 2.对象的方法
+        var o = {
+            sayHi: function () {
+                console.log(this,'2');
+            }
+        };
+        o.sayHi()
+        // 3.构造函数
+        function Star() {
+            console.log(this);
+        };
+        var ldh =new Star()
+        // 4.绑定事件函数
+        var btn = document.querySelector('button')
+        btn.onclick = function () {
+            console.log(this);
+        };
+        // 5.定时器函数
+        window.setTimeout(function () {
+            console.log(this);
+        },1000);
+        // 6.立即执行函数
+        (function () {
+            console.log(this);
+        })()
+        // this指向问题
+        // 函数的不同调用方式决定了this的指向不同
+        // 1.普通函数    window
+        // 2.对象的方法 o
+        // 3.构造函数  ldh
+        // 4.绑定事件函数 btn
+        // 5.定时器函数 window
+        // 6.立即执行函数 window
+
+        // 改变this指向
+        // call、bind、apply
+        var p = {
+            name: 'aaa'
+        }
+        function fn(a,b) {
+            console.log(this);
+            console.log(a+b);
+        }
+        fn.call(p,1,2)
+        // call可以调用函数，也可以改变函数内this的指向
+        // call的主要作用可以实现继承
+        function Father(name,age) {
+            this.name = name
+            this.age = age
+        }
+        function Son(name,age) {
+            Father.call(this,name,age)
+        }
+        var son = new Son('sss',18)
+        console.log(son);
+
+        // apply可以调用函数，也可以改变函数内this的指向,但是参数必须是数组(伪数组)
+        // apply主要应用
+        var arr = [1,13,45,32,78]
+        var max = Math.max.apply(null,arr)
+        console.log(max);
+        function Son1(name,age) { 
+            Father.apply(this,[name,age])
+         }
+         var son1 = new Son1('sss',18)
+        console.log(son1);
+
+        // bind  不会调用函数，也可以改变函数内this的指向
+        // 返回的原函数改变this之后产生的新函数
+        // 如果有的函数不需要立即调用，又想改变this指向
+        var btn = document.querySelector('button')
+        btn.onclick = function () {
+            this.disabled = true  //this指向的是btn
+            setTimeout(function () {
+                this.disabled = false //this指向的window,不能直接这样写
+                
+            }.bind(this),3000) //这里的this指向的是btn，是在定时器外面的
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise的使用</title>
+</head>
+
+<body>
+    <script>
+        function rand(m, n) {
+            return Math.ceil(Math.random() * (n - m + 1) + m - 1);
+        }
+        const p = new Promise((resolve, reject) => {
+            let n = rand(1, 100)
+            if (n < 30) {
+                resolve(n) //将promise对象状态设置为成功
+            } else {
+                reject(n) //将promise对象状态设置为失败
+            }
+        })
+        console.log(p);
+        // 调用then方法
+        p.then((n) => {
+            console.log(`111111${n}`) //成功执行这里的回调函数
+        }, (n) => {
+            console.log(`22222${n}`) //失败执行这里的回调函数
+        })
+        // 调用catch方法
+        p.catch(reason => {
+            console.log(reason, '3333333333'); //失败执行这里的回调函数
+        })
+
+        let p1 = Promise.resolve('52111')
+        console.log(p1);
+        // 如果传入的参数为非Promise类型的对象，则返回的结果为成功promise对象
+        // 如果传入的参数为Promise类型的对象，则参数结果决定 resolve 的结果
+        let p2 = Promise.resolve(new Promise((resolve, reject) => {
+            // resolve('ok') //[PromiseState] = fulfilled
+            reject('err')  //[PromiseState] = rejected
+        }))
+        let p22 = Promise.resolve(new Promise((resolve, reject) => {
+            resolve('ok') //[PromiseState] = fulfilled
+            // reject('err')  //[PromiseState] = rejected
+        }))
+        p2.catch(reason => {
+            console.log(reason);
+        })
+        console.log(p2);
+        // reject无论传入什么返回都是reject
+        let p3 = Promise.reject(521)
+        let p4 = Promise.resolve(new Promise((resolve, reject) => {
+            resolve('ok') //[PromiseState] = fulfilled
+        }))
+        console.log(p3);
+        console.log(p4);
+
+        // Promise.all() 方法
+        const result = Promise.all([p1, p2, p22])
+        // 只有p1,p2,p22结果都成立，result才是一个成功的promise对象，并且是p1,p2,p22成果结果的集合
+        console.log(result);
+
+        // Promise.race() 方法
+        // p1,p2,p22谁先改变状态码，Promise.race()返回结果就是哪一个对象，不管是 pending -> resolved   pending -> rejected
+        let p33 = new Promise((resolve,reject) => {
+            setTimeout(() =>{
+                resolve('ok11')
+            })
+        })
+        // 如果有异步任务，则异步任务会推后
+        const result1 = Promise.race([p33, p1, p2, p22])
+        console.log(result1);
+    </script>
+</body>
+
+</html>

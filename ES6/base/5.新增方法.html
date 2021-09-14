@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增方法</title>
+</head>
+<body>
+    <!-- 1.数组方法 -->
+    <!-- 迭代（遍历）方法：foreach() map() filter() some() every() -->
+    <script>
+        // filter 方法
+        var arr = [10,12,24,35,47]
+        var newarr = arr.filter(function (value,index) {
+            return value >= 20
+        }) 
+        var newarr2 = arr.filter((value,index) => {
+            return value % 2 == 0
+        })
+        console.log(newarr);
+        console.log(newarr2);
+        // some() 数组中的元素是否满足指定条件，返回值是布尔值，找到则返回true，如果找到第一个满足条件的元素，则终止查找
+        var flag = arr.some(function (value) {
+            return value % 11 == 0  
+        })
+        console.log(flag);
+        // filter 返回的是一个数组，并且是把所有符合条件的元素都进行返回，some返回的是一个布尔值，如果找到第一个满足条件的元素，则终止查找
+        // some 和 foreach 的区别:some效率会更高
+
+        // trim() 去除字符串两端的空格
+        var str = '  aa  ss  '
+        var newstr = str.trim()
+        console.log(newstr);
+
+        // Object.defineProperty() //定义新属性或者修改原有的属性
+        var obj = {
+            id: 1,
+            name: 'aa',
+            score: 100
+        }
+        // 对象属性增加和修改方式一
+        obj.num = 200
+        obj.score = 60
+        console.log(obj);
+         // 对象属性增加和修改方式二
+        Object.defineProperty(obj,'num',{  //obj对象  //num 要修改的属性
+            value: 1000,  //值
+            writable: false,  //是否可以被重写  false|true
+            enumerable:false,  //目标属性是否可以被枚举,如果值为false，则不允许遍历
+            configurable:true, //目标属性是否可以被删除或是否可以再次修改特性
+            
+        })
+        Object.defineProperty(obj,'address',{
+            value: 'aassdd',
+            writable: true,
+            enumerable: true,
+            configurable: true,
+        })
+        console.log(Object.keys(obj));
+    </script>
+</body>
+</html>
