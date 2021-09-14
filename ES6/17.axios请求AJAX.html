@@ -6,27 +6,113 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script crossorigin="anonymous" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/axios.min.js"></script>
 </head>
 
 <body>
     <button>get</button>
     <button>post</button>
     <button>ajax</button>
+    <button>fetch</button>
+    <button>跨域处理</button>
     <script>
         const btn = document.getElementsByTagName('button')[0];
         const btn1 = document.getElementsByTagName('button')[1];
         const btn2 = document.getElementsByTagName('button')[2];
+        const btn3 = document.getElementsByTagName('button')[3];
+        const btn4 = document.getElementsByTagName('button')[4];
         btn.onclick = function () {
-            axios.get('http://127.0.0.1:8000/server',{
+            // axios.defaults.baseUrl = 'http://127.0.0.1:8000'
+            axios.get('http://127.0.0.1:8000/server', {
+                // url
                 params: {
-                    id:100,
-                    vip:7
+                    id: 100,
+                    vip: 7
+                },
+                // 请求头
+                headers: {
+                    name: 'aaa'
+                },
+                // 请求体
+                data: {
+                    name: 'admin',
+                    password: 'admin'
+                }
+            }).then(value => {
+                console.log(value);
+            })
+        }
+
+        btn1.onclick = function () {
+            // axios.defaults.baseUrl = 'http://127.0.0.1:8000'
+            axios.post('http://127.0.0.1:8000/server', {
+                name: 'admin',
+                password: 'admin'
+            }, {
+                params: {
+                    id: 100,
+                    vip: 7
                 },
                 headers: {
                     name: 'aaa'
                 }
+            }).then(value => {
+                console.log(value);
             })
+        }
+
+        btn2.onclick = function () {
+            axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:8000/server',
+                // url
+                params: {
+                    id: 100,
+                    vip: 7
+                },
+                // 请求头
+                headers: {
+                    name: 'aaa'
+                },
+                // 请求体
+                data: {
+                    name: 'admin',
+                    password: 'admin'
+                }
+            })
+        }
+
+        btn3.onclick = function () {
+            fetch('http://127.0.0.1:8000/axios-server?vip=10', {
+                //请求方法
+                method: 'POST',
+                // 请求头
+                headers: {
+                    name: 'aaa'
+                },
+                // 请求体
+                body: 'name=admin&password=admin'
+            }).then(resp => {
+                return resp.text()
+                // return resp.json()  如果返回对象是json，可以用这种方法
+            }).then(resp => {
+                console.log(resp);
+            })
+        }
+
+        btn4.onclick = function () {
+            const x = new XMLHttpRequest()
+            x.open("GET", "http://127.0.0.1:8000/cors-server")
+            x.send()
+            // 4.事件绑定 处理服务端返回的结果
+            // readystate 是 xhr对象中的属性 表示状态 0 1 2 3 4
+            x.onreadystatechange = function () {
+                if (x.readyState === 4) {
+                    if (x.status >= 200 && x.status <= 300) {
+                        console.log(x.response);
+                    }
+                }
+            }
         }
     </script>
 </body>
