@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async与await</title>
+</head>
+
+<body>
+    <script>
+        // async函数返回值是promise
+        async function main() {
+            // 如果返回值是一个非promise类型的数据
+            // return 555
+            // 如果返回值是一个promise类型的数据
+            // return new Promise((resolve, reject) => {
+            //     // resolve('ok');
+            //     reject('err')
+            // })
+            // 抛出异常
+            // throw 'errrr';
+            let p = new Promise((resolve, reject) => {
+                resolve('ok');
+                // reject('err')
+            })
+            let p1 = new Promise((resolve, reject) => {
+                // resolve('ok');
+                reject('err')
+            })
+            // await右侧的表达式一般为promise对象
+            let res = await p;
+            console.log(res);
+            //，但也可以是其他值
+            let res2 = await 20;
+            console.log(res2);
+            // 如果await中的promise失败了，就会抛出异常，需要通过try  catch捕获异常
+            try {
+                let res3 = await p1;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        main();
+        console.log(result);
+        // await右侧的表达式一般为promise对象，但也可以是其他值
+        // 如果表达式是promise对象，await 返回的是promise成功的值
+        // 如果表达式是其他值，直接将此值作为await的返回值
+
+
+        // await必须写在async函数中，但async中可以没有await
+        // 如果await中的promise失败了，就会抛出异常，需要通过try  catch捕获异常
+    </script>
+</body>
+
+</html>

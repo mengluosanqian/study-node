@@ -60,6 +60,24 @@
             console.log(reason);  //异常穿透，直接写在最后就可以，在前面某一个回调函数返回一个失败的回调都可以处理
         })
         console.log(p);
+
+        //测试resolve方法
+        const p11 = Promise.resolve('ok')
+        const p12 = Promise.resolve(new Promise((resolve,reject)=> {
+            resolve('success')
+            // reject('error')
+        }))
+        const p13 = Promise.resolve('111')
+        console.log(p11);
+        console.log(p12);
+
+        //调用all方法
+        let result = Promise.all([p11,p12,p13])
+        console.log(result,'result');
+        // 调用race方法
+        let result1 = Promise.race([p11,p12,p13]) 
+        console.log(result1,'result1');
+        //then方法中的回调函数是异步执行
     </script>
 </body>
 
