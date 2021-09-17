@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+
+        let fn = (a,b) => {
+            return a+b
+        } 
+        let result = fn(12,2)
+        console.log(result); 
+        // this是静态的，this始终指向函数声明时所在作用域下的this
+        function getName(params) {
+            console.log(this.name);
+        }
+        let getName2 = () => {
+            console.log(this.name);
+        }
+        window.name = '111'
+        const aa = {
+            name: '222'
+        }
+        getName()
+        getName2()
+        getName.call(aa)
+        // 箭头函数的this指向不变
+        getName2.call(aa)
+
+
+        // 不能作为构造实例化对象
+        // 不能使用arguments 变量
+        // let getName3 = () => {
+        //     console.log(argument);
+        // }
+        // getName3(1,23,4)
+
+        // 箭头函数简写
+        // 省略小括号，当形参有且只有一个
+        let add = n =>{
+            return n+n
+        }
+        console.log(add(1));
+        // 省略花括号，当代码体有且只有一条，此时return必须省略
+        // 语句执行结果就是函数的返回值
+        let pow = n => n*n
+        console.log(pow(5));
+
+
+        // es6容许给函数参数赋值初始值
+        // 1.形参初始值
+        function add1(a,b,c=10) {
+            return a + b +c
+        }
+        let result1 = add1(1,2)
+        console.log(result1);
+        // 2.与解构赋值结合使用
+        function connect({host,username,password,port}) {
+            console.log(host,username,password,port);
+        }
+        connect({
+            host:'localhost',
+            username:'root',
+            password:'admin',
+            port:8080
+        })
+    </script>
+</body>
+</html>

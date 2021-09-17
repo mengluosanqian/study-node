@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值和模板字符串</title>
+</head>
+
+<body>
+    <script>
+        // es6容许按照一定模式从数组和对象中提取值，对变量进行赋值
+        // 数组的解构
+        const colors = ['blue', 'red', 'yellow', 'green']
+        let [c1, c2, c3, c4] = colors
+        console.log(c1, c2, c3, c4);
+        // 对象的解构
+        const aaa = {
+            name: '111',
+            age: 18,
+            sayHi: function () {
+                console.log('hi');
+            }
+        }
+        let {
+            sayHi
+        } = aaa;
+        sayHi()
+
+        // `` 新的声明字符串方式
+        // 内容中可以直接出现换行符
+        let str = `<div style="display: flex;">
+            <span>确认删除该流程？删除操作无法恢复，请谨慎操作。</span>
+            </div>`;
+        //变量拼接
+        let aa = 'asda'
+        let bb = `${aa}adsadad` 
+        console.log(bb);
+    </script>
+</body>
+
+</html>
