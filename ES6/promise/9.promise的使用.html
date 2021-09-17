@@ -72,6 +72,15 @@
         // 如果有异步任务，则异步任务会推后
         const result1 = Promise.race([p33, p1, p2, p22])
         console.log(result1);
+        // 修改promise对象状态
+        // 1.resolve函数
+        // 2.reject函数
+        // 3.抛出错误 
+        // throw 'err'
+
+        // 可以指定多个回调函数，在状态发生改变时都会调用
+        // 如果先修改状态，then方法在执行的时候就会执行回调函数
+        // 如果先指定回调再改变状态（异步任务，比如加个定时器），then方法在状态改变以后才会执行回调
     </script>
 </body>
 
