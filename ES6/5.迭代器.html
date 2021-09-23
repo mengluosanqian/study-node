@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器</title>
+</head>
+
+<body>
+    <script>
+        // 迭代器（Iterator）是一种接口，为各种不同的数据结构提供统一的访问机制
+        // 任何数据结构只要部署了iterator接口，就可以完成遍历操作
+        // es6创造了一种新的遍历方法for ... of
+        let colors = ['blue', 'red', 'yellow', 'green']
+        for (let v of colors) {
+            console.log(v);
+
+        }
+
+        let iterator = colors[Symbol.iterator]();
+        // 调用对象的next方法
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log('--------------------------------');
+        const ss = {
+            name: "颜色",
+            col: ['blue', 'red', 'yellow', 'green'],
+            [Symbol.iterator]() {
+                // 索引变量
+                let index = 0;
+                let _this = this;
+                return {
+                    next() {
+                        if (index < _this.col.length) {
+                            const result = {value: _this.col[index],done: false}
+                            index ++;
+                            return result
+                        } else {
+                            return {value: undefined,done:true}
+                        }
+                    }
+                }
+            }
+        }
+        for(let v of ss){
+            console.log(v);
+        }
+    </script>
+</body>
+
+</html>

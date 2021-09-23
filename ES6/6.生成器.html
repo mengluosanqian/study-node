@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成器</title>
+</head>
+<body>
+    <script>
+        // 生成器就是一个特殊的函数
+        // 异步编程  纯回调函数 node fs ajax mongodb
+        // yield 可以看作函数代码的分隔符
+        function *  gen(arg) { 
+            console.log(arg);
+            yield 'aaa';
+            // console.log('aaa');
+            let two = yield 'bbb';
+            console.log(two);
+            // console.log('bbb');
+            yield 'ccc'
+            // console.log('ccc');
+         }
+         let iterator = gen('ggg')
+        //  console.log(iterator);
+        //  iterator.next() //不调用next方法不会执行
+        //  iterator.next()
+         console.log(iterator.next());
+         console.log(iterator.next());
+        //  next方法可以传入实参，并作为上一个yield的返回结果
+         console.log(iterator.next('AAASSSS'));
+         console.log(iterator.next());
+         for(let v of gen()) {
+             console.log(v);
+         }
+        //  
+
+        function one(params) {
+            setTimeout(()=> {
+                // console.log(111);
+                let data = '商品'
+                iterator1.next(data)
+            },1000)
+        }
+        function two(params) {
+            setTimeout(()=> {
+                // console.log(222);
+                let data = '价格'
+                iterator1.next(data)
+            },2000)
+        }
+        function three(params) {
+            setTimeout(()=> {
+                // console.log(333);
+                let data = '销量'
+                iterator1.next(data)
+            },3000)
+        }
+        function * genr() {
+            let sp = yield one();
+            console.log(sp);
+            let jg = yield two();
+            console.log(jg);
+            let xl = yield three();
+            console.log(xl);
+        }
+        // 调用生成器函数
+        let iterator1 = genr();
+        iterator1.next()
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>symbol</title>
+</head>
+<body>
+    <script>
+        // 创建symbol
+        let s = Symbol();
+        console.log(s, typeof s);
+        let s1 = Symbol('lw');
+        let s2 = Symbol('lw');
+        console.log(s1 === s2);
+        // symbol.for创建
+        let s3 = Symbol.for('lw')
+        let s4 = Symbol.for('lw')
+        console.log(s3 === s4);
+        // 不能与其他数据进行运算，包括symbol
+        // let result = s + 100  //报错  Uncaught TypeError: Cannot convert a Symbol value to a number
+        // 向对象中添加方法
+        let game = {}
+        let methods = {
+            up: Symbol(),
+            down: Symbol()
+        }
+        game[methods.up] = function () {
+            console.log(1111);
+        }
+        game[methods.down] = function () { 
+            console.log(222);
+         }
+         console.log(game);
+         let youxi = {
+             name: 'aaa',
+             [Symbol('a')]:function(){
+
+             },
+             [Symbol('b')]:function () {
+
+               }
+         }
+         console.log(youxi);
+        // 1.数组的合并
+        // 2.数组的克隆
+        // 3.将伪数组转成真正的数组
+    </script>
+    
+</body>
+</html>
