@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .thing{
+            width: 300px;
+            height: 200px;
+            background-color: aquamarine;
+        }
+    </style>
+    <p id="thing" class="thing"></p>
+    <button> first </button>
+    <button> second </button>
+    <script>
+        const firstBtn = document.querySelectorAll('button')[0]
+        const secondBtn = document.querySelectorAll('button')[1]
+        const p = document.getElementById('thing')
+        console.log(firstBtn,p);
+        class saySome {
+            constructor(a,b) {
+                console.log(a);
+                this.a = a;
+                this.b = b;
+            }
+            wirte() {
+                p.innerHTML = p.innerHTML + this.a + ' ' + this.b
+            }
+            get a() {
+                // console.log(11111111);
+                return this._a
+            }
+            set a(a) {
+                console.log(a);
+                this._a = a + '222'
+            }
+        }
+        let saysome = new saySome('hello','this world')
+        firstBtn.onclick = function () {            
+            saysome.wirte()
+        }
+        class sonSay extends saySome {
+            constructor(a,b,c) {
+                super(a,b)
+                this.c = c
+            }
+            wirte() {
+                p.innerHTML =p.innerHTML + ' ' + this.a + ' ' + this.b + " " + this.c
+            }
+        }
+        let sonsay = new sonSay('hello','this world','!!!!!!!') 
+        secondBtn.onclick = function () {
+            sonsay.wirte()
+        }
+    </script>
+</body>
+</html>
