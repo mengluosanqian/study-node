@@ -24,6 +24,7 @@
                 this.btn = document.querySelector('button')
                 this.btn.onclick = this.sing //如果加小括号是立即调用，不要加小括号
             }
+            // 类中方法名必须使用该语法，不能使用es5的对象完整形式
             sing(song) {
                 // 普通函数里面的this指向的是调用者
                 // that里面存的是constructor里面的this
@@ -75,6 +76,38 @@
         // 2.类里面的共有属性和方法一定要加this使用
         // 3.类里面的this指向问题
         // 4.constructor里面的this指向的是实例对象，方法里面的this指向的是调用者
+
+        // 静态成员
+        // 属性属于类但不属于对象
+        // function Phone() { 
+           
+        //  }
+        //  Phone.name = '手机'
+        //  Phone.change = function () { 
+        //      console.log('hello');
+        //   }
+        //   let nokia = new Phone();
+        //   console.log(nokia.name);
+        //   nokia.change()
+          class Phone {
+               // 静态成员 属于类但不属于实例对象
+            static price = 5999;
+            static change() {
+                console.log('aasdad');
+            }
+            get size() {
+                console.log('6.7inch');
+                return "这是get的返回值，也是实例对象属性对应的值"
+            }
+            set size(val) {
+                console.log(`这是set的值 ${val}`);
+            }
+          }
+          let nokia = new Phone()
+          console.log(nokia.name);  //undefined
+          console.log(Phone.name);
+          console.log(nokia.size);
+          nokia.size = "9.9inch"
     </script>
 </body>
 </html>

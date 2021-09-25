@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合</title>
+</head>
+<body>
+    <script>
+        // 声明一个set
+        let s = new Set();
+        let s2 = new Set(['blue','red','yellow','green'])
+        console.log(s2);
+        // 元素个数 size
+        console.log(s2.size);
+        // 添加新元素
+        s2.add('pink')
+        console.log(s2);
+        // 删除元素
+        s2.delete('blue')
+        console.log(s2);
+        // 检测       
+        console.log(s2.has('red'));
+        // 清空
+        s2.clear()
+        console.log(s2);
+        console.log('--------------------------');
+        let arr = [1,2,57,3,12,4,2,15,1,2,4]
+        let arr2 = [1,2,3,6,8,9,32]
+        // 数组去重
+        let result = [...new Set(arr)]
+        console.log(result); 
+        // 交集
+        let result2 = [...new Set(arr)].filter(item => {
+            let s2 = new Set(arr2)
+            if(s2.has(item)){
+                return true
+            }else {
+                return false
+            }
+        })
+        console.log(result2);
+        let result3 = [...new Set(arr)].filter(item => new Set(arr2).has(item))
+        console.log(result3);
+        // 并集
+        let union = [...new Set([...arr,...arr2])]
+        console.log(union);
+        // 差集
+        let diff =  [...new Set(arr)].filter(item => !(new Set(arr2).has(item)))
+        let diff2 = [...new Set(arr2)].filter(item => !(new Set(arr).has(item)))
+        console.log(diff);
+        console.log(diff2);
+        console.log('-------------------------');
+        // 声明map
+        let m =new Map();
+        // 添加元素
+        m.set('name','asda')
+        m.set('age',18)
+        m.set('change',function() {
+            console.log('hello');
+        })
+        let key = {
+            school : 'ddd'
+        }
+        m.set(key,['aaa','bbb','ccc'])
+        console.log(m);
+        // 元素个数
+        console.log(m.size);
+        // 删除
+        m.delete('age')
+        console.log(m);
+        // 获取
+        console.log(m.get('change'));
+        console.log(m.get(key));
+        // 清空
+        m.clear()
+        console.log(m);
+    </script>
+</body>
+</html>

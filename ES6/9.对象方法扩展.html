@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象方法扩展</title>
+</head>
+
+<body>
+    <script>
+        // Object.is 判断两个值是否相等
+        console.log(Object.is(120, 121));
+        console.log(Object.is(NaN, NaN));
+        console.log(NaN === NaN);
+        Object.is(120, 121)
+        // Object.assign 对象的合并
+        const config1 = {
+            host: 'localhost',
+            port: 3306,
+            name: 'root',
+            pass: 'root'
+        };
+        const config2 = {
+            host: '172.0.0.1',
+            port: 8080,
+            name: 'admin',
+            pass: 'admin'
+        };
+        // 如果重名，后面对象属性会覆盖前面对象属性
+        // console.log(Object.assign(config1, config2));
+        // console.log(Object.assign(config2, config1));
+        //    Object.setPrototypeOf 设置原型对象 Object.getPrototypeOf
+        Object.setPrototypeOf(config1, config2)
+        // config2 会设置在config1的原型对象上
+        console.log(config1);
+        console.log(Object.getPrototypeOf(config1),'111');
+    </script>
+</body>
+
+</html>

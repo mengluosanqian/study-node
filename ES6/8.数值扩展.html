@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数值扩展</title>
+</head>
+<body>
+    <script>
+        // Number.EPSILON 是JavaScript中表示的最小精度
+        console.log(0.1+0.2); //0.30000000000000004
+        console.log(0.1+0.2===0.3);
+        function equal(a,b) { 
+            if(Math.abs(a-b) < Number.EPSILON) {
+                return true
+            }else {
+                return false
+            }
+         }
+         console.log(equal(0.1+0.2,0.3));
+        // 二进制和八进制
+        let b= 0b1010  //二进制
+        let o = 0o777 //八进制
+        let d = 100  //十进制
+        let x = 0xff //十六进制
+        console.log(b,o,d,x);
+        // Number.isFinite 检测一个数值是否是有限数
+        console.log(Number.isFinite(100/0));
+        // Number.isNaN 检测一个数值是否是NaN
+        // Number.parseInt Number.parseFloat 字符串转化为整数
+        console.log(Number.parseInt('21312312ads'));
+        console.log(Number.parseFloat('3.123fdfsaf'));
+        // Number.isInteger 判断一个数是否为整数
+        console.log(Number.isInteger('3,213'))
+        // Math.trunc 将数字的小数部分抹掉
+        console.log(Math.trunc(3.44))
+        // Math.sign 判断一个数是整数还是负数还是0
+        console.log(Math.sign(100));
+        console.log(Math.sign(0));
+        console.log(Math.sign(-100));
+
+
+</script>
+</body>
+</html>
