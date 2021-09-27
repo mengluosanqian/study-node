@@ -36,6 +36,32 @@
         // config2 会设置在config1的原型对象上
         console.log(config1);
         console.log(Object.getPrototypeOf(config1),'111');
+        console.log('-------------------');
+        // 获取对象所有的键名 Object.keys()
+        // 获取对象所有的值 Object.values()
+        // 获取对象所有的键值 Object.entries()
+        console.log(Object.keys(config2));
+        console.log(Object.values(config2));
+        console.log(Object.entries(config2)); //可以用来创建map
+        const m = new Map(Object.entries(config2))
+        console.log(m);
+        console.log(m.get('name'));
+        // Object.getOwnPropertyDescriptors() 对象属性的描述
+        console.log(Object.getOwnPropertyDescriptors(config2));
+
+
+        // rest 参数
+        function connect({host,...user}) {
+            console.log(host);
+            console.log(user);
+        }
+        connect({
+            host: '172.0.0.1',
+            port: 8080,
+            name: 'admin',
+            pass: 'admin'
+        })
+        console.log(...config1);
     </script>
 </body>
 

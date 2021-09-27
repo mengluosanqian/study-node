@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块化</title>
+</head>
+<body>
+    <!-- <script>
+        // 模块功能主要由两个命令构成：export和import
+        // export命令用于规定模块的对外接口
+        // import命令用于输入其他模块提供的功能
+    </script> -->
+    <!-- <script type="module">
+        // 1.通用引入方式
+        // import * as testmodule from "./test/testmodule.js"
+        // import * as testmodule2 from "./test/testmodule2.js"
+        // console.log(testmodule);
+        // console.log(testmodule2);
+        // testmodule.teach()
+        // testmodule2.default.change()
+        // 2.解构赋值形式
+        import {school ,teach} from "./test/testmodule.js"
+        // 如果名称冲突，可以使用别名设置 school as school1
+        import {default as m2} from "./test/testmodule2.js"
+        console.log(school);
+        console.log(m2);
+        // 3.简便形式 针对默认暴露
+        import m3 from "./test/testmodule2.js"
+        console.log(m3);
+    </script> -->
+    <script src="../ES6/js/app.js" type="module"></script>
+</body>
+</html>
