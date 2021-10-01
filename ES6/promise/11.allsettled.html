@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         let p2 = Promise.resolve(new Promise((resolve, reject) => {
+            // resolve('ok') //[PromiseState] = fulfilled
+            reject('err')  //[PromiseState] = rejected
+        }))
+        let p22 = Promise.resolve(new Promise((resolve, reject) => {
+            resolve('ok') //[PromiseState] = fulfilled
+            // reject('err')  //[PromiseState] = rejected
+        }))
+
+        // allSettled 无论结果如何，返回都是成功的
+        // all 只要有一个失败，返回的就是失败
+        const result = Promise.allSettled([p2, p22])
+        const result2 = Promise.all([p2, p22])
+        console.log(result);
+        console.log(result2);
+    </script>
+</body>
+</html>

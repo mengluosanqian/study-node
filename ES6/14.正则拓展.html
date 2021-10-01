@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let str = '<a href="http://www.baidu.com">百度</a>'
+        // 提取url与标签文本
+        const reg = /<a href="(.*)">(.*)<\/a>/;
+        // 执行
+        const result = reg.exec(str)
+        console.log(result);
+
+        // 命名捕获分组
+        const reg2 = /<a href="(?<url>.*)">(?<text>.*)<\/a>/;
+        const result2 = reg2.exec(str)
+        console.log(result2);
+        // 正向断言
+        let str2 = 'HSD31414合肥市大555啦啦啦'
+        const reg3 = /\d+(?=啦)/
+        const result3 = reg3.exec(str2)
+        // 反向断言
+        const reg4 = /(?<=大)\d+/
+        const result4 = reg4.exec(str2)
+        console.log(result3);
+        console.log(result4);
+
+        // dot . 元字符 除换行符以外的任意单个字符
+    </script>
+</body>
+
+</html>

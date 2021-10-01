@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bigint</title>
+</head>
+<body>
+    <!-- 大整形 -->
+    <script>
+        let n = 333n
+        console.log(n,typeof(n));
+        // 函数
+        let n1= 1312
+        // BigInt()函数不能使用浮点数
+        console.log(BigInt(n1));
+        // 大数值运算
+        let max = Number.MAX_SAFE_INTEGER
+        console.log(max); //9007199254740991
+        console.log(max + 1);  // 9007199254740992
+        console.log(max + 2);  // 9007199254740992   此时运算就有问题了
+        console.log(BigInt(max)); //9007199254740991n
+        console.log(BigInt(max) + BigInt(1));  //9007199254740992n
+        console.log(BigInt(max) + BigInt(2));  //9007199254740993n
+    </script>
+</body>
+</html>

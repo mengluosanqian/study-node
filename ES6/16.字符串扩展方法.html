@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trimStart/trimEnd</title>
+</head>
+
+<body>
+
+    <script>
+        let str = '   asdfa   '
+        console.log(str);
+        console.log(str.trimStart());
+        console.log(str.trimEnd());
+
+        let str1 = `
+        <ul>
+        <li>
+            <a>aaa</a>
+            <p>sdad</p>
+        </li>
+        <li>
+            <a>bbb</a>
+            <p>sdasd</p>
+        </li>
+    </ul>`
+
+    const reg = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/sg
+        const result2 = str1.matchAll(reg)
+        console.log(...result2);
+    </script>
+</body>
+
+</html>
