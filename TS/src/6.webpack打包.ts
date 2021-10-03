@@ -23,3 +23,7 @@
         }),
     ]
 */
+
+// 安装babel
+
+// npm i -D @babel/core @babel/preset-env babel-loader core-js

@@ -1,22 +1,22 @@
 "use strict";
 // 可以直接使用字面量进行类型声明
-var a;
+let a;
 a = 10;
 // a = 11 会报错
 // 可以使用 | 来连接多个类型（联合类型）
-var b;
+let b;
 b = 'man';
 b = 'women';
-var c;
+let c;
 c = true;
 c = 'hello';
 // any表示任意类型，一个变量设置类型为any，相对于对该变量关闭了类型检测
 // 使用ts时，不建议使用any
-var d;
+let d;
 // 声明变量时，不指定类型，则默认为any
-var e;
+let e;
 // unknown表示未知类型的值,实际上就是一个类型安全的any
-var f;
+let f;
 f = 'ssad';
 f = 1231;
 f = true;
@@ -24,7 +24,7 @@ f = true;
 // 类型断言,可以用来告诉解析器变量的实际类型
 // 语法： * as [type]
 // <type> *
-var s;
+let s;
 s = f;
 s = f;
 // void 表示空值
