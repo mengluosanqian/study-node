@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="../public/css/test.css"> -->
+</head>
+
+<body>
+
+    <script>
+        /*
+        webpack功能
+        - 打包：将不同类型资源按模块处理进行打包
+        - 静态：打包后最终产出静态资源
+        - 模块： webpack支持不同规范的模块化开发
+        */
+        //    webpack会自动去src下的index.js进行编译
+        // 指定入口文件 npm --entry ./src/main.js
+        // 指定出口文件 npm --output-path ./build
+
+        // 具体配置文件写在webpack.config.js里
+        const path = require('path')
+        module.exports = {
+            entry: './src/index.js',  //入口文件地址
+            output: {  //输出文件地址
+                filename: 'build.js',
+                path: path.resolve(__dirname, 'dist') //path只能是绝对路径
+            }
+        }
+    </script>
+</body>
+
+</html>
