@@ -1,4 +1,8 @@
 const path = require('path')
+const {CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const {DefaultPlugin} = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const {
     resourceUsage
 } = require('process')
@@ -121,5 +125,26 @@ module.exports = {
                 },
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'html-webpack-plugin',
+            template: './public/index.html'
+        }),
+        // new DefinePlugin({
+        //     BASE_URL:'"./"'
+        // }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'public',
+                    // to: ''//不写的话默认找output里面设计好的，一般默认不写这个值
+                    globOptions: {
+                        ignore: ['**/index.html']  //必须写**/ ，意思是从本目录开始
+                    }
+                }
+            ]
+        })
+    ]
 }
