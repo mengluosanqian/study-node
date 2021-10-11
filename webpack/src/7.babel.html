@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        - 为什么需要babel
+            jsx ts es6+ --> 浏览器平台直接使用
+            转换
+            兼容
+            处理js兼容
+        */
+    //    npm i @babel/core -D
+    //    npm i @babel/cli -D
+
+    //  安装完成之后运行Babel解析文件
+    // npx babel .\src\js\babelTest.js --out-dir build
+    // 发现还是没有处理const let 箭头函数等es6+内容
+    // 安装插件  npm i @babel/plugin-transform-arrow-functions -D
+    //          npm i @babel/plugin-transform-block-scoping
+    // npx babel .\src\js\babelTest.js --out-dir build --plugins=@babel/plugin-transform-arrow-functions,@babel/plugin-transform-block-scoping
+    
+    // babel-loader安装
+    // npm i babel-loader -D
+    </script>
+</body>
+</html>

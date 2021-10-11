@@ -1,5 +1,7 @@
 const path = require('path')
-const {CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const {DefaultPlugin} = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -14,8 +16,7 @@ module.exports = {
         assetModuleFilename: "img/[name][ext]" //会默认取出最后的.
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 // postcss在css之前开始工作
                 test: /\.css$/, //正则
                 use: [{
@@ -118,11 +119,27 @@ module.exports = {
                 }
             },
             {
-                test :/\.(ttf|woff2?)$/,
+                test: /\.(ttf|woff2?)$/,
                 type: 'asset/resource',
                 generator: {
                     filename: "font/[name][ext]" //指定类型资源的输出
                 },
+            },
+            {
+                test: /\.js$/,
+                use: 'babel-loader'  //可以把配置内容提出一个文件 babel.config.js
+                // use: [{
+                //     loader: 'babel-loader',
+                //     options: {
+                //         presets: [
+                //             '@babel/preset-env' //可以完成绝大多数新语法的处理  
+                //         ]
+                //         // plugins: [
+                //         //     ' @babel/plugin-transform-arrow-functions',
+                //         //     '@babel/plugin-transform-block-scoping'
+                //         // ]
+                //     }
+                // }]
             }
         ]
     },
@@ -136,15 +153,13 @@ module.exports = {
         //     BASE_URL:'"./"'
         // }),
         new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'public',
-                    // to: ''//不写的话默认找output里面设计好的，一般默认不写这个值
-                    globOptions: {
-                        ignore: ['**/index.html']  //必须写**/ ，意思是从本目录开始
-                    }
+            patterns: [{
+                from: 'public',
+                // to: ''//不写的话默认找output里面设计好的，一般默认不写这个值
+                globOptions: {
+                    ignore: ['**/index.html'] //必须写**/ ，意思是从本目录开始
                 }
-            ]
+            }]
         })
     ]
 }
