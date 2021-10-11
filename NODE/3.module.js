@@ -41,10 +41,10 @@ module.exports = {
 }
 // 直接写exports = {} 是在改对象 ，module.exports = {} 是在改module的exports这个变量
 // exports只能使用 . 的方式向外暴露
-exports = {
-  aname: 'asda',
-  aage: 18
-}
+// exports = {
+//   aname: 'asda',
+//   aage: 18
+// }
 console.log(exports === module.exports)
 console.log(__filename)
 console.log(__dirname)
