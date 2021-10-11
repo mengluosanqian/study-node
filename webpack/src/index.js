@@ -14,3 +14,4 @@ console.log(111);
         - npm i html-webpack-plugin -D  //不需要自己在dist下创建index.html
         - npm i copy-webpack-plugin -D  //copy插件
  */
+
