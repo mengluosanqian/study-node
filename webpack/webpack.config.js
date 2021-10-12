@@ -5,19 +5,38 @@ const {
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const {DefaultPlugin} = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 const {
   resourceUsage
 } = require('process')
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'build.js',
-    path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'img/[name][ext]' // 会默认取出最后的.
+    filename: 'js/main.js',
+    path: path.resolve(__dirname, 'dist'), // 打包后资源的输出目录
+    assetModuleFilename: 'img/[name][ext]', // 会默认取出最后的.
+    publicPath: '/'
+    // index.html内部引用路径，如果为空，就是 域名 + publicPath + filename
+    // publicPath为空， http://localhost:8080 + '/' + 'js/main.js'
   },
   target: 'web',
   devServer: {
-    hot: true // 是否开启热更新
+    hot: true, // 是否开启热更新
+    // hotOnly: true,
+    port: 4000, // 端口号
+    open: false, // 自动打开浏览器
+    compress: false, // 压缩文件
+    static: {
+      publicPath: '/',
+      directory: path.join(__dirname, 'public')
+    }
+    // publicPath: '/'
+    // publicPath: 指定本地服务所在目录 http://localhost:8080/publicPath
+    // contentBase: path.resolve(__dirname, 'public'),
+    // 打包后资源依赖其他的资源，此时就告知去哪里找
+    // watchContentBase: true
+    // 监控contentBase里面的内容是否发生变化
   },
   module: {
     rules: [{
@@ -143,12 +162,15 @@ module.exports = {
       //         // ]
       //     }
       // }]
+    },
+    {
+      test: /\.vue$/,
+      use: ['vue-loader']
     }
-      //   }
-      // }
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'html-webpack-plugin',

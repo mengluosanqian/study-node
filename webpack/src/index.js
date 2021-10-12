@@ -2,7 +2,12 @@ import {sum, square} from './js/utils.js'
 import './js/login'
 import './js/image'
 import './js/font'
+import Vue from 'vue'
+import App from './App.vue'
 
+new Vue({
+  render: h => h(App)
+}).$mount('#root')
 if (module.hot) { // 是否开启热更新
   module.hot.accept(['./js/font'], () => {
     console.log('font 模块发生改变')
