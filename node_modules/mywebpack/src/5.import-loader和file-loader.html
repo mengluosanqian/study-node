@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*test.css
+        - login.css  @import 语句导入了 test.css
+        - login.css 可以被匹配，当其被匹配到之后，就是postcss-loader进行工作
+        - 基于当前的代码，postcss-loader拿到了login.css当中的代码之后分析基于我们的筛选条件并不需要做额外的处理
+        - 最终将代码直接提交给了css-loader
+        - 此时css-loader是可以处理@import media url...,这个时候有拿到了test.css文件，但是loader不会回头找
+        - 最终将处理好的css代码交给style-loader进行展示
+        
+        */
+
+        // npm i file-loader -D
+        // 
+
+        // usr-loader base64 url 文件当中，减少请求次数
+        // file-loader将资源拷贝到指定目录，分开请求
+        // url-loader内部也可以调用file-loader
+        // 通过limit来区分是转为base64还是直接拷贝
+
+    </script>
+</body>
+</html>
