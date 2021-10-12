@@ -11,5 +11,5 @@ app.use(webpackDevMiddleware(compiler))
 
 // 开启端口上的服务
 app.listen(3000, () => {
-    console.log('服务运行在 3000 端口');
+  console.log('服务运行在 3000 端口')
 })
