@@ -31,7 +31,7 @@ module.exports = {
   devServer: {
     hot: true, // 是否开启热更新
     // hotOnly: true,
-    port: 4000, // 端口号
+    // port: 4000, // 端口号
     open: false, // 自动打开浏览器
     compress: false, // 压缩文件
     static: {
