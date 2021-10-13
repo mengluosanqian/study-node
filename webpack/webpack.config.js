@@ -22,7 +22,7 @@ module.exports = {
   },
   target: 'web',
   resolve: {
-    extensions: ['.js','.json','.ts','.jsx','.vue'], // 扩展名，引入时文件会自动判断后缀名
+    extensions: ['.js', '.json', '.ts', '.jsx', '.vue'], // 扩展名，引入时文件会自动判断后缀名
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
@@ -48,8 +48,8 @@ module.exports = {
       '/api': {
         // http://localhost:4000/api/user  =>
         // https://api.github.com/api/user
-        target: 'https://api.github.com/',  //去哪个服务端查询数据
-        pathRewrite: { "^/api":"" },
+        target: 'https://api.github.com/', // 去哪个服务端查询数据
+        pathRewrite: { '^/api': '' },
         changeOrigin: true
       }
     }
@@ -182,6 +182,10 @@ module.exports = {
     {
       test: /\.vue$/,
       use: ['vue-loader']
+    },
+    {
+      test: /\.ts$/,
+      use: ['babel-loader']
     }
     ]
   },
