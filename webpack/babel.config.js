@@ -7,7 +7,8 @@ module.exports = {
         // entry 依据所要兼容的浏览器进行填充
         corejs: 3
       }
-    ]
+    ],
+    ['@babel/preset-typescript']
   ]
   // plugins: [
   //     ' @babel/plugin-transform-arrow-functions',
