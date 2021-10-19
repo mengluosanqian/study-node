@@ -8,6 +8,31 @@
 </head>
 <body>
     <script>
+        let newArr = {
+            name: 'liu',
+            age: 25,
+            sex: 'man',
+            job: 'none',
+            code: '123134'
+        }
+        // 伪数组转化为数组
+        // let newArr1 = Array.prototype.slice.call(newArr)
+        let newArr1 = Array.from('newArr')
+        console.log(newArr1,'newArr1');
+        function a() { 
+            let arr = Array.from(arguments)
+            console.log(arr,'arr');
+         }
+         a(1,2,3,4,5)
+
+        //  将一组数转成数组
+        console.log(Array.of(1,2,3,4,5),'Array.of(1,2,3,4,5)');
+
+        // 填充数组
+        console.log(['a','b','c'].fill(7),'填充数组');
+        console.log(['a','b','c'].fill(7,1),'填充数组');
+        console.log(['a','b','c'].fill(7,1,2),'填充数组');
+
         // Array.prototype.includes
         const colors = ['blue','red','yellow','green']
         console.log(colors.includes('red'));
