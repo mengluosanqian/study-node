@@ -26,7 +26,8 @@
         s2.clear()
         console.log(s2);
         console.log('--------------------------');
-        let arr = [1,2,57,3,12,4,2,15,1,2,4]
+        // NaN也认为是相同值
+        let arr = [1,2,57,3,12,4,2,15,1,2,4,NaN,NaN]
         let arr2 = [1,2,3,6,8,9,32]
         // 数组去重
         let result = [...new Set(arr)]
@@ -76,6 +77,13 @@
         // 清空
         m.clear()
         console.log(m);
+
+        const map1 = new Map([
+            ['F','no'],
+            ['T','yes']
+        ])
+        console.log(map1,'map1');
+        console.log([...map1.entries()].flat());
     </script>
 </body>
 </html>
