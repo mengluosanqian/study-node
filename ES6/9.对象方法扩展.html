@@ -28,6 +28,13 @@
             name: 'admin',
             pass: 'admin'
         };
+
+        // 只有字符串的包装对象会产生可枚举属性，可以并入目标对象
+        const v1 = 'abc'
+        const v2 = true
+        const v3 = 12
+        console.log(Object.assign({},v1,v2,v3),'Object.assign({},v1,v2,v3)');
+        Object.assign({},v1,v2,v3)
         // 如果重名，后面对象属性会覆盖前面对象属性
         // console.log(Object.assign(config1, config2));
         // console.log(Object.assign(config2, config1));
