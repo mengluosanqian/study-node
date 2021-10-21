@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
+    <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
+        poster="http://localhost:8080/repository/v1.0/resources/files/download/02021102115381092000000101001142" data-setup="{}">
+        <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+    </video>
+    <script>
+        var player = videojs('example_video_1', {
+            muted: false,
+            controls: false,
+            height: 300,
+            width: 400,
+            loop: true,
+            // 更多配置.....
+        });
+
+        var vids = document.getElementsByTagName('video');
+
+        for (var i = 0; i < vids.length; i++) {
+            vids[i].onclick = function () {
+                if (this.paused) {
+                    this.play();
+                } else {
+                    this.pause();
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 点击屏幕播放/暂停 */
+        .video-js.vjs-playing .vjs-tech {
+            pointer-events: auto;
+        }
+
+
+        /* 暂停时显示播放按钮 */
+        .vjs-paused .vjs-big-play-button,
+        .vjs-paused.vjs-has-started .vjs-big-play-button {
+            display: block;
+        }
+
+        .video-js .vjs-big-play-button {
+            font-size: 2.5em;
+            line-height: 2.3em;
+            height: 2.5em;
+            width: 2.5em;
+            -webkit-border-radius: 2.5em;
+            -moz-border-radius: 2.5em;
+            border-radius: 2.5em;
+            background-color: #73859f;
+            background-color: rgba(115, 133, 159, .5);
+            border-width: 0.15em;
+            margin-top: -1.25em;
+            margin-left: -1.75em;
+        }
+
+        /* 中间的播放箭头 */
+        .vjs-big-play-button .vjs-icon-placeholder {
+            font-size: 1.63em;
+        }
+
+        /* 加载圆圈 */
+        .vjs-loading-spinner {
+            font-size: 2.5em;
+            width: 2em;
+            height: 2em;
+            border-radius: 1em;
+            margin-top: -1em;
+            margin-left: -1.5em;
+        }
+    </style>
+</body>
+
+</html>
