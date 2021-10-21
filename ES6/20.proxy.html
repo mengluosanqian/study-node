@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proxy</title>
+</head>
+<body>
+    <script>
+        const person = {
+            name:'dsa',
+            age:18,
+            _pwd: '123456'
+        }
+        // 拦截方法
+        let handler = {
+            get:function(target,prop,recevier){
+                // console.log('访问量person对象的name属性');
+                // console.log(this);
+                // return target[prop];
+                if(prop in target) {
+                    return target[prop]
+                }else {
+                    throw new Error('访问的属性不存在')
+                }
+            }
+        } 
+        // 生成proxy的实例
+        let proxy = new Proxy(person,handler)
+        console.log(proxy.name);
+
+
+        // 读取负索引的值
+        const arr = [1,4,9,16,25,36,49,64,81]
+        const proxy1 = new Proxy(arr,{
+            get:function(target,index){
+                index = Number(index)
+                if(index > 0) {
+                    return target[index]
+                }else {
+                    return target[target.length+index]
+                }
+            }
+        })
+        console.log(proxy1[2]);
+        console.log(proxy1[-2]);
+
+
+        // 禁止访问私有属性
+        const proxy2 = new Proxy(person,{
+            get:function(target,prop){
+                if(prop.indexOf('_') === 0){
+                    throw new Error('不能访问私有属性')
+                }else {
+                    return target[prop]
+                }
+            }
+        })
+        // console.log(proxy2._pwd);
+        /*
+        实现真正的私有：
+            - 不能访问到私有属性，如果访问到私有属性则返回undefined
+            - 不能直接修改私有属性，即使设置了也无效
+            - 不能遍历出私有属性，遍历出来的属性也不包含私有属性
+        */
+        const api = {
+            _apiKey:'12313sfsdfg234234',
+            getAll:function() {
+                console.log('查询全部用户');
+            },
+            getUserById:function(userId) {
+                console.log('根据用户id查询用户');
+            },
+            saveUser:function(user) {
+                console.log('保存用户');
+            }
+        }
+
+        const proxy3 = new Proxy(api,{
+            get:function(target,prop){
+                if(prop.indexOf('_') === 0){
+                   return undefined
+                }else {
+                    return target[prop]
+                }
+            },
+            set:function(target,prop,value){
+                if(prop[0] !== '_') {
+                    return target[prop] = value
+                }else{
+                    console.log('无法修改');
+                }
+            },
+            has:function (target,prop) {
+                if(prop[0] === '_') {
+                    return false
+                } else {
+                    return prop in target
+                }
+            }
+        })
+        console.log(proxy3._apiKey);
+        proxy3._apiKey= 'aasd'
+        for (key in proxy3){
+            console.log(key);
+        }
+    </script>
+</body>
+</html>
