@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="/audiojs/audio.min.js"></script>
+    <audio id="audio" src="./public/testAudio.mp3" controls muted>
+    </audio>
+    <select id="select" onchange="changeRate()">
+        <option value="1" selected>1</option>
+        <option value="0.5">0.5</option>
+        <option value="2">2</option>
+    </select>
+    <script>
+        const audio = document.getElementById('audio');
+        console.log(audio);
+        const select = document.getElementById('select');
+        function changeRate() {
+            audio.playbackRate = select.options[select.selectedIndex].value;
+        }
+    </script>
+</body>
+
+</html>

@@ -11,31 +11,41 @@
 <body>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
-    <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
+    <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" playbackRate
         poster="http://localhost:8080/repository/v1.0/resources/files/download/02021102115381092000000101001142" data-setup="{}">
         <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
     </video>
+    <select id="select" onchange="changeRate()">
+        <option value="1" selected>1</option>
+        <option value="0.5">0.5</option>
+        <option value="2">2</option>
+    </select>
     <script>
+        var sel = document.getElementById('select')
+        var bar = document.getElementsByClassName('vjs-control-bar')
+        console.log(bar);
+        bar[0].push(sel)
         var player = videojs('example_video_1', {
             muted: false,
-            controls: false,
+            controls: true,
             height: 300,
             width: 400,
             loop: true,
+            playbackRate:true
             // 更多配置.....
         });
 
-        var vids = document.getElementsByTagName('video');
+        // var vids = document.getElementsByTagName('video');
 
-        for (var i = 0; i < vids.length; i++) {
-            vids[i].onclick = function () {
-                if (this.paused) {
-                    this.play();
-                } else {
-                    this.pause();
-                }
-            }
-        }
+        // for (var i = 0; i < vids.length; i++) {
+        //     vids[i].onclick = function () {
+        //         if (this.paused) {
+        //             this.play();
+        //         } else {
+        //             this.pause();
+        //         }
+        //     }
+        // }
     </script>
     <style>
         /* 点击屏幕播放/暂停 */

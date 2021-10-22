@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>阿酷TONY</title>
+</head>
+<body>
+<div style="text-align:center">
+  <button οnclick="playPause()">播放/暂停</button>
+  <button οnclick="makeBig()">放大</button>
+  <button οnclick="makeSmall()">缩小</button>
+  <button οnclick="makeNormal()">普通</button>
+  <button οnclick="getPlaySpeed()" type="button">播放速度是多少？</button>
+  <button οnclick="setPlaySpeed()" type="button">将视频设置为以快速播放</button>
+  <br>
+  <video id="video" width="420" autoplay controls>
+    <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+    TONY提示：您浏览器不支持 HTML5 video 标签。 </video>
+</div>
+<script> 
+var myVideo=document.getElementById("video"); 
+function getPlaySpeed() {
+    alert(myVideo.playbackRate);//获取播放速度
+    }
+function setPlaySpeed()  { 
+    myVideo.playbackRate=2;//设定新的播放速度2倍速度
+    } 
+function playPause(){ 
+    if (myVideo.paused) 
+      myVideo.play(); //播放
+    else 
+      myVideo.pause(); //暂停播放
+    } 
+function makeBig(){ 
+    myVideo.width=660; 
+    } 
+function makeSmall(){ 
+    myVideo.width=230; 
+    } 
+function makeNormal(){ 
+    myVideo.width=400; 
+    } 
+</script>
+</body>
+</html>
