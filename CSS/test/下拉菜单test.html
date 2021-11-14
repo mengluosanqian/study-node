@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .ul> li{
+            float: left;
+            list-style: none;
+            border: 1px solid red;
+            height: 30px;
+            /* overflow: hidden; */
+        }
+        .ul >li .subul>li {
+            height: 0px;
+            overflow: hidden;
+            list-style: none;
+            background-color: aliceblue;
+            transition: height 0.5s;
+        }
+        .ul >li:hover > .subul >li{
+            height: 30px;
+        }
+    </style>
+    <ul class="ul">
+        <li>书籍
+            <ul class="subul">
+                <li>javaScript</li>
+                <li>javaScript</li>
+                <li>javaScript</li>
+            </ul>
+        </li>
+        <li>书籍
+            <ul class="subul">
+                <li>javaScript</li>
+                <li>javaScript</li>
+                <li>javaScript</li>
+            </ul>
+        </li>
+        <li>书籍
+            <ul class="subul">
+                <li>javaScript</li>
+                <li>javaScript</li>
+                <li>javaScript</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

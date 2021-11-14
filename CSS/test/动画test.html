@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="city">
+        <div class="icon"></div>
+        <div class="pulse1"></div>
+        <div class="pulse2"></div>
+        <div class="pulse3"></div>
+    </div>
+    <style>
+        @keyframes kuoda {
+            0% {
+
+            }
+            70% {
+                width: 40px;
+                height: 40px;
+                opacity: 1;
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                opacity: 0;
+            }
+        }
+        .city {
+            margin-top: 100px;
+            margin-left: 100px;
+            position: relative;
+        }
+        .icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+        }
+        .city div[class^="pulse"] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 12px red;
+            border-radius: 50%;
+            animation: kuoda 2s linear infinite;
+            /* 为什么用动画不用scale? scale也会把阴影扩大 */
+        }
+        .city .pulse2 {
+            animation-delay: 0.7s !important;
+        }
+        .city .pulse3 {
+            animation-delay: 1.4s !important;
+        }
+    </style>
+</body>
+</html>

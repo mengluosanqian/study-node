@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <!-- 
+        transition
+        transition-property             过度属性（例如transform）
+        transition-duration             过度持续时间
+        transition-timing-function      过度函数
+        transition-delay                过度延迟时间
+     -->
     <!-- %是根据自身宽度来对比的，实现水平垂直居中 -->
     <div class="juzhong">
 
@@ -35,7 +42,26 @@
     <div class="scaled">
         <!-- 缩放 -->
     </div>
+    <div class="more">
+
+    </div>
     <style>
+        /* 多个过度效果start */
+        .more {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background-color: red;
+            transform-origin: left top;
+            margin: 100px auto; 
+            transition: transform 1s ease,width 1s ,height 1s;
+        }
+        .more:hover {
+            transform: rotate(360deg);
+            width: 200px;
+            height: 200px;
+        } 
+        /* 多个过度效果end */
         .scaled{
             width: 100px;
             height: 100px;

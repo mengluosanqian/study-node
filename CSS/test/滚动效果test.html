@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="ul">
+        <li>
+            <p class="show">首页</p>
+            <p class="click">首页</p>
+        </li>
+        <li>
+            <p class="show">视频</p>
+            <p class="click">视频</p>
+        </li>
+        <li>
+            <p class="show">动画</p>
+            <p class="click">动画</p>
+        </li>
+    </ul>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .ul>li{
+            list-style: none;
+            width: 80px;
+            height: 30px;
+            float: left;
+            position: relative;
+            overflow: hidden;
+            /* background-color: aquamarine; */
+        }
+        .ul>li .show {
+            background-color: aliceblue;
+            text-align: center;
+            line-height: 30px;
+        }
+        .ul>li:hover > .click {
+            transform: rotate(0deg);
+        }
+        .ul>li .click {
+            background-color: aquamarine;
+            text-align: center;
+            line-height: 30px;
+            width: 80px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: -50px 50px;
+            transition: transform 1s;
+           
+        }
+
+    </style>
+</body>
+</html>
