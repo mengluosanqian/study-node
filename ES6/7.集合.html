@@ -8,6 +8,52 @@
 </head>
 <body>
     <script>
+        let testArr = [1,2,3,4,32,1,2,3,4,5,6]
+        let test = new Set()
+        testArr.forEach(item => {
+            test.add(item)
+        })
+        console.log(test,'利用set去重');
+        console.log(test.values());
+        let test1 = new Set(testArr)
+        console.log(test1,'利用set去重');
+        /*
+        set:
+            - set中成员的值都是唯一的，没有重复的值
+            - 向set中添加成员时，不会发生类型转换
+            - 向set中添加的对象总是不相等（例如：由于两个空对象不相等，所以它们被视为两个值）
+            - 属性： size 返回set实例的成员总数
+            - 方法： add()      添加某个值，返回set本身
+                    delete()    删除某个值，返回一个布尔值，判断删除是否成功
+                    has()       返回一个布尔值，表示该值是否为set成员
+                    clear()     清除所有成员，没有返回值
+                    keys()      返回键名的遍历器（由于set没有键名，只有键值，键值键名是同一个值，所以keys() values() 方法一致）
+                    values()    返回键值的遍历器
+                    entries()   返回键值对的遍历器
+                    forEach()   使用回调函数遍历每一个成员
+        */
+
+        /*
+        map:
+            - es6中的map很大程度上和set相似，但是map是以键值对的形式存储数据的
+            - 属性： size 返回map实例的成员总数
+            - 方法： set(key,value)  设置键名key对应的键值value，然后返回整个map结构，如果key已经有值，则键值被更新，否则就生成新键
+                    get(key)        读取key对应的键值，如果找不到key，则返回undefined
+                    delete(key)     删除某个key,返回true,如果删除失败，返回false
+                    has(key)        返回一个布尔值，表示某个键是否在当前map对象中
+                    clear()         清除所有成员，没有返回值
+                    keys()          返回键名的遍历器
+                    values()        返回键值的遍历器
+                    entries()       返回键值对的遍历器
+                    forEach()       使用回调函数遍历每一个成员
+        */
+
+        /*
+        - 使用 Array.from() 将set、map伪数组转化成数组
+        - 数组去重
+        - 间接使用数组的方法（map、filter）
+        - 实现并集、交集、差集
+        */
         // 声明一个set
         let s = new Set();
         let s2 = new Set(['blue','red','yellow','green'])
