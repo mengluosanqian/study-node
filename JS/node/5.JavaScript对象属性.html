@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const student = {
+            name:"aaa",
+            age:12,
+            [Symbol("level")]:'优秀',
+            [Symbol("level")]:"有钱"
+        }
+        const val = Object.getOwnPropertyDescriptor(student,'name')
+        console.log(val);
+        /*
+        configurable: true  可删除
+        enumerable: true    可枚举
+        value: "aaa"
+        writable: true      可修改
+        */
+        Object.defineProperty(student,"gender", {
+            configurable: false,
+            enumerable: true,
+            value: "男",
+            writable: true,
+        })
+        delete student.gender
+        console.log(student);
+    </script>
+</body>
+</html>

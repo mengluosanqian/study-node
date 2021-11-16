@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包：函数嵌套函数，内部函数是闭包
+        // 正常情况下，函数执行完成，内部变量会销毁
+        // 内部函数没有执行完成，外部变量不会被销毁 
+        function outerFun() { 
+            let a = 10; 
+            function innerFun() { 
+                console.log(a);
+             }
+             return innerFun
+         }
+
+         let fun = outerFun()
+         fun()
+
+        //  利用闭包实现模块化功能
+        let outer =(function () { 
+            let a = 10;
+            let b = 20;
+            function add() { 
+                return a + b
+            }
+            function sub() {
+                return a - b
+            }
+            return {
+                add,
+                sub
+            }
+         })()
+         console.log(outer.add());
+         console.log(outer.sub());
+    </script>
+</body>
+</html>
