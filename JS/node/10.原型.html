@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        什么是原型？
+        每一个对象都有它的原型对象，它可以使用自己原型对象上的所有属性和方法
+        */
+        // let cat = {
+        //     name: '喵喵'
+        // }
+        // cat.__proto__.eat = function () { 
+        //     console.log('吃鱼');
+        //  }
+        //  cat.eat()
+         function Cat(name,age) {
+             this.name = name;
+             this.age = age
+           }
+           let cat = new Cat('喵喵',2)
+           Cat.prototype.eat = function () { 
+            console.log('吃鱼');
+            }
+           cat.eat()
+        //    原型对象有什么用
+        let date = new Date()
+        Date.prototype.formate = function () { 
+            let year = this.getFullYear()
+            let month = this.getMonth() + 1
+            let date = this.getDate()
+            return `${year}年${month}月${date}日`
+         }
+         
+         console.log(date.formate());
+    </script>
+</body>
+</html>
