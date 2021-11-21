@@ -59,7 +59,7 @@
         let result1 = add1(1,2)
         console.log(result1);
         // 2.与解构赋值结合使用
-        function connect({host,username,password,port}) {
+        function connect({host,username,password,port=8088}) {
             console.log(host,username,password,port);
         }
         connect({

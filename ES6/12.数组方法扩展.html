@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数组方法扩展</title>
 </head>
+
 <body>
     <script>
+        var arrtest = [22, 3, 8, 58];
+        arrtest.splice(1, 2, 6); // [3]
+        console.log(arrtest); // [22,6,58]
+        let newarrtest = arrtest.map((item) => {
+            return item * item
+        })
+        console.log(newarrtest);
         let newArr = {
             name: 'liu',
             age: 25,
@@ -15,46 +24,49 @@
             job: 'none',
             code: '123134'
         }
+        console.log(Array.of(1, 'asd', newArr, [1, 2, 3]));
         // 伪数组转化为数组
         // let newArr1 = Array.prototype.slice.call(newArr)
         let newArr1 = Array.from('newArr')
-        console.log(newArr1,'newArr1');
-        function a() { 
+        console.log(newArr1, 'newArr1');
+
+        function a() {
             let arr = Array.from(arguments)
-            console.log(arr,'arr');
-         }
-         a(1,2,3,4,5)
+            console.log(arr, 'arr');
+        }
+        a(1, 2, 3, 4, 5)
 
         //  将一组数转成数组
-        console.log(Array.of(1,2,3,4,5),'Array.of(1,2,3,4,5)');
+        console.log(Array.of(1, 2, 3, 4, 5), 'Array.of(1,2,3,4,5)');
 
         // 填充数组
-        console.log(['a','b','c'].fill(7),'填充数组');
-        console.log(['a','b','c'].fill(7,1),'填充数组');
-        console.log(['a','b','c'].fill(7,1,2),'填充数组');
+        console.log(['a', 'b', 'c'].fill(7), '填充数组');
+        console.log(['a', 'b', 'c'].fill(7, 1), '填充数组');
+        console.log(['a', 'b', 'c'].fill(7, 1, 2), '填充数组');
 
         // Array.prototype.includes
-        const colors = ['blue','red','yellow','green']
+        const colors = ['blue', 'red', 'yellow', 'green']
         console.log(colors.includes('red'));
         // ** == Math.pow
         console.log(2 ** 10);
 
         // flat 将多维数组转换为一维数组
-        const arr = [1,2,3,[2,3,4,[5,6]]]
+        const arr = [1, 2, 3, [2, 3, 4, [5, 6]]]
         console.log(arr.flat());
         // 参数为深度， 是一个数字，表示几层
         console.log(arr.flat(2));
-        const arr2 = [1,2,3,[2,3,4,[5,6,[5,4,2]]]]
+        const arr2 = [1, 2, 3, [2, 3, 4, [5, 6, [5, 4, 2]]]]
         console.log(arr2.flat());
         // 参数为深度， 是一个数字，表示几层
         console.log(arr2.flat(2));
 
         // flatMap
-        const arr3 = [1,2,3,4]
-        const result3 = arr3.map(item => [item*10])
+        const arr3 = [1, 2, 3, 4]
+        const result3 = arr3.map(item => [item * 10])
         console.log(result3);
-        const result4 = arr3.flatMap(item => [item*10])
+        const result4 = arr3.flatMap(item => [item * 10])
         console.log(result4);
     </script>
 </body>
+
 </html>

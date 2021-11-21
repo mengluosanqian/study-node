@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        sort: 
+        1.如果不指定<方法函数>，则按unicode码顺序排列。
+        2.如果指定<方法函数>，则按<方法函数>所指定的排序方法排序。
+        3.方法函数：
+            function sortNum(a,b){
+                return a-b;//升序。b-a是降序
+            }
+        */
+       /*
+       flat:
+       实现flat的效果
+       es5 使用递归
+       */
+      function flatten(arr) {
+          let result = []
+          for(let i = 0;i< arr.length;i++) {
+              if(Array.isArray(arr[i])) {
+                  result = result.concat(flatten(arr[i]))
+              }else {
+                  result.push(arr[i])
+              }
+          }
+          return result
+      }
+      console.log(flatten([1,2,4,[2,4,[5,6]]]));
+
+      function flatten2(arr) { 
+          while (arr.some(item => Array.isArray(item))) {
+              arr = [].concat(...arr)
+          }
+          return arr
+       }
+       console.log(flatten2([1,2,4,[2,4,[5,6]]]));
+    </script>
+</body>
+</html>
