@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        .outer {
+            width: 400px;
+            height: 100%;
+            background-color: aquamarine;
+            margin: 0px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .inner {
+            width: 100%;
+            height: 0;
+            padding-top: 50%;
+            /* 当margin或者padding取值是百分比的时候，无论是left，right或者top，bottom，
+            都是以父元素的width为参考物，进行提前占位，避免资源加载时候的闪烁，还可以让高度自适应。 */
+            background-color: red;
+        }
+    </style>
+</body>
+</html>
