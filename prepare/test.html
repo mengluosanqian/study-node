@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(2 > "1");
+        arr = [1, 2, 3, 4, 2, 3, 1, 3, 2, 6]
+
+        function unique(arr) {
+            let arr1 = []
+            for (let i = 0; i < arr.length; i++) {
+                if (!arr1.includes(arr[i])) {
+                    arr1.push(arr[i])
+                }
+            }
+            return arr1
+        }
+        console.log(unique(arr));
+        // function fn(a, c) {
+        //     console.log(a) // function a () {}
+        //     var a = 123
+        //     console.log(a) // 123 
+        //     console.log(c) // function c() {}
+        //     function a() {}
+        //     if (false) {
+        //         var d = 678
+        //     }
+        //     console.log(d) // undefined
+        //     console.log(b) // undefined
+        //     var b = function () {}
+        //     console.log(b) // function () {}
+        //     function c() {}
+        // }
+        // fn(1, 2)
+        var global
+
+        function a() {
+            var aa = 123
+
+            function b() {
+                var bb = 456
+                console.log(aa);
+                // aa = 0
+            }
+            //  var aa = 123
+            return b
+        }
+        var res = a()
+        res()
+        // console.log(aa);
+    </script>
+</body>
+
+</html>

@@ -36,15 +36,15 @@
          },500)
 
         function throttle(fn, delay) {
-            let flag = true
+            let timer
             return function () {
-                if (flag) {
-                    setTimeout(() => {
+                if (!timer) {
+                    timer = setTimeout(() => {
                         fn.call(this)
-                        flag = true
+                        timer = null
                     }, delay)
                 }
-                flag = false
+                // flag = false
             }
         }
     </script>

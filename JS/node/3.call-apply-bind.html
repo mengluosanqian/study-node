@@ -14,7 +14,7 @@
             console.log('this.name', this.name);
         };
         let cat = {
-            name: "aaa"
+            // name: "aaa"
         }
         let dog = {
             name: 'bbb',
@@ -37,6 +37,45 @@
         //bind不会调用函数，apply会调用参数
        let aa=  dog.eat.bind(cat,'ddd','eee')
        aa()
+
+    //    应用：
+    // 1.将伪数组转化为数组
+    let div = document.getElementsByTagName('div')
+    Array.prototype.slice.call(div)
+    // div调用array.prototype上的方法
+    function listToArray(likeArray) { 
+        var arr = []
+        try {
+            arr = Array.prototype.slice.call(likeArray)
+        } catch (e) {
+            for (let i = 0; i < likeArray.length; i++) {
+                arr[arr.length] = likeArray[i];
+                
+            }
+        }
+     }
+    //  2.arguments
+    function fn() {
+        console.log(arguments);
+        console.log(Array.prototype.slice.call(arguments))
+      }
+      fn(1,2,3,4,5)
+
+    // 3.数组的拼接
+    // 要求：改变arr1的值
+    let arr1 = [1,2,3]
+    let arr2 = [4,5,6]
+    console.log(arr1);
+    Array.prototype.push.apply(arr1,arr2)
+    console.log(arr1);
+
+    // 4.判断数据类型
+    function isArray(arr) { 
+        return Object.prototype.toString.call(arr) == '[object Array]'
+        return Object.prototype.toString.call(arr) == '[object Object]'
+        return Object.prototype.toString.call(arr) == '[object String]'
+        return Object.prototype.toString.call(arr) == '[object Null]'
+     }
     </script>
 </body>
 
