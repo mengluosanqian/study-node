@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = 222
+        var a = {
+            name: 111,
+            say() {
+                console.log(this.name);
+            }
+        }
+        var fun = a.say
+        fun()
+        // 相当于window.fun() 222
+        a.say()
+        // a.say.call(a)
+        // 111
+        var b = {
+            name: 333,
+            say(fn) {
+                fn()
+                // fn.call(window)
+                // 在这里执行这个方法,而不是在这里打印this
+            }
+        }
+        b.say(a.say)
+        // 
+        b.say = a.say
+        b.say()
+        // b.say.call(b)
+        // 333
+        // 函数中直接调用
+        function get(content) {
+            console.log(content);
+        }
+        get('hello')
+        // get.call(window,'hello')
+        // 作为对象的方法去调用
+        var person = {
+            name: 'aaa',
+            run() {
+                console.log(this.name);
+            }
+        }
+        person.run()
+        person.run.call(person)
+
+        /*
+        箭头函数
+        - 导致箭头函数内部的this，取决于外部代码块的this
+        - 不能够用作构造函数
+        */
+        var x = 1
+        var obj = {
+            x: 2,
+            say: () => {
+                console.log(this.x);
+            }
+        }
+        obj.say()
+        // 原型链继承
+        function Parent() {
+            this.name = 'aaaa'
+        }
+        Parent.prototype.getName = function () {
+            return this.name
+        }
+
+        function Child() {
+
+        }
+        Child.prototype = new Parent()
+        Child.prototype.constructor = Child
+        const child = new Child()
+        console.log(child.name);
+        console.log(child.getName());
+        
+        // 构造继承
+        function Parent(name) { 
+            this.name = [name]
+         }
+         Parent.prototype.getName = function () {
+            return this.name
+        }
+        // 在子类的构造函数中，执行父类的构造函数,并且为其绑定子类的this
+        function Child() {
+            Parent.call(this,'bbbb')
+        }
+        // 组合式继承
+        function Parent(name) { 
+            this.name = [name]
+         }
+         Parent.prototype.getName = function () {
+            return this.name
+        }
+        function Child() {
+            Parent.call(this,'bbbb')
+        }
+        Child.prototype = new Parent()
+        Child.prototype.constructor = Child
+        const child1 = new Child()
+        const child2 = new Child()
+        child1.name[0] = 'cccccc'
+        console.log(child1.name);
+        console.log(child2.name);
+    </script>
+    
+</body>
+
+</html>
