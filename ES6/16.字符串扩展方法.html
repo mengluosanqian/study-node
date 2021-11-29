@@ -11,6 +11,30 @@
 <body>
 
     <script>
+        /*
+        - includes('字符串','从第N个字符开始')：返回布尔值，表示是否找到了参数字符串。
+        - startsWith('字符串','从第N个字符开始')：返回布尔值，表示参数字符串是否在原字符串的头部。
+        - endsWith('字符串','前N个字符')：返回布尔值，表示参数字符串是否在原字符串的尾部。
+
+        注意endsWith第二个参数和其他两个有所不同
+        */
+       /*
+       repeat(重复次数)
+        - repeat方法返回一个新字符串，表示将原字符串重复n次。
+        - 参数如果是小数，会被取整。
+        - 如果repeat的参数是负数或者Infinity，会报错。
+        - 参数NaN等同于 0。
+        - 如果repeat的参数是字符串，则会先转换成数字。
+       */
+       /*
+       padStart(位数,'补全字符串')、padEnd(位数,'补全字符串')
+       - padStart()用于头部补全，padEnd()用于尾部补全。
+       - 如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串
+       - 如果用来补全的字符串与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串。
+       - 如果省略第二个参数，默认使用空格补全长度。
+
+       */
+      let restr = 'aas'
         let str = '   asdfa   '
         console.log(str);
         console.log(str.trimStart());
@@ -31,6 +55,8 @@
     const reg = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/sg
         const result2 = str1.matchAll(reg)
         console.log(...result2);
+
+    // at(指定位置) 返回参数指定位置的字符，支持负索引
     </script>
 </body>
 
