@@ -55,8 +55,8 @@
         console.log(m.get('name'));
         // Object.getOwnPropertyDescriptors() 对象属性的描述
         console.log(Object.getOwnPropertyDescriptors(config2));
-
-
+        // Object.getOwnPropertyNames(obj) 返回一个数组，含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+        // Object.getOwnPropertySymbols(obj) Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名。
         // rest 参数
         function connect({host,...user}) {
             console.log(host);
