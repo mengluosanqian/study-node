@@ -8,6 +8,37 @@
 </head>
 <body>
     <script>
+        /*
+        原始数据类型
+            - 表示独一无二的值
+            - symbol不是构造函数，不能使用new关键字
+            - symbol() 里面的内容是symbol的描述，只是为了方便开发中辨识，并不能代表symbol的值
+            - 每一个symbol类型数据都是独一无二，不能划等号
+            - symbol不能和其他值参与运算
+            - symbol定义的属性无法被Object.keys()或者for...in 遍历出来
+            - symbol类型的属性不能被JSON.stringify()序列化
+
+        symbol类型转换
+        let s = Symbol('lw')
+        转换成字符串： 
+            - String(s)
+            - s.toString()
+        转换成Boolean：
+            - Boolean(s)
+
+        使用Symbol定义对象的唯一属性名
+            - 写法一
+                let s = Symbol()
+                let a = {}
+                a[s] = "hello"
+                不能使用.语法追加属性，否则会被当成字符串
+            - 写法二
+                let s = Symbol()
+                let a = {
+                    [s] = "hello"
+                    一定要加中括号，否则会被当成字符串
+                }
+        */
         // 创建symbol
         let s = Symbol();
         console.log(s, typeof s);
