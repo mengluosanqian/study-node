@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 数组去重
+        let arr = [1, 2, 3, 4, 56, 3, 2, 21, 42]
+        let newArr = arr.reduce((prev, next, index, arr) => {
+            if (!prev.includes(next)) {
+                return prev.concat(next)
+            } else {
+                return prev
+            }
+        }, [])
+        console.log(newArr);
+        //  二维数组转化成一维数组
+        let arr2 = [
+            [1, 2],
+            [3, 4],
+            [5, 6, 2]
+        ]
+        let newArr2 = arr2.reduce((prev, next) => {
+            return prev.concat(next)
+        }, [])
+        console.log(newArr2);
+        //  多维数组转化为一维数组
+        let arr3 = [
+            [1, 2, [3, 4]],
+            [2, 3, [4, 5, [7, 3, 8]]]
+        ]
+
+        let arr4 = [
+            [0, 1],
+            [2, 3],
+            [4, [5, 6, 7]]
+        ]
+        let newArr3 = function (arr) {
+            return arr.reduce((pre, cur) => pre.concat(Array.isArray(cur) ? newArr3(cur) : cur), [])
+        }
+        console.log(newArr3(arr3));
+
+        // 计算数组中每个元素出现的次数
+        let arr5 = ['name','age','long','short','long','name','name']
+        let newArr4 = arr5.reduce((prev,next) => {
+            if(next in prev) {
+                prev[next]++
+            }else{
+                prev[next]=1
+            }
+            return prev
+        },{})
+        console.log(newArr4);
+    </script>
+</body>
+
+</html>
