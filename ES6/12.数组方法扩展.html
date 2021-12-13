@@ -10,6 +10,15 @@
 
 <body>
     <script>
+        // reduce去重
+        let arrMore = [1,23,4,1,2,5,24,2,1,23,22,24]
+        let newarrMore =  arrMore.reduce((prev,next)=> {
+            if(!prev.includes(next)) {
+                prev.push(next)
+            }
+            return prev
+        },[])
+        console.log(newarrMore);
         var arrtest = [22, 3, 8, 58];
         arrtest.splice(1, 2, 6); // [3]
         console.log(arrtest); // [22,6,58]
