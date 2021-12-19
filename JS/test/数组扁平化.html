@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main></main>
+    <canvas id="myCanvas" width="200" height="100"></canvas>
+    <script>
+        let arr = [1, 2, 3, 5, [23, 43, 21, 65, [12, 32, 43]]]
+        function flat(arr) {
+            let newArr = arr.reduce((prev,next)=>{
+                return prev.concat(Array.isArray(next)?flat(next):next)
+            },[])
+            return newArr
+        }
+        console.log(flat(arr))
+    </script>
+</body>
+</html>
