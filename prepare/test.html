@@ -9,28 +9,57 @@
 </head>
 
 <body>
+    <input id="text" />
     <div id="mydiv" class="image">
         <img src="./public/img/隐式转换.png">
     </div>
     <div id="mydiv"></div>
     <script>
+        const text = document.getElementById('text');
+        text.onclick = function (e) {
+            console.log('onclick')
+        }
+        text.onfocus = function (e) {
+            console.log('onfocus')
+        }
+        text.onmouseleave = function (e) {
+            console.log('onmouseleave')
+        }
+        text.onmouseover = function (e) {
+            console.log('onmouseover')
+        }
+        text.onmousedown = function (e) {
+            console.log('onmousedown')
+        }
+        text.onmouseup = function (e) {
+            console.log('onmouseup')
+        }
+        text.onmouseenter = function (e) {
+            console.log('onmouseenter')
+        }
+        text.onblur = function (e) {
+            console.log('onblur')
+        }
+
         console.log(document.getElementById('mydiv'))
     </script>
     <style>
         .image {
             width: 100px;
             height: 100px;
-            
+
             margin: 200px auto 0;
             position: relative;
             /* background-color: red;
             transition: transform 1s linear; */
         }
+
         .image img {
             width: 100%;
             transition: transform 1s linear;
             transform-origin: center center;
         }
+
         img:hover {
             transform: rotate(360deg);
         }

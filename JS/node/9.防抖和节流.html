@@ -13,18 +13,40 @@
     <script>
         // 防抖：用户触发时间过于频繁，只要最后一次事件的操作
         let inp = document.querySelector("input")
-
-        function debounce(fn, delay) {
-            let t = null
+        function debounce(fn,delay) {
+            let timer = null
             return function () {
-                if (t !== null) {
-                    clearTimeout(t)
+                if(timer) {
+                    clearTimeout(timer)
                 }
-                t = setTimeout(() => {
+                timer = setTimeout(()=> {
                     fn.call(this)
-                }, delay)
+                },delay)
             }
         }
+        function throttle(fn,delay) {
+            let timer = null
+            return function () {
+                if(timer) {
+                    timer = null
+                }
+                timer = setTimeout(() => {
+                    fn.call(this)
+                },delay)
+            }
+        }
+
+        // function debounce(fn, delay) {
+        //     let t = null
+        //     return function () {
+        //         if (t !== null) {
+        //             clearTimeout(t)
+        //         }
+        //         t = setTimeout(() => {
+        //             fn.call(this)
+        //         }, delay)
+        //     }
+        // }
         inp.oninput = debounce(function () {
             console.log(this.value);
         }, 500)
@@ -35,18 +57,18 @@
             console.log('测试节流');
          },500)
 
-        function throttle(fn, delay) {
-            let timer
-            return function () {
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn.call(this)
-                        timer = null
-                    }, delay)
-                }
-                // flag = false
-            }
-        }
+        // function throttle(fn, delay) {
+        //     let timer
+        //     return function () {
+        //         if (!timer) {
+        //             timer = setTimeout(() => {
+        //                 fn.call(this)
+        //                 timer = null
+        //             }, delay)
+        //         }
+        //         // flag = false
+        //     }
+        // }
     </script>
     <style>
         body {
