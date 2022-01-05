@@ -25,24 +25,44 @@
             }
         }
         let arr = [1, 2, 3, 5, [23, 43, 21, 65, [12, 32, 43]]]
-
-        function deepClone(val) {
+        
+        function clonedeep(val) {
             let result
             if(typeof val === 'object') {
                 result = Array.isArray(val) ? [] : {}
-                for(let i in val) {
-                    result[i] = typeof val[i] == 'object' ? deepClone(val[i]) : val[i] 
+                for (let i in val) {
+                    result[i] = typeof val[i] === 'object' ? clonedeep(val[i]) : val[i]
                 }
-            }else {
+            } else {
                 result = val
             }
             return result
         }
+
+
+
+
+
+
+
+        // function deepClone(val) {
+        //     let result
+        //     if(typeof val === 'object') {
+        //         result = Array.isArray(val) ? [] : {}
+        //         for(let i in val) {
+        //             result[i] = typeof val[i] == 'object' ? deepClone(val[i]) : val[i] 
+        //         }
+        //     }else {
+        //         result = val
+        //     }
+        //     return result
+        // }
         
-        let arr1 = deepClone(arr)
+        let arr1 = clonedeep(arr)
         console.log(arr1);
-        arr1[1] = 2
+        arr1[1] = 22
         console.log(arr1);
+        console.log(arr);
 
     </script>
 </body>
