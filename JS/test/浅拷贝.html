@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: '11',
+            age: 22,
+            friends: {
+                a: {
+                    aname: 'aa',
+                    aage: 21
+                },
+                b: {
+                    bname: 'bb',
+                    bage: 43
+                }
+            }
+        }
+        let arr = [1, 2, 3, 5, [23, 43, 21, 65, [12, 32, 43]]]
+
+        function shallowCopy(val) {
+            if (!val || typeof val !== 'object') return
+            let result = Array.isArray(val) ? [] : {}
+            for (let i in val) {
+                if (val.hasOwnProperty(i)) {
+                    result[i] = val[i]
+                }
+            }
+            return result
+        }
+
+        let arr1 = shallowCopy(arr)
+        console.log(arr1);
+        arr1[1] = 22
+        console.log(arr1);
+        console.log(arr);
+        let c = shallowCopy(1)
+        console.log(c);
+
+    </script>
+</body>
+
+</html>

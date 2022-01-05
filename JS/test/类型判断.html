@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function getType(val) {
+        // console.log(typeof val)
+        if (val === null) {
+            return val + ''
+        }
+        if (typeof val === 'object') {
+            let typeClass = Object.prototype.toString.call(val).split(" ")[1]
+            let type = typeClass.substr(0,typeClass.length - 1)
+            return type
+        } else {
+            return typeof val
+        }
+    }
+    console.log(getType([]));
+    
+    </script>
+</body>
+</html>
