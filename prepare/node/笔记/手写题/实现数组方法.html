@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, 5, 6, 1, 2, 3]
+        let arr2 = [1,2,3,4,[3,4,5,[4,5,6,7,[2,3,4]]]]
+        // Array.prototype._map = function (fn, thisArr) {
+        //     const result = []
+        //     thisArr = thisArr || []
+        //     for (let i = 0; i < this.length; i++) {
+        //         result.push(fn.call(thisArr, this[i]))
+        //     }
+        //     return result
+        // }
+        Array.prototype._push = function () {
+            for(let i = 0;i< arguments.length;i++) {
+                this[this.length] = arguments[i]
+            }
+            return this.length
+         }
+        Array.prototype._map= function (fn,thisArr) {
+            const result = []
+            thisArr = thisArr || []
+            this.reduce((prev,next,index,arr) => {
+                result._push(fn.call(thisArr,next))
+            },[])
+            return result
+        }
+        // Array.prototype._filter = function (fn,thisValue) { 
+        //     thisValue = thisValue || []
+        //     const result = []
+        //     for (let i = 0; i < this.length; i++) {
+        //         if(fn.call(thisValue,this[i])) {
+        //             result.push(this[i])
+        //         }
+        //     }
+        //     return result
+        //  }
+        Array.prototype._filter = function (fn,thisValue) {
+            thisValue = thisValue || []
+            const result = []
+            this.reduce((prev,next) => {
+                if(fn.call(thisValue,next)) {
+                    result.push(next)
+                }
+            })
+            return result
+         }
+         Array.prototype._flat = function (depth) { 
+             if(!Array.isArray(this) || depth <= 0) {
+                 return this
+             }
+             this._reduce((prev,next) => {
+                 if(Array.isArray(next)) {
+                     return prev.concat(_flat(next,depth-1))
+                 } else {
+                     return prev.concat(next)
+                 }
+             },[])
+          }
+          Array.prototype._reduce = function (fn, initValue) {
+              for(let i = 0;i<this.length;i++) {
+                  if(typeof initValue === 'undefined') {
+                      initValue = fn(this[i],this[i+1],i+1,this)
+                      ++i
+                  }else {
+                      initValue = fn(initValue,this[i],i,this)
+                  }
+              }
+              return initValue
+            }
+        let arr1 = arr._map(item => item * 2,[1])
+        console.log(arr1);
+        console.log(arr._filter(item => item > 4));
+        console.log(arr2.flat(1));
+    </script>
+</body>
+
+</html>
