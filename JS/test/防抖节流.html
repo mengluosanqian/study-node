@@ -12,43 +12,73 @@
     <input type="text">
     <script>
         let inp = document.querySelector("input")
-        function debounce(fn, wait) {
-            let timer = null
-            return function () {
-                let context = this,
-                    args = arguments;
-                if (timer) {
-                    clearTimeout(timer)
-                    timer = null
-                }
-                timer = setTimeout(() => {
-                    fn.apply(context, args)
-                }, wait)
-            }
-        }
+        // function debounce(fn, wait) {
+        //     let timer = null
+        //     return function () {
+        //         let context = this,
+        //             args = arguments;
+        //         if (timer) {
+        //             clearTimeout(timer)
+        //             timer = null
+        //         }
+        //         timer = setTimeout(() => {
+        //             fn.apply(context, args)
+        //         }, wait)
+        //     }
+        // }
         inp.oninput = debounce(function () {
             console.log(this.value);
         }, 500)
 
-        function throttle(fn, wait) {
-            let timer = null
-            return function () {
-                let context = this,
-                    args = arguments;
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn.apply(context, args)
-                        timer = null
-                    }, wait)
-                }
-            }
-        }
+        // function throttle(fn, wait) {
+        //     let timer = null
+        //     return function () {
+        //         let context = this,
+        //             args = arguments;
+        //         if (!timer) {
+        //             timer = setTimeout(() => {
+        //                 fn.apply(context, args)
+        //                 timer = null
+        //             }, wait)
+        //         }
+        //     }
+        // }
 
 
 
         window.onscroll = throttle(function () {
             console.log('测试节流');
         }, 500)
+
+
+        function debounce(fn) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+                if (!timer) {
+                    clearTimeout()
+                }
+                timer = setTimeout(() => {
+                        fn.apply(context,args)
+                        timer = null
+                    })
+            }
+        }
+
+        function throttle(fn, wait) {
+            let timer = null
+            return function () {
+                let context = this
+                let args = arguments
+                if(!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(context,args)
+                        timer = null
+                    }, wait)
+                }
+            }
+          }
     </script>
     <style>
         body {

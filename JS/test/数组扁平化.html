@@ -11,13 +11,29 @@
     <canvas id="myCanvas" width="200" height="100"></canvas>
     <script>
         let arr = [1, 2, 3, 5, [23, 43, 21, 65, [12, 32, 43]]]
-        function flat(arr) {
-            let newArr = arr.reduce((prev,next)=>{
-                return prev.concat(Array.isArray(next)?flat(next):next)
-            },[])
-            return newArr
-        }
-        console.log(flat(arr))
+        // function flat(arr) {
+        //     let newArr = arr.reduce((prev,next)=>{
+        //         return prev.concat(Array.isArray(next)?flat(next):next)
+        //     },[])
+        //     return newArr
+        // }
+        // console.log(flat(arr))
+
+        Array.prototype._flat = function (depth) { 
+             if(!Array.isArray(this) || depth <= 0) {
+                 return this
+             }
+             return this.reduce((prev,next) => {
+                 if(Array.isArray(next)) {
+                    return prev.concat(next._flat(depth-1))
+                 } else {
+                    return prev.concat(next)
+                 }
+             },[])
+             
+          }
+        let a = arr._flat(1)
+        console.log(a);
     </script>
 </body>
 </html>

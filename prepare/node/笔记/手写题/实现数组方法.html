@@ -11,7 +11,7 @@
 <body>
     <script>
         let arr = [1, 2, 3, 4, 5, 6, 1, 2, 3]
-        let arr2 = [1,2,3,4,[3,4,5,[4,5,6,7,[2,3,4]]]]
+        let arr2 = [1, 2, 3, 4, [3, 4, 5, [4, 5, 6, 7, [2, 3, 4]]]]
         // Array.prototype._map = function (fn, thisArr) {
         //     const result = []
         //     thisArr = thisArr || []
@@ -20,20 +20,35 @@
         //     }
         //     return result
         // }
+
+        Array.prototype._map = function (fn, thisValue) {
+            const result = []
+            thisValue = thisValue || window
+            this.reduce((prev, next) => {
+                result.push(fn.call(thisValue, next))
+            }, [])
+            return result
+        }
+        let b = arr._map(item => item * 2)
+        console.log(b);
         Array.prototype._push = function () {
-            for(let i = 0;i< arguments.length;i++) {
+            for (let i = 0; i < arguments.length; i++) {
                 this[this.length] = arguments[i]
             }
             return this.length
-         }
-        Array.prototype._map= function (fn,thisArr) {
-            const result = []
-            thisArr = thisArr || []
-            this.reduce((prev,next,index,arr) => {
-                result._push(fn.call(thisArr,next))
-            },[])
-            return result
         }
+
+        Array.prototype._unshift = function () {
+            let newArray = [...arguments, ...this]
+            this.length = newArray.length
+            for (let i = 0; i < newArray.length; i++) {
+                this[i] = newArray[i]
+
+            }
+            return this.length
+        }
+
+        console.log(arr._unshift(1, 2, 3));
         // Array.prototype._filter = function (fn,thisValue) { 
         //     thisValue = thisValue || []
         //     const result = []
@@ -44,43 +59,151 @@
         //     }
         //     return result
         //  }
-        Array.prototype._filter = function (fn,thisValue) {
-            thisValue = thisValue || []
+        // Array.prototype._filter = function (fn, thisValue) {
+        //     thisValue = thisValue || []
+        //     const result = []
+        //     this.reduce((prev, next) => {
+        //         if (fn.call(thisValue, next)) {
+        //             result.push(next)
+        //         }
+        //     })
+        //     return result
+        // }
+        // Array.prototype._flat = function (depth) {
+        //     if (!Array.isArray(this) || depth <= 0) {
+        //         return this
+        //     }
+        //     this._reduce((prev, next) => {
+        //         if (Array.isArray(next)) {
+        //             return prev.concat(_flat(next, depth - 1))
+        //         } else {
+        //             return prev.concat(next)
+        //         }
+        //     }, [])
+        // }
+        Array.prototype._reduce = function (fn, initValue) {
+            for (let i = 0; i < this.length; i++) {
+                if (typeof initValue === 'undefined') {
+                    initValue = fn(this[i], this[i + 1], i + 1, this)
+                        ++i
+                } else {
+                    initValue = fn(initValue, this[i], i, this)
+                }
+            }
+            return initValue
+        }
+        let arr1 = arr._map(item => item * 2, [1])
+        console.log(arr1);
+        console.log(arr2.flat(2));
+        Array.prototype._flat = function (depth) {
             const result = []
-            this.reduce((prev,next) => {
-                if(fn.call(thisValue,next)) {
+            if (!Array.isArray(this) || depth <= 0) return this
+            this.reduce((prev, next) => {
+                if (Array.isArray(next)) {
+                    return prev.concat(next._flat(depth - 1))
+                } else {
+                    return prev.concat(next)
+                }
+            }, [])
+
+        }
+        Array.prototype._filter = function (fn, thisValue) {
+            thisValue = thisValue || window
+            const result = []
+            this.reduce((prev, next) => {
+                if (fn.call(thisValue, next)) {
                     result.push(next)
                 }
             })
             return result
-         }
-         Array.prototype._flat = function (depth) { 
-             if(!Array.isArray(this) || depth <= 0) {
-                 return this
-             }
-             this._reduce((prev,next) => {
-                 if(Array.isArray(next)) {
-                     return prev.concat(_flat(next,depth-1))
-                 } else {
-                     return prev.concat(next)
-                 }
-             },[])
-          }
-          Array.prototype._reduce = function (fn, initValue) {
-              for(let i = 0;i<this.length;i++) {
-                  if(typeof initValue === 'undefined') {
-                      initValue = fn(this[i],this[i+1],i+1,this)
-                      ++i
-                  }else {
-                      initValue = fn(initValue,this[i],i,this)
-                  }
-              }
-              return initValue
+        }
+        console.log(arr._filter(item => item > 4), 'filter');
+        // Array.prototype._forEach = function (fn) {
+        //     for (let i = 0; i < this.length; i++) {
+        //         fn(this[i], i, this)
+        //     }
+        // }
+        Array.prototype._forEach = function (fn) {
+            this.reduce((prev, next, index, arr) => {
+                fn(next, index, arr)
+            })
+        }
+
+        Array.prototype._every = function (fn) {
+            let result = true
+            this.reduce((prev, next) => {
+                if (!fn(next)) {
+                    result = false
+                }
+            })
+            return result
+        }
+        Array.prototype._some = function (fn) {
+            let result = false
+            this.reduce((prev, next) => {
+                if (fn(next)) {
+                    result = true
+                }
+            })
+            return result
+        }
+
+        // Array.prototype._find = function (fn) {
+        //     let result = []
+        //     this.reduce((prev, next) => {
+        //         if (fn(next)) {
+        //             result.push(next)
+        //         } 
+        //     })
+        //     return result[0]
+        // }
+        Array.prototype._find = function (fn) {
+            for (let i = 0; i < this.length; i++) {
+                if (fn(this[i], i.this)) return this[i]
             }
-        let arr1 = arr._map(item => item * 2,[1])
-        console.log(arr1);
-        console.log(arr._filter(item => item > 4));
-        console.log(arr2.flat(1));
+            return undefined
+        }
+        Array.prototype._findIndex = function (fn) {
+            for (let i = 0; i < this.length; i++) {
+                if (fn(this[i])) return i
+            }
+            return -1
+        }
+        console.log(arr._some(item => item > 7));
+        let result1 = []
+        arr._forEach(item => {
+            result1.push(item * 3)
+        })
+        console.log(result1);
+        console.log(arr._findIndex(item => item > 4));
+
+        Array.prototype._join = function (type = ',') {
+            if (this.length === 0) {
+                return ''
+            }
+            return this.reduce((prev, next) => {
+                return `${prev}${type}${next}`
+            })
+        }
+
+        // Array.prototype._includes = function (val) {
+        //     for (let i = 0; i <= this.length; i++) {
+        //         if (this[i] === val) return true
+        //     }
+        //     return false
+        // }
+        Array.prototype._includes = function (val) {
+            let result = false
+            this.reduce((prev,next) => {
+                if(next == val) {
+                    result = true
+                }
+            })
+            return result
+        }
+        let arr4 = []
+        let str = arr4._join('-')
+        console.log(arr._includes(1));
     </script>
 </body>
 
