@@ -192,7 +192,8 @@
         //     }
         //     return false
         // }
-        Array.prototype._includes = function (val) {
+        Array.prototype._includes = function (val,start) {
+            start = start < 0? this.length + start : start
             let result = false
             this.reduce((prev,next) => {
                 if(next == val) {
@@ -204,6 +205,18 @@
         let arr4 = []
         let str = arr4._join('-')
         console.log(arr._includes(1));
+
+        function quChong(arr) {
+            const newArr = []
+            arr.reduce((prev,next) => {
+                if(!prev.has(next)) {
+                    pre.set(next,1)
+                    newArr.push(next)
+                }
+                return prev
+            },new Map())
+            return newArr
+          }
     </script>
 </body>
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. 基本结构
+        function _promise(executor) {
+            let self = this
+            self.status = 'pending' // 状态
+            self.value = null // 成功之后返回数据
+            self.reason = null // 失败原因
+
+            // 7. 解决异步问题 => 暂存区
+            self.onFulfilledCallbacks = []
+            self.onRejectedCallbacks = []
+
+            // 5.1 返回成功的结果
+            function resolve(value) {
+                if (self.status === 'pending') {
+                    self.value = value // 保存成功结果
+                    self.status = 'fulfilled'
+                    console.log(self);
+
+                    // 9. 状态改变 => 依次取出
+                    self.onFulfilledCallbacks.forEach(item => item(value))
+                }
+            }
+
+            // 5.2 返回失败的原因
+            function reject(value) {
+                if (self.status === 'pending') {
+                    self.reason = value // 保存失败原因
+                    self.status = 'rejected'
+                    console.log(self);
+
+                    // 9. 状态改变 => 依次取出
+                    self.onRejectedCallbacks.forEach(item => item(value))
+                }
+            }
+
+            // 4. executor => 立即执行
+            try {
+                executor(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+
+        // 2. then() 不管失败还是成功都会进入
+        _promise.prototype.then = function (onFulfilled, onRejected) {
+            // 6. 确保传入的是方法，如果不是 定义一个方法
+            onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : function (data) {
+                return data
+            }
+            onRejected = typeof onRejected === 'function' ? onRejected : function (err) {
+                throw err
+            }
+
+            let self = this
+
+            // 实现链式调用
+            if (self.status === 'fulfilled') {
+                return new _promise((resolve, reject) => {
+                    try {
+                        let x = onFulfilled(self.value)
+                        x instanceof _promise ? x.then(resolve, reject) : resolve(x)
+                    } catch (error) {
+                        reject(err)
+                    }
+                })
+            }
+            if (self.status === 'rejected') {
+                return new _promise((resolve, reject) => {
+                    try {
+                        let x = onRejected(self.value)
+                        x instanceof _promise ? x.then(resolve, reject) : resolve(x)
+                    } catch (error) {
+                        reject(err)
+                    }
+                })
+            }
+
+            // 暂存回调函数
+            if (self.status === 'pending') {
+                self.onFulfilledCallbacks.push(onFulfilled)
+                self.onRejectedCallbacks.push(onRejected)
+            }
+        }
+
+        // catch()
+        _promise.prototype.catch = function (fn) {
+            return this.then(null, fn)
+        }
+
+        // 3. 调用
+        function china() {
+            console.log('china中国')
+            var p = new _promise(
+                function (resolve, reject) {
+                    setTimeout(function () {
+                        console.log('中国  国家')
+                        resolve('教育大省份')
+                    }, 1000)
+                }
+            )
+            return p;
+        }
+
+        function jiangshu(data) {
+            console.log('江苏' + data);
+            var p = new _promise(function (resolve, reject) {
+                setTimeout(function () {
+                    console.log('江苏 省份')
+                    resolve('地级市');
+                }, 2000)
+            })
+            return p;
+        }
+
+        function xian(data) {
+            console.log('盱眙县' + data)
+            var p = new _promise(function (resolve, reject) {
+                setTimeout(function () {
+                    console.log('盱眙县');
+                    resolve('淮河镇')
+                }, 2000)
+            })
+            return p;
+        }
+        china()
+            .then(function (data) {
+                return jiangshu(data)
+            })
+            .then(function (data) {
+                return xian(data)
+            })
+
+            .then(function (data) {
+                console.log(data)
+            })
+    </script>
+</body>
+
+</html>

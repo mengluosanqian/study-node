@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        function _instanceOf(father,child) {
-            const fp = father.prototype
-            const cp = child.__proto__
-            while(cp) {
-                if(cp === fp) {
+        function _instanceOf(left, right) {
+            let proto = left.__proto__
+            while (true) {
+                if(proto === null) return false
+                if(proto === right.prototype) {
                     return true
                 }
-                cp = cp.__proto__
+                proto = proto.__proto__
             }
-            return false
-          }
+        }
+        function Foo() {  }
+        let foo = new Foo()
+        console.log(_instanceOf(foo,Foo));
 
-          function _new(fn,...args) {
+        function _new(fn, ...args) {
             // 1. 定义一个空对象
             const obj = {}
             // 2. 隐式原型指向构造函数的显示原型
             obj.__proto__ = fn.prototype
             // 3. 执行构造函数，this指向空对象
-            fn.apply(obj,args)
+            fn.apply(obj, args)
             // 4. 返回对象
             return obj
-            }
-            const ajax = {
-                get(url,fn) {
-                    const xhr = new XMLHttpRequest()
-                    xhr.open('GET',url,true)
-                    xhr.onreadystatechange = function () {
-                        if(xhr.readyState === 4) {
-                            fn(xhr.responseText)
-                        }
-                        
+        }
+        const ajax = {
+            get(url, fn) {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', url, true)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        fn(xhr.responseText)
                     }
-                    xhr.send()
-                },
-                post(url,data,fn) {
-                    const xhr = new XMLHttpRequest()
-                    xhr.open('POST',url,true)
-                    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
-                    xhr.onreadystatechange = function () {
-                        if(xhr.readyState === 4) {
-                            fn(xhr.responseText)
-                        }
-                        
-                    }
-                    xhr.send(data)
+
                 }
+                xhr.send()
+            },
+            post(url, data, fn) {
+                const xhr = new XMLHttpRequest()
+                xhr.open('POST', url, true)
+                xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        fn(xhr.responseText)
+                    }
+
+                }
+                xhr.send(data)
             }
+        }
     </script>
 </body>
+
 </html>
