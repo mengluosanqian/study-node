@@ -80,3 +80,4 @@ const CompressionPlugin = require("compression-webpack-plugin")
     - 骨架屏就是在进入项目的FP阶段，给它来一个类似轮廓的东西，当我们的页面加载完成之后就消失
 10. loading
     - 首页加一个loading或许是最原始的方法了，在index.html里加一个loadingcss效果，当页面加载完成消失
+11. 使用CDN资源
