@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function deepClone(obj) {
+            let result
+            if (typeof obj === 'object') {
+                result = Array.isArray(obj) ? [] : {}
+                for (let i in obj) {
+                    result[i] = typeof obj[i] === 'object' ? deepClone(obj[i]) : obj[i]
+                }
+            } else {
+                result = obj
+            }
+            return obj
+        }
+
+        function debounce(callback, delay) {
+            let timer
+            return function () {
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                let arg = arguments
+                let context = this
+                timer = setTimeout(() => {
+                    callback.apply(context, arg)
+                }, fn)
+            }
+        }
+
+        function throttle(callback, delay) {
+            let timer
+            return function () {
+                let context = this
+                let arg = arguments
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn.apply(context,arg)
+                        timer = null
+                    },delay)
+                }
+
+            }
+        }
+    </script>
+</body>
+
+</html>

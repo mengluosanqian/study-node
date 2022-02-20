@@ -31,6 +31,7 @@ spa仅在web页面初始化加载相应的HTML、JavaScript和CSS，一旦页面
 
 #### 解决方法
 1. 预渲染
+   将路由模式改为history，再安装prerender-spa-plugin
 2. 同构
    - 同构渲染，就是一套代码多端使用
    - 现在有一些框架，Next，Nuxt，类似于渲染就是vue ->json ->vue-server-renderer ->html
