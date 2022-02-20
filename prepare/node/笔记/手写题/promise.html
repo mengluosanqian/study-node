@@ -99,6 +99,24 @@
             return this.then(null, fn)
         }
 
+        // all()
+        Promise.prototype._all = function (promises) {
+            return new Promise((prev,next) => {
+                let count = 0
+                let result = []
+                const len = promises.length
+                promises.forEach((item,index) => {
+                    Promise.resolve(item).then(resp => {
+                        count += 1
+                        result[index] = resp
+                        if(count = len) {
+                            prev(result)
+                        }
+                    }).catch(next)
+                })
+            })
+        }
+
         // 3. 调用
         function china() {
             console.log('china中国')
