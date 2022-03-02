@@ -9,6 +9,30 @@
 </head>
 
 <body>
+    <div class="test">
+        <div class="will-change"></div>
+    </div>
+    <style>
+        .test{
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+            
+        }
+        .test:hover .will-change {
+            will-change: transform;
+            
+        }
+        .will-change {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+            transition: transform 0.3s;
+        }
+        .will-change :hover {
+            transform: rotate(360deg);
+        }
+    </style>
     <script>
         function deepClone(obj) {
             let result
@@ -44,13 +68,66 @@
                 let arg = arguments
                 if (!timer) {
                     timer = setTimeout(() => {
-                        fn.apply(context,arg)
+                        fn.apply(context, arg)
                         timer = null
-                    },delay)
+                    }, delay)
                 }
 
             }
         }
+
+        function _instanceof(left, right) {
+            let prototype = right.prototype
+            left = left.__proto__
+            while (true) {
+                if (left === null) {
+                    return false
+                }
+                if (left.__proto__ == prototype) {
+                    return true
+                }
+                left = left.__proto__
+            }
+        }
+
+        Function.prototype._call = function(context,...rest) {
+            if(typeof this !== 'function') {
+                console.error('type error');
+            }
+            let args = rest
+            result = null
+            context = context || window
+            context.fn = this
+            result = context.fn(...args)
+            delete context.fn
+            return result
+        }
+
+        Function.prototype._apply = function(context, ...rest) {
+            if(typeof this !== 'function') {
+                console.error('type error');
+            }
+            let args = rest
+            console.log(args);
+            result = null
+            context = context || window
+            context.fn = this
+            result = context.fn(args)
+            delete context.fn
+            return result
+        }
+
+        var foo = {
+            value: 1
+        };
+
+        function bar(v1,v2) {
+            console.log(v1,'v1');
+            return this.value + v1 +  'hh';
+        }
+
+        let aa = bar._apply(foo,[22,33])
+        console.log(aa,'aa');
     </script>
 </body>
 
