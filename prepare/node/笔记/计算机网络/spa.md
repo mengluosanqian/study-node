@@ -80,5 +80,13 @@ const CompressionPlugin = require("compression-webpack-plugin")
 9. 骨架屏
     - 骨架屏就是在进入项目的FP阶段，给它来一个类似轮廓的东西，当我们的页面加载完成之后就消失
 10. loading
-    - 首页加一个loading或许是最原始的方法了，在index.html里加一个loadingcss效果，当页面加载完成消失
+    - 首页加一个loading或许是最原始的方法了，在index.html里加一个loading css效果，当页面加载完成消失
 11. 使用CDN资源
+12. dns解析优化
+   - dns缓存优化
+   - dns预加载策略
+   - 稳定可靠的dns服务器
+13. 浏览器下载、解析、渲染页面优化
+   - 尽可能的精简HTML代码和结构
+   - 尽可能的优化css文件和结构
+   - 合理的放置js代码，尽量不要使用内联的js代码
