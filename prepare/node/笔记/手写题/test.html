@@ -10,9 +10,14 @@
 
 <body>
     <div class="test">
-        <div class="will-change"></div>
+        <div class="will-change">
+            <input id="inp">
+        </div>
     </div>
     <style>
+        body {
+            height: 2000px
+        }
         .test{
             width: 200px;
             height: 200px;
@@ -34,100 +39,187 @@
         }
     </style>
     <script>
-        function deepClone(obj) {
-            let result
-            if (typeof obj === 'object') {
-                result = Array.isArray(obj) ? [] : {}
-                for (let i in obj) {
-                    result[i] = typeof obj[i] === 'object' ? deepClone(obj[i]) : obj[i]
-                }
-            } else {
-                result = obj
-            }
-            return obj
+        Array.prototype._map = function (fn,context) {  
+            context = context || window
+            const result = []
+            this.reduce((prev,next) => {
+                result.push(fn.call(context,next))
+            },[])
+            return result
         }
-
-        function debounce(callback, delay) {
-            let timer
-            return function () {
-                if (timer) {
-                    clearTimeout(timer)
+        const arr = [1,2,3,5,6,78]
+        // let newArr = arr._map((item) => {
+        //     return item*2
+        // })
+        Array.prototype._some = function (fn,context) {  
+            context = context || window
+            let result = false
+            this.reduce((prev,next) => {
+                if(fn.call(context,next)) {
+                    result = true
                 }
-                let arg = arguments
-                let context = this
-                timer = setTimeout(() => {
-                    callback.apply(context, arg)
-                }, fn)
-            }
+            })
+            return result
         }
+        console.log(arr._some((item)=> {
+            return item > 50
+        }));
 
-        function throttle(callback, delay) {
-            let timer
-            return function () {
-                let context = this
-                let arg = arguments
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn.apply(context, arg)
-                        timer = null
-                    }, delay)
+        Array.prototype._reduce = function (fn, initValue) {  
+            for(let i = 0;i<=this.length;i++) {
+                if(typeof initValue == 'undefined') {
+                    initValue = fn(this[i],this[i+1],i+1,this)
+                }else {
+                    initValue = fn(initValue,this[i],i,this)
                 }
-
             }
+            return initValue
         }
+        let newArr = arr.reduce((prev,next)=> {
+            return prev+next
+        },100)
+        console.log(newArr);
 
-        function _instanceof(left, right) {
-            let prototype = right.prototype
+        function _instanceOf(left,right) {  
             left = left.__proto__
-            while (true) {
-                if (left === null) {
-                    return false
-                }
-                if (left.__proto__ == prototype) {
+            right = right.prototype
+            while(left) {
+                if(left == null) return false
+                if(left == right) {
                     return true
                 }
                 left = left.__proto__
             }
         }
 
-        Function.prototype._call = function(context,...rest) {
-            if(typeof this !== 'function') {
-                console.error('type error');
+        let inp = document.querySelector("#inp")
+        inp.oninput = debounce(function () {
+            console.log(this.value);
+        }, 500)
+        function debounce(callback,delay) { 
+            let timer = null
+            return function () {
+                if(timer) {
+                    clearTimeout(timer)
+                }
+                let arg = arguments
+                let context = this
+                timer = setTimeout(() => {
+                    callback.call(context,arg)
+                },delay)
             }
-            let args = rest
-            result = null
-            context = context || window
-            context.fn = this
-            result = context.fn(...args)
-            delete context.fn
-            return result
         }
 
-        Function.prototype._apply = function(context, ...rest) {
-            if(typeof this !== 'function') {
-                console.error('type error');
+        function throttle(callback,delay) {  
+            let timer = null
+            return function () {  
+                let context = this
+                let arg = arguments
+                if(!timer) {
+                    timer = setTimeout(() => {
+                        callback.call(context,arg)
+                        timer = null
+                    },delay)
+                }
             }
-            let args = rest
-            console.log(args);
-            result = null
-            context = context || window
-            context.fn = this
-            result = context.fn(args)
-            delete context.fn
-            return result
         }
+        window.onscroll = throttle(function () { 
+            console.log('测试节流');
+         },500)
+        // function deepClone(obj) {
+        //     let result
+        //     if (typeof obj === 'object') {
+        //         result = Array.isArray(obj) ? [] : {}
+        //         for (let i in obj) {
+        //             result[i] = typeof obj[i] === 'object' ? deepClone(obj[i]) : obj[i]
+        //         }
+        //     } else {
+        //         result = obj
+        //     }
+        //     return obj
+        // }
 
-        var foo = {
-            value: 1
-        };
+        // function debounce(callback, delay) {
+        //     let timer
+        //     return function () {
+        //         if (timer) {
+        //             clearTimeout(timer)
+        //         }
+        //         let arg = arguments
+        //         let context = this
+        //         timer = setTimeout(() => {
+        //             callback.apply(context, arg)
+        //         }, fn)
+        //     }
+        // }
 
-        function bar(v1,v2) {
-            console.log(v1,'v1');
-            return this.value + v1 +  'hh';
-        }
+        // function throttle(callback, delay) {
+        //     let timer
+        //     return function () {
+        //         let context = this
+        //         let arg = arguments
+        //         if (!timer) {
+        //             timer = setTimeout(() => {
+        //                 fn.apply(context, arg)
+        //                 timer = null
+        //             }, delay)
+        //         }
 
-        let aa = bar._apply(foo,[22,33])
-        console.log(aa,'aa');
+        //     }
+        // }
+
+        // function _instanceof(left, right) {
+        //     let prototype = right.prototype
+        //     left = left.__proto__
+        //     while (true) {
+        //         if (left === null) {
+        //             return false
+        //         }
+        //         if (left.__proto__ == prototype) {
+        //             return true
+        //         }
+        //         left = left.__proto__
+        //     }
+        // }
+
+        // Function.prototype._call = function(context,...rest) {
+        //     if(typeof this !== 'function') {
+        //         console.error('type error');
+        //     }
+        //     let args = rest
+        //     result = null
+        //     context = context || window
+        //     context.fn = this
+        //     result = context.fn(...args)
+        //     delete context.fn
+        //     return result
+        // }
+
+        // Function.prototype._apply = function(context, ...rest) {
+        //     if(typeof this !== 'function') {
+        //         console.error('type error');
+        //     }
+        //     let args = rest
+        //     console.log(args);
+        //     result = null
+        //     context = context || window
+        //     context.fn = this
+        //     result = context.fn(args)
+        //     delete context.fn
+        //     return result
+        // }
+
+        // var foo = {
+        //     value: 1
+        // };
+
+        // function bar(v1,v2) {
+        //     console.log(v1,'v1');
+        //     return this.value + v1 +  'hh';
+        // }
+
+        // let aa = bar._apply(foo,[22,33])
+        // console.log(aa,'aa');
     </script>
 </body>
 
