@@ -13,27 +13,101 @@
         <div class="will-change"></div>
     </div>
     <style>
-        .test{
+        .test {
             width: 200px;
             height: 200px;
             background-color: aquamarine;
-            
+
         }
+
         .test:hover .will-change {
             will-change: transform;
-            
+
         }
+
         .will-change {
             width: 100px;
             height: 100px;
             background-color: bisque;
             transition: transform 0.3s;
         }
+
         .will-change :hover {
             transform: rotate(360deg);
         }
     </style>
     <script>
+        console.log('script start') // 1
+
+        async function async1() {
+            await async2()
+            console.log('async1 end') //5
+        }
+        async function async2() {
+            console.log('async2 end') // 2
+        }
+        async1()
+
+        setTimeout(function () {
+            console.log('setTimeout')  //8
+        }, 0)
+
+        new Promise(resolve => {
+            console.log('Promise') // 3
+            resolve()
+        })
+            .then(function () {
+                console.log('promise1') // 6
+            })
+            .then(function () {
+                console.log('promise2') // 7
+            })
+
+        console.log('script end') // 4
+
+
+
+
+        console.log('script start');  // 1
+
+        setTimeout(() => {
+            console.log('time1'); // 10
+        }, 1 * 2000);
+
+        Promise.resolve()
+            .then(function () {
+                console.log('promise1'); // 4
+            }).then(function () {
+                console.log('promise2'); // 8
+            });
+
+
+        async function foo() {
+            await bar()
+            console.log('async1 end') // 5
+        }
+        foo()
+
+        async function errorFunc() {
+            try {
+                await Promise.reject('error!!!') // 6
+            } catch (e) {
+                console.log(e)
+            }
+            console.log('async1');  // 7
+            return Promise.resolve('async1 success') // 9
+        }
+        errorFunc().then(res => console.log(res))
+
+        function bar() {
+            console.log('async2 end') // 2
+        }
+
+        console.log('script end'); // 3
+
+
+
+
         function deepClone(obj) {
             let result
             if (typeof obj === 'object') {
@@ -90,8 +164,8 @@
             }
         }
 
-        Function.prototype._call = function(context,...rest) {
-            if(typeof this !== 'function') {
+        Function.prototype._call = function (context, ...rest) {
+            if (typeof this !== 'function') {
                 console.error('type error');
             }
             let args = rest
@@ -103,8 +177,8 @@
             return result
         }
 
-        Function.prototype._apply = function(context, ...rest) {
-            if(typeof this !== 'function') {
+        Function.prototype._apply = function (context, ...rest) {
+            if (typeof this !== 'function') {
                 console.error('type error');
             }
             let args = rest
@@ -121,13 +195,13 @@
             value: 1
         };
 
-        function bar(v1,v2) {
-            console.log(v1,'v1');
-            return this.value + v1 +  'hh';
+        function bar(v1, v2) {
+            console.log(v1, 'v1');
+            return this.value + v1 + 'hh';
         }
 
-        let aa = bar._apply(foo,[22,33])
-        console.log(aa,'aa');
+        let aa = bar._apply(foo, [22, 33])
+        console.log(aa, 'aa');
     </script>
 </body>
 
