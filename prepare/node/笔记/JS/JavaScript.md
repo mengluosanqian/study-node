@@ -67,3 +67,8 @@
 11. parseInt 解析一个字符串并返回一个整数
 12. String 把对象的值转化为字符串
 13. unescape() 对由 escape() 编码的字符串进⾏解码
+
+#### 创建二维空数组
+```js
+new Array(3).fill(0).map(()=>{return Array(3).fill(0)})
+```
