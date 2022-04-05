@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let arr = [2,3,4,5,[2,4,5,3[5,4,3,[2,43]]]]
+        function deepClone(val) {
+            let result
+            if(typeof val === 'object') {
+                result = Array.isArray(val) ? [] : {}
+                for(let i in val) {
+                    result[i] = typeof val[i] == 'object' ? deepClone[val[i]] : val[i]
+                }
+            }else {
+                result = val
+            }
+           return result
+        }
+        let newArr = deepClone(arr)
+        newArr[0] = 99
+        console.log(arr);
+        console.log(newArr);
+    </script>
+</body>
+</html>
