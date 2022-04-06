@@ -72,3 +72,11 @@
 ```js
 new Array(3).fill(0).map(()=>{return Array(3).fill(0)})
 ```
+
+#### ASCII互相转换
+```js
+str="A";
+code = str.charCodeAt();//65
+str2 = String.fromCharCode(code);//A
+str3 = String.fromCharCode(0x60+26);//Z
+```
