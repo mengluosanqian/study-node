@@ -11,7 +11,65 @@
 <body>
     <input>
     <script>
-        let arr = [2, 3, 4, 5, [2, 4, 5, 3[5, 4, 3, [2, 43]]]]
+        function selectSort(arr) {
+            const len = arr.length
+            let minIndex // 缓存当前区间的最小值的索引
+            for (let i = 0; i < len - 1; i++) {
+                // 初始化索引为当前区间第一个元素
+                minIndex = i
+                // i,j分别代表了当前区间的左右边界
+                for (let j = i; j < len; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        // 如果minIndex对应的值比j对应的值小，就把j赋值给minIndex
+                        minIndex = j
+                    }
+                }
+                // 如果minIndex不是当前区间的头元素，则交换两者
+                if (minIndex !== i) {
+                    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+                }
+            }
+            return arr
+        }
+
+        function mergeSort(arr) {
+            if (arr.length < 2) return arr
+            const mid = Math.floor(arr.length / 2)
+            const left = mergeSort(arr.slice(0, mid))
+            const right = mergeSort(arr.slice(mid))
+            return merge(left,right);
+            
+        }
+        function merge(left,right) {
+            let res = [],
+                i = 0,
+                j = 0
+            while (i < left.length && j < right.length) {
+                if (left[i] < right[j]) {
+                    res.push(left[i])
+                    i++
+                } else {
+                    res.push(right[j])
+                    j++
+                }
+            }
+            if(i < left.length) {
+                res.push(...left.slice(i))
+            }else {
+                res.push(...right.slice(j))
+            }
+            return res
+        }
+        ///////////////////////////////////////////////////////
+        let arr = [2, 3, 4, 5, [2, 4, 5, 3, [5, 4, 3, [2, 43]]]]
+
+        function _flat(arr) {
+            let result = arr.reduce((prev, next) => {
+                return prev.concat(Array.isArray(next) ? _flat(next) : next)
+            }, [])
+            return result
+        }
+        console.log(mergeSort(_flat(arr)));
 
         function deepClone(val) {
             let result
@@ -37,26 +95,26 @@
                     clearTimeout(timer)
                 }
                 let context = this,
-                arg = arguments
+                    arg = arguments
                 timer = setTimeout(() => {
-                    fn.apply(context,arguments)
+                    fn.apply(context, arguments)
                     // timer = null
                 }, delay)
             }
         }
         let inp = document.querySelector("input")
-        inp.addEventListener('input',debounce(function () {
+        inp.addEventListener('input', debounce(function () {
             console.log(this.value);
         }, 500))
 
-        function throttle(fn,delay) { 
-            let timer = null 
-            return function() {
+        function throttle(fn, delay) {
+            let timer = null
+            return function () {
                 let context = this,
-                arg = arguments
-                if(!timer) {
+                    arg = arguments
+                if (!timer) {
                     timer = setTimeout(() => {
-                        fn.apply(context,arguments)
+                        fn.apply(context, arguments)
                         timer = null
                     }, delay)
                 }
