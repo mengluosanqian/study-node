@@ -11,6 +11,267 @@
 <body>
     <input>
     <script>
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('p1')
+            }, 2000)
+        })
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('p2')
+            }, 1000)
+        })
+        let p3 = new Promise((resolve, reject) => {
+            reject('p3')
+        })
+        // Promise.prototype._all(promises) {
+        //     return new Promise((resolve, reject) => {
+        //         const len = 0
+        //         const result = []
+        //         for (let i = 0; i < promises.length; i++) {
+        //             promises[i].then(res => {
+        //                 result[i] = res
+        //                 len++
+        //                 if (len == promises.length) {
+        //                     resolve(result)
+        //                 }
+        //             }).catch(e => {
+        //                 reject(e)
+        //             })
+        //         }
+        //     })
+        // }
+        Promise._all = function (iterators) {
+            return new Promise((resolve, reject) => {
+                if (!iterators || iterators.length === 0) {
+                    resolve([])
+                } else {
+                    // 计算器，用于判断所有任务是否执行完成
+                    let count = 0;
+                    // 结果数组
+                    let result = [];
+                    // 执行数组长度
+                    let len = iterators.length
+                    for (let i = 0; i < len; i++) {
+                        // 考虑到iterators[i]可能是普通对象，则统一包装为Promise对象
+                        Promise.resolve(iterators[i]).then((data) => {
+                            // 按顺序保存对应的结果
+                            result[i] = data;
+                            // 判断++count 的次数是否等于 传入执行数组的长度
+                            if (++count === len) {
+                                resolve(result);
+                            }
+                        }, (err) => {
+                            // 任何一个Promise对象执行失败，则调用reject()方法
+                            reject(err);
+                        })
+                    }
+                }
+            })
+        }
+
+
+        Promise._race = function(promises) {
+            return new Promise((resolve,reject) => {
+                for(let i = 0;i < promises.length;i++) {
+                    Promise.resolve(promises[i]).then(res => {
+                        resolve(res)
+                    }).catch(e => {
+                        reject(e)
+                    })
+                }
+            })
+        }
+        Promise._all([p1, p2, p3]).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+        Promise._race([p1, p2, p3]).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+    <!-- <script>
+        let tree = [{
+                id: 1,
+                parentId: null,
+                name: 'a'
+            },
+            {
+                id: 2,
+                parentId: null,
+                name: 'b'
+            },
+            {
+                id: 3,
+                parentId: 1,
+                name: 'c'
+            },
+            {
+                id: 4,
+                parentId: 2,
+                name: 'd'
+            },
+            {
+                id: 5,
+                parentId: 1,
+                name: 'e'
+            },
+            {
+                id: 6,
+                parentId: 3,
+                name: 'f'
+            },
+            {
+                id: 7,
+                parentId: 4,
+                name: 'g'
+            },
+            {
+                id: 8,
+                parentId: 7,
+                name: 'h'
+            },
+        ]
+
+        function listToTree(arr, id = 0) {
+            if (arr.length == 0) return []
+            return arr.reduce((prev, next) => {
+                if (!next.parentId) {
+                    next['parentId'] = 0
+                }
+                if (next.parentId == id) {
+                    const node = {
+                        ...next
+                    }
+                    node['children'] = listToTree(arr.filter(el => id !== el['id']), next['id'])
+                    prev.push(node)
+                    return prev
+                } else {
+                    return prev
+                }
+            }, [])
+        }
+        // console.log(listToTree(tree));
+        let list = [{
+                "id": 1,
+                "parentId": 0,
+                "name": "a",
+                "children": [{
+                        "id": 3,
+                        "parentId": 1,
+                        "name": "c",
+                        "children": [{
+                            "id": 6,
+                            "parentId": 3,
+                            "name": "f",
+                            "children": []
+                        }]
+                    },
+                    {
+                        "id": 5,
+                        "parentId": 1,
+                        "name": "e",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "parentId": 0,
+                "name": "b",
+                "children": [{
+                    "id": 4,
+                    "parentId": 2,
+                    "name": "d",
+                    "children": [{
+                        "id": 7,
+                        "parentId": 4,
+                        "name": "g",
+                        "children": [{
+                            "id": 8,
+                            "parentId": 7,
+                            "name": "h",
+                            "children": []
+                        }]
+                    }]
+                }]
+            }
+        ]
+
+        function treeToList(tree = [], list = []) {
+            for (let leaf of tree) {
+                const {children, ...rest} = leaf;
+                if (Array.isArray(children)) {
+                    treeToList(children,list);
+                }
+                list.push({...rest});
+            }
+            return list;
+        }
+        // console.log(treeToList(list));
+        const arr1 = [3, 1, 4, 6, 5, 7, 2]
+
+        function insertSort(arr) {
+            for (let i = 1; i < arr.length; i++) {
+                let j = i,
+                    tem = arr[j]
+                while (j > 0 && arr[j - 1] > tem) {
+                    arr[j] = arr[j - 1]
+                    j--
+                }
+                arr[j] = tem
+            }
+            return arr
+        }
+        // console.log(insertSort(arr1));
+        function selectSort(arr) {
+            const len = arr.length
+            for (let i = 0; i < len - 1; i++) {
+                minIndex = i
+                for (let j = i; j < len; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j
+                    }
+                }
+                if (minIndex !== i) {
+                    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
+                }
+            }
+            return arr
+        }
+        // console.log(selectSort(arr1));
+        //////////////////////////////////////////////
+        function _setInterval(fn, delay) {
+            const interval = () => {
+                fn()
+                setTimeout(() => {
+                    interval()
+                }, delay)
+            }
+            setTimeout(interval(), delay)
+        }
+
+        // _setInterval(() => {
+        //     console.log('setInterval' + new Date())
+        // }, 1000)
+
+        function _setTimeout(fn, delay) {
+            const timeout = () => {
+                let timer = setInterval(() => {
+                    fn()
+                    clearInterval(timer)
+                }, delay)
+            }
+            timeout()
+        }
+        // _setTimeout(() => {
+        //     console.log('_setTimeout' + new Date())
+        // }, 1000)
+
+        /////////////////////////////////////////
         function selectSort(arr) {
             const len = arr.length
             let minIndex // 缓存当前区间的最小值的索引
@@ -37,10 +298,11 @@
             const mid = Math.floor(arr.length / 2)
             const left = mergeSort(arr.slice(0, mid))
             const right = mergeSort(arr.slice(mid))
-            return merge(left,right);
-            
+            return merge(left, right);
+
         }
-        function merge(left,right) {
+
+        function merge(left, right) {
             let res = [],
                 i = 0,
                 j = 0
@@ -53,9 +315,9 @@
                     j++
                 }
             }
-            if(i < left.length) {
+            if (i < left.length) {
                 res.push(...left.slice(i))
-            }else {
+            } else {
                 res.push(...right.slice(j))
             }
             return res
@@ -69,7 +331,7 @@
             }, [])
             return result
         }
-        console.log(mergeSort(_flat(arr)));
+        // console.log(mergeSort(_flat(arr)));
 
         function deepClone(val) {
             let result
@@ -85,8 +347,8 @@
         }
         let newArr = deepClone(arr)
         newArr[0] = 99
-        console.log(arr);
-        console.log(newArr);
+        // console.log(arr);
+        // console.log(newArr);
 
         function debounce(fn, delay) {
             let timer = null
@@ -123,7 +385,7 @@
         window.onscroll = throttle(function () {
             console.log('测试节流');
         }, 500)
-    </script>
+    </script> -->
     <style>
         body {
             height: 3000px;
