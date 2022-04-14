@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <div class="outer">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </div>
+
+
     <input>
     <div class="overflowMore">测试一下字符串截断在线写代码，给定一个二叉树，求根节点到叶子节点的路径上所有节点值之和（DFS，先序遍历，递归）
         在线写代码，给定两个有序数组，合并为一个有序数组。不许使用 js 的 concat 和 sort 方法（两个指针）
@@ -18,6 +25,19 @@
         TCP 三次握手和四次挥手，拥塞控制（参看计算机网络教材）
         你有什么要问我的吗？（见后文小结里的 HR 相关文章）</div>
     <script>
+        let arr = [2, 3, 4, 5, [2, 4, 5, 3, [5, 4, 3, [2, 43]]]]
+        function deepClone(obj) {  
+            if(typeof obj !== 'object') return obj
+            let res = Array.isArray(obj) ? [] : {}
+            for(let i in obj) {
+                res[i] =  typeof obj[i] == 'object' ? deepClone(obj[i]) : obj[i]
+            }
+            return res
+        }
+        let arr2 = deepClone(arr)
+        arr2[0] = 999
+        console.log(arr);
+        console.log(arr2);
         function outputNum(n,delay) {
            for(var i = 0;i < n;i++) {
                (function (i) {  
@@ -420,7 +440,12 @@
             display: -webkit-box;
             overflow: hidden;
             -webkit-line-clamp:2;
-            /* -webkit-box-orient:vertical; */
+            -webkit-box-orient:vertical;
+        }
+        .outer {
+            width: 300px;
+            height: 200px;
+            background-color: aquamarine;
         }
     </style>
 </body>
