@@ -25,6 +25,19 @@
         TCP 三次握手和四次挥手，拥塞控制（参看计算机网络教材）
         你有什么要问我的吗？（见后文小结里的 HR 相关文章）</div>
     <script>
+        function flat(arr) {
+            let result = []
+            for (const item of arr) {
+                item instanceof Array ? result = result.concat(flat(item)) : result.push(item)
+            }
+            return result
+        }
+
+        let arr = [1, 2, 3, 4, [21, 22, 23, 24, [34, 35, 36, [43, 44]]]]
+        let newArr = flat(arr)
+        console.log(newArr);
+    </script>
+    <!-- <script>
         let arr = [2, 3, 4, 5, [2, 4, 5, 3, [5, 4, 3, [2, 43]]]]
         function deepClone(obj) {  
             if(typeof obj !== 'object') return obj
@@ -129,7 +142,7 @@
         }).catch(err => {
             console.log(err);
         })
-    </script>
+    </script> -->
     <!-- <script>
         let tree = [{
                 id: 1,
@@ -427,21 +440,24 @@
         body {
             height: 3000px;
         }
-        .overflow{
+
+        .overflow {
             width: 200px;
             background-color: aquamarine;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .overflowMore{
+
+        .overflowMore {
             width: 200px;
             background-color: aquamarine;
             display: -webkit-box;
             overflow: hidden;
-            -webkit-line-clamp:2;
-            -webkit-box-orient:vertical;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
+
         .outer {
             width: 300px;
             height: 200px;
