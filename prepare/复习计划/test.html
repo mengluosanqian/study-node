@@ -25,6 +25,28 @@
         TCP 三次握手和四次挥手，拥塞控制（参看计算机网络教材）
         你有什么要问我的吗？（见后文小结里的 HR 相关文章）</div>
     <script>
+        // sum(1)(2)(3, 4).sumOf()
+
+        function sum(a,...rest) {
+            let result = a
+
+            function add(...rest) {
+                debugger
+                rest.forEach(item => {
+                    console.log(item);
+                    result += item
+                })
+                return add
+            }
+            console.log(add);
+            add.valueOf = function () {
+                return result
+            }
+            return add
+        }
+        console.log(sum(1)(2,4)(3).valueOf());
+
+
         function searchParams(search) {
             let arr = encodeURI(search).split('&')
             let params = {}
@@ -34,7 +56,7 @@
             }
             return params
         }
-        console.log(searchParams('a=1&b=2&b=3&c=4&d=&d=&e=%E4%BD%A0%E5%A5%BD'));
+        // console.log(searchParams('a=1&b=2&b=3&c=4&d=&d=&e=%E4%BD%A0%E5%A5%BD'));
 
 
         // function flat(arr) {
@@ -53,7 +75,7 @@
         //     }
         //     return result
         // }
-        Array.prototype._flat = function (depth=Infinity) {
+        Array.prototype._flat = function (depth = Infinity) {
             if (!Array.isArray(this) || depth <= 0) {
                 return this
             }
