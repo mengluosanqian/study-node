@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="myIpt">
+    <script>
+        let ipt = document.querySelector('#myIpt')
+        ipt.oninput = debounce(function() {
+            console.log(this.value);
+        },500)
+        function debounce(callback,delay) {
+            let timer = null
+            return function () {
+                if(timer) {
+                    clearTimeout(timer)
+                }
+                let context = this
+                let arg = arguments
+                timer = setTimeout(() => {
+                    callback.call(context,arg)
+                },delay)
+            }
+        }
+        function throttle(callback,delay) {
+            let timer = null
+            return function () {
+                let context = this
+                let arg = arguments
+                if(!timer) {
+                    timer = setTimeout(() => {
+                        callback.call(context,arg)
+                        timer = null
+                    },delay)
+                }               
+            }
+        }
+        window,onscroll = throttle(function() {
+            console.log('测试节流');
+        },500)
+    </script>
+    <style>
+        body{
+            height: 3000px;
+        }
+    </style>
+</body>
+</html>

@@ -9,12 +9,25 @@
 </head>
 
 <body>
+    <div class="imgAndWord">
+        <span>隐式转换</span>
+
+        <img src="../public/img/隐式转换.png">
+
+    </div>
     <!-- <div class="outer">
         <div class="left"></div>
         <div class="center"></div>
         <div class="right"></div>
     </div> -->
     <div class="borderSet"></div>
+    <div class="sanjiao"></div>
+    <div class="tixing"></div>
+    <div class="box">
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+    </div>
 
     <!-- <input>
     <div class="overflowMore">测试一下字符串截断在线写代码，给定一个二叉树，求根节点到叶子节点的路径上所有节点值之和（DFS，先序遍历，递归）
@@ -27,7 +40,7 @@
     <script>
         // sum(1)(2)(3, 4).sumOf()
 
-        function sum(a,...rest) {
+        function sum(a, ...rest) {
             let result = a
 
             function add(...rest) {
@@ -44,7 +57,7 @@
             }
             return add
         }
-        console.log(sum(1)(2,4)(3).valueOf());
+        console.log(sum(1)(2, 4)(3).valueOf());
 
 
         function searchParams(search) {
@@ -505,14 +518,68 @@
         }, 500)
     </script> -->
     <style>
+        .box {
+            width: 50%;
+        }
+        .outer {
+            width: 500px;
+            padding-bottom: 33.33%;
+            height: 0;
+            position: relative;
+        }
+
+        .outer .inner {
+            width: 100%;
+            height: 100%;
+            background-color: aqua;
+            position: absolute;
+        }
+
+        .sanjiao {
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-left: 20px solid red;
+            border-bottom: 20px solid transparent;
+
+        }
+
+        .tixing {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border-top: 50px solid red;
+            border-bottom: 50px solid transparent;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            transform: rotate(45deg);
+        }
+
+        .imgAndWord {
+            width: 500px;
+            height: 100px;
+            background-color: aquamarine;
+            line-height: 100px;
+            /* text-align: center; */
+        }
+
+        .imgAndWord img {
+            width: 70px;
+            height: 70px;
+            vertical-align: middle;
+        }
+
         body {
             height: 3000px;
         }
+
         .borderSet {
             border-top: 1px solid red;
             transform: scaleY(0.5);
 
         }
+
         .overflow {
             width: 200px;
             background-color: aquamarine;
