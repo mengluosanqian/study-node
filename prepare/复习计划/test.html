@@ -28,7 +28,7 @@
             <div class="inner"></div>
         </div>
     </div>
-
+    <div id="triangle-bottomleft"></div>
     <!-- <input>
     <div class="overflowMore">测试一下字符串截断在线写代码，给定一个二叉树，求根节点到叶子节点的路径上所有节点值之和（DFS，先序遍历，递归）
         在线写代码，给定两个有序数组，合并为一个有序数组。不许使用 js 的 concat 和 sort 方法（两个指针）
@@ -518,9 +518,17 @@
         }, 500)
     </script> -->
     <style>
+        #triangle-bottomleft {
+            width: 0;
+            height: 0;
+            border-bottom: 100px solid red;
+            border-right: 100px solid transparent;
+        }
+
         .box {
             width: 50%;
         }
+
         .outer {
             width: 500px;
             padding-bottom: 33.33%;
