@@ -1,616 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-
-<body>
-    <div class="imgAndWord">
-        <span>隐式转换</span>
-
-        <img src="../public/img/隐式转换.png">
-
-    </div>
-    <!-- <div class="outer">
-        <div class="left"></div>
-        <div class="center"></div>
-        <div class="right"></div>
-    </div> -->
-    <div class="borderSet"></div>
-    <div class="sanjiao"></div>
-    <div class="tixing"></div>
-    <div class="box">
-        <div class="outer">
-            <div class="inner"></div>
-        </div>
-    </div>
-    <div id="triangle-bottomleft"></div>
-    <!-- <input>
-    <div class="overflowMore">测试一下字符串截断在线写代码，给定一个二叉树，求根节点到叶子节点的路径上所有节点值之和（DFS，先序遍历，递归）
-        在线写代码，给定两个有序数组，合并为一个有序数组。不许使用 js 的 concat 和 sort 方法（两个指针）
-        在线写代码，两栏布局，左边定宽右边自适应，等高（ flex ， grid ， float ， position ，方法很多随便说几个）
-        简述自定义事件实现方法（参看红宝书）
-        简述 getter 和 setter 写法（参看红宝书）
-        TCP 三次握手和四次挥手，拥塞控制（参看计算机网络教材）
-        你有什么要问我的吗？（见后文小结里的 HR 相关文章）</div> -->
-    <script>
-        // sum(1)(2)(3, 4).sumOf()
-
-        function sum(a, ...rest) {
-            let result = a
-
-            function add(...rest) {
-                debugger
-                rest.forEach(item => {
-                    console.log(item);
-                    result += item
-                })
-                return add
-            }
-            console.log(add);
-            add.valueOf = function () {
-                return result
-            }
-            return add
-        }
-        console.log(sum(1)(2, 4)(3).valueOf());
-
-
-        function searchParams(search) {
-            let arr = encodeURI(search).split('&')
-            let params = {}
-            for (let i = 0; i < arr.length; i++) {
-                let param = arr[i].split('=')
-                params[param[0]] = param[1]
-            }
-            return params
-        }
-        // console.log(searchParams('a=1&b=2&b=3&c=4&d=&d=&e=%E4%BD%A0%E5%A5%BD'));
-
-
-        // function flat(arr) {
-        //     let result = []
-        //     while(arr.length) {
-        //         let val = arr.shift()
-        //         Array.isArray(val) ? arr.unshift(...val) : result.push(val)
-        //     }
-        //     return result
-        // }
-        // Array.prototype._flat = function (depth) {
-        //     let result = []
-        //     while (this.length) {
-        //         let val = this.shift()
-        //         Array.isArray(val) ? this.unshift(...val) : result.push(val)
-        //     }
-        //     return result
-        // }
-        Array.prototype._flat = function (depth = Infinity) {
-            if (!Array.isArray(this) || depth <= 0) {
-                return this
-            }
-            return this.reduce((prev, next) => {
-                if (Array.isArray(next)) {
-                    return prev.concat(next._flat(depth - 1))
-                } else {
-                    return prev.concat(next)
-                }
-
-            }, [])
-        }
-        // Array.prototype._flat = function (depth) { 
-        //      if(!Array.isArray(this) || depth <= 0) {
-        //          return this
-        //      }
-        //      return this.reduce((prev,next) => {
-        //          if(Array.isArray(next)) {
-        //             return prev.concat(next._flat(depth-1))
-        //          } else {
-        //             return prev.concat(next)
-        //          }
-        //      },[])
-
-        //   }
-        let arr = [1, 2, 3, 4, [21, 22, 23, 24, [34, 35, 36, [43, 44]]]]
-        let newArr = arr._flat()
-        console.log(newArr);
-    </script>
-    <!-- <script>
-        let arr = [2, 3, 4, 5, [2, 4, 5, 3, [5, 4, 3, [2, 43]]]]
-        function deepClone(obj) {  
-            if(typeof obj !== 'object') return obj
-            let res = Array.isArray(obj) ? [] : {}
-            for(let i in obj) {
-                res[i] =  typeof obj[i] == 'object' ? deepClone(obj[i]) : obj[i]
-            }
-            return res
-        }
-        let arr2 = deepClone(arr)
-        arr2[0] = 999
-        console.log(arr);
-        console.log(arr2);
-        function outputNum(n,delay) {
-           for(var i = 0;i < n;i++) {
-               (function (i) {  
-                   setTimeout(() => {
-                       console.log(i);
-                   },delay*i)
-               })(i)
-           }
-        }
-        outputNum(10,500)
-        let p1 = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('p1')
-            }, 2000)
-        })
-        let p2 = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('p2')
-            }, 1000)
-        })
-        let p3 = new Promise((resolve, reject) => {
-            reject('p3')
-        })
-        // Promise.prototype._all(promises) {
-        //     return new Promise((resolve, reject) => {
-        //         const len = 0
-        //         const result = []
-        //         for (let i = 0; i < promises.length; i++) {
-        //             promises[i].then(res => {
-        //                 result[i] = res
-        //                 len++
-        //                 if (len == promises.length) {
-        //                     resolve(result)
-        //                 }
-        //             }).catch(e => {
-        //                 reject(e)
-        //             })
-        //         }
-        //     })
-        // }
-        Promise._all = function (iterators) {
-            return new Promise((resolve, reject) => {
-                if (!iterators || iterators.length === 0) {
-                    resolve([])
-                } else {
-                    // 计算器，用于判断所有任务是否执行完成
-                    let count = 0;
-                    // 结果数组
-                    let result = [];
-                    // 执行数组长度
-                    let len = iterators.length
-                    for (let i = 0; i < len; i++) {
-                        // 考虑到iterators[i]可能是普通对象，则统一包装为Promise对象
-                        Promise.resolve(iterators[i]).then((data) => {
-                            // 按顺序保存对应的结果
-                            result[i] = data;
-                            // 判断++count 的次数是否等于 传入执行数组的长度
-                            if (++count === len) {
-                                resolve(result);
-                            }
-                        }, (err) => {
-                            // 任何一个Promise对象执行失败，则调用reject()方法
-                            reject(err);
-                        })
-                    }
-                }
-            })
-        }
-
-
-        Promise._race = function (promises) {
-            return new Promise((resolve, reject) => {
-                for (let i = 0; i < promises.length; i++) {
-                    Promise.resolve(promises[i]).then(res => {
-                        resolve(res)
-                    }).catch(e => {
-                        reject(e)
-                    })
-                }
-            })
-        }
-        Promise._all([p1, p2, p3]).then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        })
-        Promise._race([p1, p2, p3]).then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        })
-    </script> -->
-    <!-- <script>
-        let tree = [{
-                id: 1,
-                parentId: null,
-                name: 'a'
-            },
-            {
-                id: 2,
-                parentId: null,
-                name: 'b'
-            },
-            {
-                id: 3,
-                parentId: 1,
-                name: 'c'
-            },
-            {
-                id: 4,
-                parentId: 2,
-                name: 'd'
-            },
-            {
-                id: 5,
-                parentId: 1,
-                name: 'e'
-            },
-            {
-                id: 6,
-                parentId: 3,
-                name: 'f'
-            },
-            {
-                id: 7,
-                parentId: 4,
-                name: 'g'
-            },
-            {
-                id: 8,
-                parentId: 7,
-                name: 'h'
-            },
-        ]
-
-        function listToTree(arr, id = 0) {
-            if (arr.length == 0) return []
-            return arr.reduce((prev, next) => {
-                if (!next.parentId) {
-                    next['parentId'] = 0
-                }
-                if (next.parentId == id) {
-                    const node = {
-                        ...next
-                    }
-                    node['children'] = listToTree(arr.filter(el => id !== el['id']), next['id'])
-                    prev.push(node)
-                    return prev
-                } else {
-                    return prev
-                }
-            }, [])
-        }
-        // console.log(listToTree(tree));
-        let list = [{
-                "id": 1,
-                "parentId": 0,
-                "name": "a",
-                "children": [{
-                        "id": 3,
-                        "parentId": 1,
-                        "name": "c",
-                        "children": [{
-                            "id": 6,
-                            "parentId": 3,
-                            "name": "f",
-                            "children": []
-                        }]
-                    },
-                    {
-                        "id": 5,
-                        "parentId": 1,
-                        "name": "e",
-                        "children": []
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "parentId": 0,
-                "name": "b",
-                "children": [{
-                    "id": 4,
-                    "parentId": 2,
-                    "name": "d",
-                    "children": [{
-                        "id": 7,
-                        "parentId": 4,
-                        "name": "g",
-                        "children": [{
-                            "id": 8,
-                            "parentId": 7,
-                            "name": "h",
-                            "children": []
-                        }]
-                    }]
-                }]
-            }
-        ]
-
-        function treeToList(tree = [], list = []) {
-            for (let leaf of tree) {
-                const {children, ...rest} = leaf;
-                if (Array.isArray(children)) {
-                    treeToList(children,list);
-                }
-                list.push({...rest});
-            }
-            return list;
-        }
-        // console.log(treeToList(list));
-        const arr1 = [3, 1, 4, 6, 5, 7, 2]
-
-        function insertSort(arr) {
-            for (let i = 1; i < arr.length; i++) {
-                let j = i,
-                    tem = arr[j]
-                while (j > 0 && arr[j - 1] > tem) {
-                    arr[j] = arr[j - 1]
-                    j--
-                }
-                arr[j] = tem
-            }
-            return arr
-        }
-        // console.log(insertSort(arr1));
-        function selectSort(arr) {
-            const len = arr.length
-            for (let i = 0; i < len - 1; i++) {
-                minIndex = i
-                for (let j = i; j < len; j++) {
-                    if (arr[j] < arr[minIndex]) {
-                        minIndex = j
-                    }
-                }
-                if (minIndex !== i) {
-                    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
-                }
-            }
-            return arr
-        }
-        // console.log(selectSort(arr1));
-        //////////////////////////////////////////////
-        function _setInterval(fn, delay) {
-            const interval = () => {
-                fn()
-                setTimeout(() => {
-                    interval()
-                }, delay)
-            }
-            setTimeout(interval(), delay)
-        }
-
-        // _setInterval(() => {
-        //     console.log('setInterval' + new Date())
-        // }, 1000)
-
-        function _setTimeout(fn, delay) {
-            const timeout = () => {
-                let timer = setInterval(() => {
-                    fn()
-                    clearInterval(timer)
-                }, delay)
-            }
-            timeout()
-        }
-        // _setTimeout(() => {
-        //     console.log('_setTimeout' + new Date())
-        // }, 1000)
-
-        /////////////////////////////////////////
-        function selectSort(arr) {
-            const len = arr.length
-            let minIndex // 缓存当前区间的最小值的索引
-            for (let i = 0; i < len - 1; i++) {
-                // 初始化索引为当前区间第一个元素
-                minIndex = i
-                // i,j分别代表了当前区间的左右边界
-                for (let j = i; j < len; j++) {
-                    if (arr[j] < arr[minIndex]) {
-                        // 如果minIndex对应的值比j对应的值小，就把j赋值给minIndex
-                        minIndex = j
-                    }
-                }
-                // 如果minIndex不是当前区间的头元素，则交换两者
-                if (minIndex !== i) {
-                    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
-                }
-            }
-            return arr
-        }
-
-        function mergeSort(arr) {
-            if (arr.length < 2) return arr
-            const mid = Math.floor(arr.length / 2)
-            const left = mergeSort(arr.slice(0, mid))
-            const right = mergeSort(arr.slice(mid))
-            return merge(left, right);
-
-        }
-
-        function merge(left, right) {
-            let res = [],
-                i = 0,
-                j = 0
-            while (i < left.length && j < right.length) {
-                if (left[i] < right[j]) {
-                    res.push(left[i])
-                    i++
-                } else {
-                    res.push(right[j])
-                    j++
-                }
-            }
-            if (i < left.length) {
-                res.push(...left.slice(i))
-            } else {
-                res.push(...right.slice(j))
-            }
-            return res
-        }
-        ///////////////////////////////////////////////////////
-        let arr = [2, 3, 4, 5, [2, 4, 5, 3, [5, 4, 3, [2, 43]]]]
-
-        function _flat(arr) {
-            let result = arr.reduce((prev, next) => {
-                return prev.concat(Array.isArray(next) ? _flat(next) : next)
-            }, [])
-            return result
-        }
-        // console.log(mergeSort(_flat(arr)));
-
-        function deepClone(val) {
-            let result
-            if (typeof val === 'object') {
-                result = Array.isArray(val) ? [] : {}
-                for (let i in val) {
-                    result[i] = typeof val[i] == 'object' ? deepClone[val[i]] : val[i]
-                }
-            } else {
-                result = val
-            }
-            return result
-        }
-        let newArr = deepClone(arr)
-        newArr[0] = 99
-        // console.log(arr);
-        // console.log(newArr);
-
-        function debounce(fn, delay) {
-            let timer = null
-            return function () {
-                if (timer) {
-                    clearTimeout(timer)
-                }
-                let context = this,
-                    arg = arguments
-                timer = setTimeout(() => {
-                    fn.apply(context, arguments)
-                    // timer = null
-                }, delay)
-            }
-        }
-        let inp = document.querySelector("input")
-        inp.addEventListener('input', debounce(function () {
-            console.log(this.value);
-        }, 500))
-
-        function throttle(fn, delay) {
-            let timer = null
-            return function () {
-                let context = this,
-                    arg = arguments
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn.apply(context, arguments)
-                        timer = null
-                    }, delay)
-                }
-            }
-        }
-        window.onscroll = throttle(function () {
-            console.log('测试节流');
-        }, 500)
-    </script> -->
     <style>
-        #triangle-bottomleft {
-            width: 0;
-            height: 0;
-            border-bottom: 100px solid red;
-            border-right: 100px solid transparent;
+        .jindu {
+            margin: 100px auto;
+            width: 400px;
+            height: 30px;
+            background-color: blueviolet;
+            opacity: 1;
         }
-
-        .box {
-            width: 50%;
+        .jindu:hover {
+            /* transform: scale(2,2); */
+            transition: ease ;
+            transition-duration: 2s;
         }
-
-        .outer {
-            width: 500px;
-            padding-bottom: 33.33%;
-            height: 0;
-            position: relative;
-        }
-
-        .outer .inner {
-            width: 100%;
-            height: 100%;
-            background-color: aqua;
-            position: absolute;
-        }
-
-        .sanjiao {
-            width: 0;
-            height: 0;
-            border-top: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-left: 20px solid red;
-            border-bottom: 20px solid transparent;
-
-        }
-
-        .tixing {
-            width: 50px;
-            height: 50px;
-            background-color: transparent;
-            border-top: 50px solid red;
-            border-bottom: 50px solid transparent;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            transform: rotate(45deg);
-        }
-
-        .imgAndWord {
-            width: 500px;
+        .xuanzhuan{
+            width: 100px;
             height: 100px;
-            background-color: aquamarine;
-            line-height: 100px;
-            /* text-align: center; */
+            transition: transform 1s ease;
+            background-color: blueviolet;
+            transform-origin: right bottom;
         }
-
-        .imgAndWord img {
-            width: 70px;
-            height: 70px;
-            vertical-align: middle;
+        .xuanzhuan:hover {
+            transform: rotate(360deg);
         }
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            height: 3000px;
-        }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
 
-        .borderSet {
-            border-top: 1px solid red;
-            transform: scaleY(0.5);
-
-        }
-
-        .overflow {
-            width: 200px;
-            background-color: aquamarine;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .overflowMore {
-            width: 200px;
-            background-color: aquamarine;
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .outer {
-            width: 300px;
-            height: 200px;
-            background-color: aquamarine;
-        }
+     .outer {
+         width: 300px;
+         height: 100%;
+         margin: 0 auto;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: aquamarine;
+     }
+     .inner {
+         position: relative;
+         width: 50%;
+         height: 0;
+         padding-bottom: 50%;
+         background-color: blueviolet;
+     }
+     .box {
+         position: absolute;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+        height: 100%;
+        width: 100%;
+     }
     </style>
-</body>
-
+  </head>
+  <body>
+    <!-- <div class="outer">
+      <div class="inner">
+        <div class="box">hello</div>
+      </div>
+    </div> -->
+    <div class="jindu"></div>
+    <div class="xuanzhuan"></div>
+  </body>
 </html>
