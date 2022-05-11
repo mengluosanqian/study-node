@@ -1,76 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-        .jindu {
-            margin: 100px auto;
-            width: 400px;
-            height: 30px;
-            background-color: blueviolet;
-            opacity: 1;
-        }
-        .jindu:hover {
-            /* transform: scale(2,2); */
-            transition: ease ;
-            transition-duration: 2s;
-        }
-        .xuanzhuan{
-            width: 100px;
-            height: 100px;
-            transition: transform 1s ease;
-            background-color: blueviolet;
-            transform-origin: right bottom;
-        }
-        .xuanzhuan:hover {
-            transform: rotate(360deg);
-        }
-      * {
-        margin: 0;
-        padding: 0;
-      }
 
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .jindu {
+      margin: 100px auto;
+      width: 400px;
+      height: 30px;
+      background-color: blueviolet;
+      opacity: 1;
+    }
 
-     .outer {
-         width: 300px;
-         height: 100%;
-         margin: 0 auto;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         background-color: aquamarine;
-     }
-     .inner {
-         position: relative;
-         width: 50%;
-         height: 0;
-         padding-bottom: 50%;
-         background-color: blueviolet;
-     }
-     .box {
-         position: absolute;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-        height: 100%;
-        width: 100%;
-     }
-    </style>
-  </head>
-  <body>
-    <!-- <div class="outer">
+    .jindu:hover {
+      /* transform: scale(2,2); */
+      transition: ease;
+      transition-duration: 2s;
+    }
+
+    .xuanzhuan {
+      width: 100px;
+      height: 100px;
+      transition: transform 1s ease;
+      background-color: blueviolet;
+      transform-origin: right bottom;
+    }
+
+    .xuanzhuan:hover {
+      transform: rotate(360deg);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .outer {
+      width: 300px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: aquamarine;
+    }
+
+    .inner {
+      position: relative;
+      width: 50%;
+      height: 0;
+      padding-bottom: 50%;
+      background-color: blueviolet;
+    }
+
+    .box {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="outer">
       <div class="inner">
         <div class="box">hello</div>
       </div>
     </div> -->
-    <div class="jindu"></div>
-    <div class="xuanzhuan"></div>
-  </body>
+  <div class="jindu"></div>
+  <div class="xuanzhuan"></div>
+  <script>
+    Promise.retry = (fun, limit = 5) => {
+      return new Promise((resolve, reject) => {
+        let sum = 1
+        let _run = () => {
+          fun().then(res => {
+            resolve(res)
+          }).catch(err => {
+            if (sum >= limit) {
+              reject(err)
+
+
+            } else {
+              sum++
+              console.log('retry!');
+              _run()
+            }
+          })
+        }
+        _run()
+      })
+    }
+
+    function test() {
+      let k = 1
+      return new Promise((resolve, reject) => {
+        if (k >= 3) {
+          resolve('success')
+          k++
+        } else {
+          reject('go!!!')
+        }
+
+      })
+    }
+    Promise.retry(test).then(res => {
+      console.log('resolve:', res);
+    }).catch(err => {
+      console.log('reject', err);
+    })
+  </script>
+</body>
+
 </html>
