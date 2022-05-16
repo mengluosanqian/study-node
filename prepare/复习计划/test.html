@@ -107,7 +107,21 @@
     // }
     // console.log(getArrayDepth(arr));
     let str = 'get-element-by-id'
-    let arr = [1,2,3,45,1,2,3]
+    let arr = [1,2,3,45,1,23,5,232,2,1]
+    function quickSort(arr) {
+      if(arr.length <= 1) return arr
+      let left = [],right = []
+      let val = arr.pop()
+      for(let item of arr) {
+        if(item < val) {
+          left.push(item)
+        } else {
+          right.push(item)
+        }
+      }
+      return quickSort(left).concat(val,quickSort(right))
+    }
+    console.log(quickSort(arr));
     // let newArr = [...new Set(arr)]
     let newArr = []
     let j
