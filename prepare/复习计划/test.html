@@ -82,57 +82,76 @@
   <div class="xuanzhuan"></div>
   <input id="inp">
   <script>
-    // let arr = [1, 2, 3, 4, [2, 43, 3, 2, 1, [2, 2, 1, 5, [2, 23, 4]]]]
+    // LazyMan("Hank")
+    // 输出:
+    // Hi! This is Hank!
 
-    // function arrDepth(arr) {
-    //   if (Object.prototype.toString.call(arr) !== '[object Array]') {
-    //     throw Error('不是数组')
-    //   }
-    //   let depth = 1
-    //   arr.reduce((prev, next) => {
+    // LazyMan("Hank").sleep(10).eat("dinner")
+    // 输出
+    // Hi! This is Hank!
+    // //等待10秒..
+    // Wake up after 10
+    // Eat dinner
 
-    //   }, [])
-    // }
+    // LazyMan("Hank").eat("dinner").eat("supper")
+    // 输出
+    // Hi! This is Hank!
+    // Eat dinner
+    // Eat supper
 
-    // function getArrayDepth(arr) {
-    //   const depths = []
-    //   arr.forEach(ele => {
-    //     let depth = 0
-    //     if (Array.isArray(ele)) {
-    //       depth = getArrayDepth(ele)
-    //     }
-    //     depths.push(depth)
-    //   })
-    //   return 1 + Math.max(...depths)
-    // }
-    // console.log(getArrayDepth(arr));
-    let str = 'get-element-by-id'
-    let arr = [1,2,3,45,1,23,5,232,2,1]
-    function quickSort(arr) {
-      if(arr.length <= 1) return arr
-      let left = [],right = []
-      let val = arr.pop()
-      for(let item of arr) {
-        if(item < val) {
-          left.push(item)
-        } else {
-          right.push(item)
-        }
-      }
-      return quickSort(left).concat(val,quickSort(right))
+    // LazyMan(“Hank”).sleepFirst(5).eat(“supper”)输出
+    // //等待5秒
+    // Wake up after 5
+    // Hi! This is Hank!
+    // Eat supper
+
+    function LazyMan(name) {
+      return new MyLazyMan(name)
     }
-    console.log(quickSort(arr));
-    // let newArr = [...new Set(arr)]
-    let newArr = []
-    let j
-    for(let i = 0;i < arr.length;i++) {
-      for(j = 0;j < newArr.length;j++) {
-        if(arr[i] == newArr[j]) break
-        
+    class MyLazyMan{
+      constructor(name) {
+        this.queue = []
+        this.queue.push(() => {
+          console.log(`Hi! This is ${name}!`);
+          this.next()
+        })
+        setTimeout(() => {
+          this.next()
+        })
       }
-      if(j == newArr.length) newArr.push(arr[i])
+      next() {
+        let task = this.queue.shift()
+        task && task()
+      }
+      eat(val) {
+        this.queue.push(() => {
+          console.log(`Eat ${val}`);
+          this.next()
+        })
+        return this
+      }
+      sleep(second) {
+        this.queue.push(() => {
+          setTimeout(() => {
+            console.log(`Wake up after ${second}!`);
+            this.next()
+          },second*1000)
+          
+        })
+        return this
+      }
+      sleepFirst(second) {
+        this.queue.unshift(() => {
+          setTimeout(() => {
+            console.log(`Wake up after ${second}!`);
+            console.log(this);
+            this.next()
+          },second*1000)   
+        })
+        return this
+      }
     }
-     console.log(newArr);
+    LazyMan("Hank").sleep(10).eat("supper").sleepFirst(5)
   </script>
 </body>
 
