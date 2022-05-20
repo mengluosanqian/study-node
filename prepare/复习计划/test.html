@@ -1,158 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
-    .jindu {
-      margin: 100px auto;
-      width: 400px;
-      height: 30px;
-      background-color: blueviolet;
-      opacity: 1;
-    }
-
-    .jindu:hover {
-      /* transform: scale(2,2); */
-      transition: ease;
-      transition-duration: 2s;
-    }
-
-    .xuanzhuan {
-      width: 100px;
-      height: 100px;
-      transition: transform 1s ease;
-      background-color: blueviolet;
-      transform-origin: right bottom;
-    }
-
-    .xuanzhuan:hover {
-      transform: rotate(360deg);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-    }
-
-    .outer {
-      width: 300px;
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: aquamarine;
-    }
-
-    .inner {
-      position: relative;
-      width: 50%;
-      height: 0;
-      padding-bottom: 50%;
-      background-color: blueviolet;
-    }
-
-    .box {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-    }
-  </style>
-</head>
-
-<body>
-  <!-- <div class="outer">
-      <div class="inner">
-        <div class="box">hello</div>
-      </div>
-    </div> -->
-  <div class="jindu"></div>
-  <div class="xuanzhuan"></div>
-  <input id="inp">
-  <script>
-    // LazyMan("Hank")
-    // 输出:
-    // Hi! This is Hank!
-
-    // LazyMan("Hank").sleep(10).eat("dinner")
-    // 输出
-    // Hi! This is Hank!
-    // //等待10秒..
-    // Wake up after 10
-    // Eat dinner
-
-    // LazyMan("Hank").eat("dinner").eat("supper")
-    // 输出
-    // Hi! This is Hank!
-    // Eat dinner
-    // Eat supper
-
-    // LazyMan(“Hank”).sleepFirst(5).eat(“supper”)输出
-    // //等待5秒
-    // Wake up after 5
-    // Hi! This is Hank!
-    // Eat supper
-
-    function LazyMan(name) {
-      return new MyLazyMan(name)
-    }
-    class MyLazyMan{
-      constructor(name) {
-        this.queue = []
-        this.queue.push(() => {
-          console.log(`Hi! This is ${name}!`);
-          this.next()
-        })
-        setTimeout(() => {
-          this.next()
-        })
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .outer {
+        width: 400px;
+        height: 600px;
+        background: red;
       }
-      next() {
-        let task = this.queue.shift()
-        task && task()
-      }
-      eat(val) {
-        this.queue.push(() => {
-          console.log(`Eat ${val}`);
-          this.next()
-        })
-        return this
-      }
-      sleep(second) {
-        this.queue.push(() => {
-          setTimeout(() => {
-            console.log(`Wake up after ${second}!`);
-            this.next()
-          },second*1000)
-          
-        })
-        return this
-      }
-      sleepFirst(second) {
-        this.queue.unshift(() => {
-          setTimeout(() => {
-            console.log(`Wake up after ${second}!`);
-            console.log(this);
-            this.next()
-          },second*1000)   
-        })
-        return this
-      }
-    }
-    LazyMan("Hank").sleep(10).eat("supper").sleepFirst(5)
-  </script>
-</body>
 
+      .inner {
+        width: 50%;
+        padding-bottom: 50%;
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner"></div>
+    </div>
+  </body>
 </html>
+
