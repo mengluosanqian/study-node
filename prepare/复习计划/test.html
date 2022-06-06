@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      @keyframes test {
+        0% {
+          left: 0px;
+        }
+        50% {
+          left: 500ppx;
+        }
+        100% {
+          left: 1000px;
+        }
+      }
       /* .outer {
         width: 400px;
         height: 600px;
@@ -29,12 +40,24 @@
         transform: translate(-50%,-50%);
         margin: 0px auto;
       }
+      .test {
+        width: 200px;
+        height: 50px;
+        background-color: aquamarine;
+        position: relative;
+        /* transition: transform 2s linear ; */
+        animation: test 5s linear alternate;
+      }
+      /* .test:hover {
+        transform: translate(200px,200px);
+      } */
     </style>
   </head>
   <body>
     <!-- <div class="outer">
       <div class="inner"></div>
     </div> -->
+    <div class="test"></div>
     <div class="outer" style="height:100px;background-color: red;">
       <p class="inner">这里边是一段文字</p>
     </div>
