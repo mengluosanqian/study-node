@@ -9,3 +9,4 @@
 9. 设计模式
 10. Object.create
 11. 尾递归函数
+12. polyfill 
