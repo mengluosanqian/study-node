@@ -60,39 +60,144 @@
       } */
   </style>
   <script>
-    new Promise((resolve, reject) => {
-        console.log(1)
-        resolve()
-      })
-      .then(() => { // 微1-1
-        console.log(2)
-        new Promise((resolve, reject) => {
-            console.log(3)
-            setTimeout(() => { // 宏2
-              reject();
-            }, 3 * 1000);
-            resolve() // TODO 注1
+    // const sleep = time => {
+    //   return new Promise(resolve => setTimeout(resolve,time))
+    // }
+    // sleep(1000).then(() => {
+    //   console.log(1);
+    // })
+    // class EventEmitter {
+    //   constructor() {
+    //     this.cache = {}
+    //   }
+    //   on(name,fn) {
+    //     this.cache[name] ? this.cache[name].push(fn) : this.cache[name] = [fn]
+    //   }
+    //   off(name, fn) {
+    //     let tasks = this.cache[name]
+    //     if(tasks) {
+    //       const index = tasks.findIndex(f => f === fn || f.callback === fn)
+    //       if(index >= 0) {
+    //         tasks.splice(index,1)
+    //       }
+    //     }
+    //   }
+    //   emit(name,once = false,...args) {
+    //     if(this.cache[name]) {
+    //       let tasks = this.cache[name].slice()
+    //       for(let fn of tasks) {
+    //         fn(...args)
+    //       }
+    //       if(once) {
+    //         delete this.cache[name]
+    //       }
+    //     }
+    //   }
+    // }
+    const tempArr = [{
+        id: 1,
+        parentId: 0
+      },
+      {
+        id: 2,
+        parentId: 1
+      },
+      {
+        id: 3,
+        parentId: 1
+      },
+      {
+        id: 4,
+        parentId: 2
+      },
+    ];
+
+    function arrayToTree(arr) {
+      arr.forEach(item => {
+        console.log(item);
+        let parentId = item.parentId
+        if (parentId !== 0) {
+          arr.forEach(el => {
+            if (el.id == parentId) {
+              if (!el.children) {
+                el.children = []
+              }
+              el.children.push(item)
+            }
           })
-          .then(() => { // 微1-2  TODO 注2
-            console.log(4)
-            new Promise((resolve, reject) => {
-                console.log(5)
-                resolve();
-              })
-              .then(() => { // 微1-4
-                console.log(7)
-              })
-              .then(() => { // 微1-6
-                console.log(9)
-              })
-          })
-          .then(() => { // 微1-5 TODO 注3
-            console.log(8)
-          })
+        }
+      });
+      return arr.filter(item => item.parentId == 0)
+    }
+    // console.log(arrayToTree(tempArr));
+    const tree = [{
+        id: 1,
+        parentId: 0,
+        children: [{
+          id: 2,
+          parentId: 1,
+          children: [{
+            id: 4,
+            parentId: 2
+          }]
+        }, {
+          id: 3,
+          parentId: 1
+        }]
+      }]
+
+    console.log(tree);
+
+    function treeToArray(tree,newArr = []) {
+      let res = []
+      tree.forEach(item => {
+        const { children } = item
+        if(children) {
+          delete item.children
+          if(children.length) {
+            newArr.push(item)
+            return treeToArray(children,newArr)
+          }
+        }
+        newArr.push(item)
       })
-      .then(() => { // 微1-3
-        console.log(6)
-      })
+      return newArr
+    }
+    console.log(arrayToTree(treeToArray(tree)));
+    // function sleep(callback, time) {
+    //   if (typeof callback === 'function') {
+    //     setTimeout(callback, time)
+    //   }
+    // }
+    // sleep(() => console.log(1), 1000)
+
+    // function side(arr) {
+    //   console.log(arr);
+    //   arr[0] = arr[2];
+    // }
+
+    // function func1(a, b, c = 3) {
+    //   console.log(arguments);
+    //   c = 10;
+    //   // console.log(a,b,c);
+    //   side(arguments);
+    //   // console.log(a,b,c);
+    //   console.log(a + b + c);
+
+    // }
+
+    // function func2(a, b, c) {
+    //   console.log(arguments);
+    //   // console.log(a,b,c);
+    //   c = 10;
+    //   // console.log(a,b,c);
+    //   side(arguments);
+    //   // console.log(a,b,c);
+    //   console.log(a + b + c);
+    //   // console.log(arguments);
+    // }
+    // func1(1, 1, 1);
+    // func2(1, 1, 1);
   </script>
 </head>
 
