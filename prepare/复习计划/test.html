@@ -60,6 +60,49 @@
       } */
   </style>
   <script>
+    // var name = 'global';
+    // var obj = {
+    //   name: 'local',
+    //   foo: function () {
+    //     this.name = 'foo';
+    //     console.log(this.name);
+    //   }.bind(window)
+    // };
+    // var bar = new obj.foo();
+    // setTimeout(function () {
+    //   console.log(window.name);// global
+    // }, 0);
+    // console.log(bar.name);
+
+    // var bar3 = bar2 = bar;
+    // bar2.name = 'foo2';
+    // console.log(bar3.name); 
+    name = 'javascript';
+    let obj = {
+      name: 'obj',
+      A() {
+        this.name += 'this';
+        console.log(this.name)
+      },
+      B(f) {
+        this.name += 'this';
+        console.log(this.name,this);
+        f();
+      },
+      C() {
+        setTimeout(function () {
+          console.log(this.name);
+        }, 1000);
+      }
+    }
+    let a = obj.A;
+    a(); // window javascriptthis
+    obj.B(function () {
+      console.log(this.name,this,'B');
+    });
+    obj.C();
+    console.log(name);
+
     // const sleep = time => {
     //   return new Promise(resolve => setTimeout(resolve,time))
     // }
@@ -131,39 +174,41 @@
     }
     // console.log(arrayToTree(tempArr));
     const tree = [{
-        id: 1,
-        parentId: 0,
+      id: 1,
+      parentId: 0,
+      children: [{
+        id: 2,
+        parentId: 1,
         children: [{
-          id: 2,
-          parentId: 1,
-          children: [{
-            id: 4,
-            parentId: 2
-          }]
-        }, {
-          id: 3,
-          parentId: 1
+          id: 4,
+          parentId: 2
         }]
+      }, {
+        id: 3,
+        parentId: 1
       }]
+    }]
 
-    console.log(tree);
+    // console.log(tree);
 
-    function treeToArray(tree,newArr = []) {
+    function treeToArray(tree, newArr = []) {
       let res = []
       tree.forEach(item => {
-        const { children } = item
-        if(children) {
+        const {
+          children
+        } = item
+        if (children) {
           delete item.children
-          if(children.length) {
+          if (children.length) {
             newArr.push(item)
-            return treeToArray(children,newArr)
+            return treeToArray(children, newArr)
           }
         }
         newArr.push(item)
       })
       return newArr
     }
-    console.log(arrayToTree(treeToArray(tree)));
+    // console.log(arrayToTree(treeToArray(tree)));
     // function sleep(callback, time) {
     //   if (typeof callback === 'function') {
     //     setTimeout(callback, time)

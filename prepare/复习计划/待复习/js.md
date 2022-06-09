@@ -10,3 +10,4 @@
 10. Object.create
 11. 尾递归函数
 12. polyfill 
+13. https://blog.csdn.net/uuuyy_/article/details/122086547 this指向
