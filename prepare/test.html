@@ -1,95 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>抛物线</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      height:100%
+    }
+    .ball{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position:absolute;
+      background-color: rgb(25, 151, 201);
+    }
+    .tools{
+      position: fixed;
+      right: 100px;
+      bottom: 100px;
+    }
+    button{
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-    <script>
-        // function observe(obj, callback) {
-        //     const newObj = {}
-        //     Object.keys(obj).forEach(item => {
-        //         Object.defineProperty(newObj, item, {
-        //             configurable: true,
-        //             enumerable: true,
-        //             get() {
-        //                 return obj[item]
-        //             },
-        //             set(newVal) {
-        //                 obj[item] = newVal
-        //                 callback(item, newVal)
-        //             }
-        //         })
-        //     })
-        //     return newObj
-        // }
-        function observe(obj, callback) {
-            return new Proxy(obj, {
-                get(target,key) {
-                    return target[key]
-                },
-                set(target,key,value) {
-                    target[key] = value
-                    callback(key,value)
-                }
-            })
-        }
-        const obj = observe({
-                name: '小鱼',
-                sex: '女'
-            },
-            (key, value) => {
-                console.log(`属性[${key}]的值被修改为[${value}]`)
-            }
-        )
-
-        // 这段代码执行后，输出 属性[name]的值被修改为[妹纸]
-        obj.name = '小鱿鱼11'
-
-        // 这段代码执行后，输出 属性[sex]的值被修改为[女]
-        obj.sex = '未知'
-        const foo = (function () {
-            let count = 1
-
-            function increase() {
-                return count++
-            }
-            increase.reset = function () {
-                count = 1
-            }
-            return increase
-        })()
-        a = foo();
-        b = foo();
-        c = foo();
-        // 此时  a 的值是1;b的值是2;c的值是3;
-        console.log(a, b, c) // 1 2 3
-
-
-        foo.reset();
-        d = foo(); // d的值是1, 说明foo重新开始计数;
-        console.log(d);
-    </script>
-    <style>
-        .green {
-            background-color: green;
-        }
- 
-        .red {
-            background-color: red;
-        }
- 
-        .blue {
-            background-color: blue;
-        }
-    </style>
-    <div class="green blue red">
-        fsdfasdfasd
-    </div>
+  <div class="tools">
+  <button onclick="move()">开始</button>
+  <button onclick="init()">重置</button>
+</div>
 </body>
+  <script>
+    // 小球起始位置
+    let XStart = 100,
+    YStart = 100,
+    // 抛物线的开始点坐标 结束点坐标
+    XEnd = document.body.clientWidth,
+    YEnd = document.body.clientHeight;
+    let Time = 200;  //运行时间
+    let XSpeed = (XEnd - XStart) / Time; // 水平方向上的速度
+    let A = 2 * (YEnd - YStart)/(Time * Time);  //代入加速度运算公式即Δx=vt+1/2at^2
+    let animaId,ballInstant;
+    let nowX,nowY,loop // 当前位置，循环次数
+
+    const init = ()=>{
+      // js动态创建对象
+      if(ballInstant){
+        stop()
+      }
+      ballInstant = document.createElement('div');
+      ballInstant.className = 'ball';
+      document.body.appendChild(ballInstant);
+      ballInstant.style.top = YStart + 'px';
+      ballInstant.style.left = XStart + 'px';
+      loop= 0;
+      nowX = XStart; //当前X
+      nowY = YStart; //当前Y
+    }
+  
+    // 在函数内部再调用函数自身
+    let move = () => {
+      animaId = requestAnimationFrame(()=>{
+      ballInstant.style.top = nowY + 'px';
+      ballInstant.style.left = nowX + 'px';
+      nowX += XSpeed;
+      nowY += A * loop;
+      console.log(nowX+' , '+nowY);
+      if(nowY >= YEnd || nowX >= XEnd){
+        stop()
+      }
+      move();
+      loop++;
+    })
+    }
+
+    stop = ()=>{ // 停止
+      ballInstant.parentNode.removeChild(ballInstant);
+      ballInstant = null;
+      console.log('delete the ball');
+      cancelAnimationFrame(animaId) 
+    }
+    init();
+  </script>
 
 </html>

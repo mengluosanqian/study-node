@@ -6,3 +6,5 @@
 6. Vuex 中的变量打包之后存在哪里？和全局作用域中的变量有什么区别
 7. https://juejin.cn/post/6844903913410314247#heading-9
 8. https://juejin.cn/post/6890810591968477191 ssr
+9. 预渲染
+10. 

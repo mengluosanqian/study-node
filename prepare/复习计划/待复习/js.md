@@ -11,3 +11,4 @@
 11. 尾递归函数
 12. polyfill 
 13. https://blog.csdn.net/uuuyy_/article/details/122086547 this指向
+14. 性能指标，白屏时间是怎么计算的
