@@ -7,4 +7,8 @@
 7. https://juejin.cn/post/6844903913410314247#heading-9
 8. https://juejin.cn/post/6890810591968477191 ssr
 9. 预渲染
-10. 
+10. v-model原理 -- end
+11. Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？ -- end
+12. Vue 中的 key 有什么作用？ -- end
+13. 实现vuex
+14. watch和watchEffect

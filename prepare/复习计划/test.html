@@ -6,261 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
-    @keyframes test {
-      0% {
-        left: 0px;
-      }
-
-      50% {
-        left: 500ppx;
-      }
-
-      100% {
-        left: 1000px;
-      }
+    .routeView {
+      color: pink;
     }
-
-    /* .outer {
-        width: 400px;
-        height: 600px;
-        background: red;
-      }
-
-      .inner {
-        width: 50%;
-        padding-bottom: 50%;
-        background: blue;
-      } */
-    .outer {
-      /* display: flex;
-        justify-content: center;
-        align-items: center; */
-      position: relative;
+    .routeView2 {
+      color: skyblue;
     }
-
-    .inner {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      margin: 0px auto;
-    }
-
-    .test {
-      width: 200px;
-      height: 50px;
-      background-color: aquamarine;
-      position: relative;
-      /* transition: transform 2s linear ; */
-      animation: test 5s linear alternate;
-    }
-
-    /* .test:hover {
-        transform: translate(200px,200px);
-      } */
   </style>
-  <script>
-    // var name = 'global';
-    // var obj = {
-    //   name: 'local',
-    //   foo: function () {
-    //     this.name = 'foo';
-    //     console.log(this.name);
-    //   }.bind(window)
-    // };
-    // var bar = new obj.foo();
-    // setTimeout(function () {
-    //   console.log(window.name);// global
-    // }, 0);
-    // console.log(bar.name);
-
-    // var bar3 = bar2 = bar;
-    // bar2.name = 'foo2';
-    // console.log(bar3.name); 
-    let obj1 = {
-      a: 111,
-      b: 222
-    }
-    for(let item in obj1) {
-      console.log(obj1[item]);
-    }
-    name = 'javascript';
-    let obj = {
-      name: 'obj',
-      A() {
-        this.name += 'this';
-        console.log(this.name)
-      },
-      B(f) {
-        this.name += 'this';
-        console.log(this.name,this);
-        f();
-      },
-      C() {
-        setTimeout(function () {
-          console.log(this.name);
-        }, 1000);
-      }
-    }
-    let a = obj.A;
-    a(); // window javascriptthis
-    obj.B(function () {
-      console.log(this.name,this,'B');
-    });
-    obj.C();
-    console.log(name);
-
-    // const sleep = time => {
-    //   return new Promise(resolve => setTimeout(resolve,time))
-    // }
-    // sleep(1000).then(() => {
-    //   console.log(1);
-    // })
-    // class EventEmitter {
-    //   constructor() {
-    //     this.cache = {}
-    //   }
-    //   on(name,fn) {
-    //     this.cache[name] ? this.cache[name].push(fn) : this.cache[name] = [fn]
-    //   }
-    //   off(name, fn) {
-    //     let tasks = this.cache[name]
-    //     if(tasks) {
-    //       const index = tasks.findIndex(f => f === fn || f.callback === fn)
-    //       if(index >= 0) {
-    //         tasks.splice(index,1)
-    //       }
-    //     }
-    //   }
-    //   emit(name,once = false,...args) {
-    //     if(this.cache[name]) {
-    //       let tasks = this.cache[name].slice()
-    //       for(let fn of tasks) {
-    //         fn(...args)
-    //       }
-    //       if(once) {
-    //         delete this.cache[name]
-    //       }
-    //     }
-    //   }
-    // }
-    const tempArr = [{
-        id: 1,
-        parentId: 0
-      },
-      {
-        id: 2,
-        parentId: 1
-      },
-      {
-        id: 3,
-        parentId: 1
-      },
-      {
-        id: 4,
-        parentId: 2
-      },
-    ];
-
-    function arrayToTree(arr) {
-      arr.forEach(item => {
-        console.log(item);
-        let parentId = item.parentId
-        if (parentId !== 0) {
-          arr.forEach(el => {
-            if (el.id == parentId) {
-              if (!el.children) {
-                el.children = []
-              }
-              el.children.push(item)
-            }
-          })
-        }
-      });
-      return arr.filter(item => item.parentId == 0)
-    }
-    // console.log(arrayToTree(tempArr));
-    const tree = [{
-      id: 1,
-      parentId: 0,
-      children: [{
-        id: 2,
-        parentId: 1,
-        children: [{
-          id: 4,
-          parentId: 2
-        }]
-      }, {
-        id: 3,
-        parentId: 1
-      }]
-    }]
-
-    // console.log(tree);
-
-    function treeToArray(tree, newArr = []) {
-      let res = []
-      tree.forEach(item => {
-        const {
-          children
-        } = item
-        if (children) {
-          delete item.children
-          if (children.length) {
-            newArr.push(item)
-            return treeToArray(children, newArr)
-          }
-        }
-        newArr.push(item)
-      })
-      return newArr
-    }
-    // console.log(arrayToTree(treeToArray(tree)));
-    // function sleep(callback, time) {
-    //   if (typeof callback === 'function') {
-    //     setTimeout(callback, time)
-    //   }
-    // }
-    // sleep(() => console.log(1), 1000)
-
-    // function side(arr) {
-    //   console.log(arr);
-    //   arr[0] = arr[2];
-    // }
-
-    // function func1(a, b, c = 3) {
-    //   console.log(arguments);
-    //   c = 10;
-    //   // console.log(a,b,c);
-    //   side(arguments);
-    //   // console.log(a,b,c);
-    //   console.log(a + b + c);
-
-    // }
-
-    // function func2(a, b, c) {
-    //   console.log(arguments);
-    //   // console.log(a,b,c);
-    //   c = 10;
-    //   // console.log(a,b,c);
-    //   side(arguments);
-    //   // console.log(a,b,c);
-    //   console.log(a + b + c);
-    //   // console.log(arguments);
-    // }
-    // func1(1, 1, 1);
-    // func2(1, 1, 1);
-  </script>
 </head>
-
 <body>
-  <!-- <div class="outer">
-      <div class="inner"></div>
-    </div> -->
-  <div class="test"></div>
-  <div class="outer" style="height:100px;background-color: red;">
-    <p class="inner">这里边是一段文字</p>
-  </div>
-</body>
+    <ul>
+        <li><a href="/home">home</a></li>
+        <li><a href="/about">about</a></li>
 
+        <div id="routeView"></div>
+    </ul>
+</body>
+<script>
+    let routerView = routeView
+    window.addEventListener('DOMContentLoaded', onLoad)
+    window.addEventListener('popstate', ()=>{
+        routerView.innerHTML = location.pathname
+    })
+    function onLoad () {
+        routerView.innerHTML = location.pathname
+        var linkList = document.querySelectorAll('a[href]')
+        linkList.forEach(el => el.addEventListener('click', function (e) {
+            e.preventDefault()
+            history.pushState(null, '', el.getAttribute('href'))
+            routerView.innerHTML = location.pathname
+        }))
+    }
+
+</script>
 </html>
