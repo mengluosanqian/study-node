@@ -5,38 +5,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
-  <style>
-    .routeView {
-      color: pink;
-    }
-    .routeView2 {
-      color: skyblue;
-    }
-  </style>
 </head>
+
 <body>
-    <ul>
-        <li><a href="/home">home</a></li>
-        <li><a href="/about">about</a></li>
-
-        <div id="routeView"></div>
-    </ul>
+  <div class="header">header</div>
+  <div class="main">
+    <div class="content">content</div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+  <div class="footer">footer</div>
 </body>
-<script>
-    let routerView = routeView
-    window.addEventListener('DOMContentLoaded', onLoad)
-    window.addEventListener('popstate', ()=>{
-        routerView.innerHTML = location.pathname
-    })
-    function onLoad () {
-        routerView.innerHTML = location.pathname
-        var linkList = document.querySelectorAll('a[href]')
-        linkList.forEach(el => el.addEventListener('click', function (e) {
-            e.preventDefault()
-            history.pushState(null, '', el.getAttribute('href'))
-            routerView.innerHTML = location.pathname
-        }))
-    }
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
+  .header,
+  .footer {
+    height: 100px;
+    background: #000;
+    color: seashell;
+  }
+
+  .main {
+    height: 400px;
+    background: #ccc;
+    /* padding-left: 300px;
+    padding-right: 300px; */
+  }
+
+  .content {
+    float: left;
+    width: 100%;
+    height: 400px;
+    background: #f90;
+    margin: 0 300px;
+  }
+
+  .left {
+    float: left;
+    width: 300px;
+    height: 400px;
+    background: purple;
+    /*position: relative;
+     right: 300px;*/
+    margin-left: -100%; 
+  }
+
+  .right {
+    float: left;
+    width: 300px;
+    height: 400px;
+    background: seagreen;
+    margin-left: -300px;
+    /* position: relative;
+    left: 300px; */
+  }
+</style>
+<script>
+  let ipt = document.querySelector('#ipt')
+
+  function debounce(fn, delay) {
+    let timer = null
+    return function () {
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() => {
+        console.log(this, 'this');
+        // fn.call(this)
+        fn()
+      }, delay)
+    }
+  }
+  ipt.oninput = debounce(function () {
+    console.log(this);
+    console.log(this.value);
+  }, 500)
 </script>
+
 </html>
