@@ -51,7 +51,7 @@
     background: purple;
     /*position: relative;
      right: 300px;*/
-    margin-left: -100%; 
+    margin-left: -100%;
   }
 
   .right {
@@ -65,25 +65,18 @@
   }
 </style>
 <script>
-  let ipt = document.querySelector('#ipt')
-
-  function debounce(fn, delay) {
-    let timer = null
-    return function () {
-      if (timer) {
-        clearTimeout(timer)
-      }
-      timer = setTimeout(() => {
-        console.log(this, 'this');
-        // fn.call(this)
-        fn()
-      }, delay)
-    }
-  }
-  ipt.oninput = debounce(function () {
-    console.log(this);
-    console.log(this.value);
-  }, 500)
+async function async1() {
+  let a = await async2().catch(err=> {
+    console.log(err);
+  })
+  console.log(a);
+} 
+function async2() {
+  return new Promise((resolve,reject) => {
+    reject('data')
+  })
+}
+async1()
 </script>
 
 </html>
