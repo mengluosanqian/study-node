@@ -8,13 +8,14 @@
 </head>
 
 <body>
-  <div class="header">header</div>
+  <!-- <div class="header">header</div>
   <div class="main">
     <div class="content">content</div>
     <div class="left">left</div>
     <div class="right">right</div>
   </div>
-  <div class="footer">footer</div>
+  <div class="footer">footer</div> -->
+  <input type="color" name="" id="">
 </body>
 <style>
   * {
@@ -77,6 +78,13 @@ function async2() {
   })
 }
 async1()
+
+let a = {
+  aa: 1
+}
+let b = Object.assign({},a)
+b.aa = 2
+console.log(a,b);
 </script>
 
 </html>
