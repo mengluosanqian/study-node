@@ -66,25 +66,38 @@
   }
 </style>
 <script>
-async function async1() {
-  let a = await async2().catch(err=> {
-    console.log(err);
-  })
-  console.log(a);
-} 
-function async2() {
-  return new Promise((resolve,reject) => {
-    reject('data')
-  })
-}
-async1()
+  async function async1() {
+    let a = await async2().catch(err => {
+      console.log(err);
+    })
+    console.log(a);
+  }
 
-let a = {
-  aa: 1
-}
-let b = Object.assign({},a)
-b.aa = 2
-console.log(a,b);
+  function async2() {
+    return new Promise((resolve, reject) => {
+      reject('data')
+    })
+  }
+  async1()
+
+  let a = {
+    aa: 1
+  }
+  let b = Object.assign({}, a)
+  b.aa = 2
+  console.log(a, b);
+
+  function randomArray(arr) {
+    let length = arr.length
+    for (let i = 0; i < length; i++) {
+      let randomIndex = Math.floor(Math.random() * (length - i));
+      [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]];
+    }
+    return arr
+  }
+  let arr = [1,2,3,4,5,6,7,8,9,10]
+  console.log(randomArray(arr));
+  
 </script>
 
 </html>
