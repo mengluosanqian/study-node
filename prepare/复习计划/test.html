@@ -15,9 +15,26 @@
     <div class="right">right</div>
   </div>
   <div class="footer">footer</div> -->
-  <input type="color" name="" id="">
+  <!-- <input type="color" name="" id=""> -->
+  <div id="block"></div>
 </body>
 <style>
+  body {
+    position: relative;
+    height: 2000px;
+    width: 100%;
+  }
+
+  #block {
+    width: 200px;
+    height: 300px;
+    background-color: antiquewhite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -95,9 +112,53 @@
     }
     return arr
   }
-  let arr = [1,2,3,4,5,6,7,8,9,10]
+  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   console.log(randomArray(arr));
-  
+
+  function repeat(func, times, wait) {
+    // TODO
+    let count = 1
+    return function (arg) {
+      func(arg)
+      let timer = setInterval(() => {
+        count++
+        func(arg)
+        if (count == times) {
+          clearInterval(timer)
+        }
+      }, wait);
+    }
+  }
+  const repeatFunc = repeat(alert, 4, 3000);
+  // 调用这个 repeatFunc ("hellworld")，会alert4次 helloworld, 每次间隔3秒
+  // repeatFunc("hellworld")
+  function throttle(fn, delay) {
+    let timer = null
+    return function () {
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(this)
+          timer = null
+        }, delay)
+      }
+    }
+  }
+  window.onscroll = throttle(function () {
+    console.log('测试节流');
+  }, 3000)
+
+  function A() {
+    // 记录调用的次数
+    let count = 0
+    return function () {
+      count++
+      return count % 2 === 0 ? 2 : 1
+    }
+  }
+  let aa = A()
+  console.log(aa());
+  console.log(aa());
+  console.log(aa());
 </script>
 
 </html>
