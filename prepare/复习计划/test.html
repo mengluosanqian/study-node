@@ -147,18 +147,37 @@
     console.log('测试节流');
   }, 3000)
 
-  function A() {
-    // 记录调用的次数
-    let count = 0
-    return function () {
-      count++
-      return count % 2 === 0 ? 2 : 1
-    }
+//   function A() {
+//     // 记录调用的次数
+//     let count = 0
+//     return function () {
+//       count++
+//       return count % 2 === 0 ? 2 : 1
+//     }
+//   }
+//   let aa = A()
+//   console.log(aa());
+//   console.log(aa());
+//   console.log(aa());
+//   a = foo();b = foo();c = foo();
+// // a === 1;b === 2;c === 3;
+// foo.clear();d = foo(); //d === 1;
+function indexAdd() {
+  let index = 1
+  function foo() {
+    return index++
   }
-  let aa = A()
-  console.log(aa());
-  console.log(aa());
-  console.log(aa());
+  foo.clear = function() {
+    index = 1
+  }
+  return foo
+} 
+let foo = indexAdd()
+a = foo();b = foo();c = foo();
+console.log(a,b,c);
+// a === 1;b === 2;c === 3;
+foo.clear();d = foo(); //d === 1;
+console.log(d);
 </script>
 
 </html>
