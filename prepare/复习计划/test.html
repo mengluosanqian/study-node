@@ -147,37 +147,78 @@
     console.log('测试节流');
   }, 3000)
 
-//   function A() {
-//     // 记录调用的次数
-//     let count = 0
-//     return function () {
-//       count++
-//       return count % 2 === 0 ? 2 : 1
-//     }
-//   }
-//   let aa = A()
-//   console.log(aa());
-//   console.log(aa());
-//   console.log(aa());
-//   a = foo();b = foo();c = foo();
-// // a === 1;b === 2;c === 3;
-// foo.clear();d = foo(); //d === 1;
-function indexAdd() {
-  let index = 1
-  function foo() {
-    return index++
+  //   function A() {
+  //     // 记录调用的次数
+  //     let count = 0
+  //     return function () {
+  //       count++
+  //       return count % 2 === 0 ? 2 : 1
+  //     }
+  //   }
+  //   let aa = A()
+  //   console.log(aa());
+  //   console.log(aa());
+  //   console.log(aa());
+  //   a = foo();b = foo();c = foo();
+  // // a === 1;b === 2;c === 3;
+  // foo.clear();d = foo(); //d === 1;
+  function indexAdd() {
+    let index = 1
+
+    function foo() {
+      return index++
+    }
+    foo.clear = function () {
+      index = 1
+    }
+    return foo
   }
-  foo.clear = function() {
-    index = 1
+  let foo = indexAdd()
+  a = foo();
+  b = foo();
+  c = foo();
+  console.log(a, b, c);
+  // a === 1;b === 2;c === 3;
+  foo.clear();
+  d = foo(); //d === 1;
+  console.log(d);
+
+  function _flat(arr, depth = Infinity) {
+    if (!Array.isArray(arr)) {
+      return new Error('不是数组')
+    }
+    let res = []
+    for(let i = 0;i < arr.length;i++) {
+      if(Array.isArray(arr[i]) && depth >= 1) {
+        res = res.concat(_flat(arr[i],depth-1))
+      } else {
+        res.push(arr[i])
+      }
+    }
+    return res
   }
-  return foo
-} 
-let foo = indexAdd()
-a = foo();b = foo();c = foo();
-console.log(a,b,c);
-// a === 1;b === 2;c === 3;
-foo.clear();d = foo(); //d === 1;
-console.log(d);
+  let arr1 = [1,2,3,4,[5,6,73,6,[6,45,3,[5,4,6]]],[34,2,5,[6,54,[3,23]]]]
+  let newArr = _flat(arr1)
+  console.log(newArr);
+  // function _filter(arr,fn) {
+  //   let res = []
+  //   arr.reduce((prev,next) => {
+  //     if(fn(next)) {
+  //       res.push(next)
+  //     }
+  //   },[])
+  //   return res
+  // }
+  Array.prototype._filter = function(fn) {
+    let res = []
+    this.reduce((prev,next) => {
+      if(fn(next)) {
+        res.push(next)
+      }
+    },[])
+    return res
+  }
+  console.log(newArr._filter(item => item > 10));
 </script>
 
 </html>
