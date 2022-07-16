@@ -28,12 +28,53 @@
     button{
       cursor: pointer;
     }
+    .outer {
+      width: 1000px;
+      height: 600px;
+      background-color: aquamarine;
+      padding: 30px;
+    }
+    .inner {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      background-color: blueviolet;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .top {
+      margin-top: 50px;
+    }
+    .box {
+      flex: 1;
+      width: calc((100% - 60px) / 3);
+      min-width: calc((100% - 60px) / 3);
+      max-width: calc((100% - 60px) / 3);
+      background-color: bisque;
+      margin-right: 20px;
+      margin-top: 20px;
+    }
+    .none {
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
-  <div class="tools">
+  <!-- <div class="tools">
   <button onclick="move()">开始</button>
   <button onclick="init()">重置</button>
+</div> -->
+<div class="outer">
+  <div class="inner">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  <!-- </div>
+  <div class="inner top"> -->
+    <div class="box"></div>
+    <!-- <div class="box none"></div>
+    <div class="box none"></div> -->
+  </div>
 </div>
 </body>
   <script>
