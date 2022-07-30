@@ -19,7 +19,46 @@
     <div class="inner font">
         这是inner font里面的内容这是inner font里面的内容这是inner font里面的内容这是inner font里面的内容这是inner font里面的内容这是inner font里面的内容
     </div>
+    <div class="sanjiao"></div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
     <style>
+        ul {
+            display: flex;
+            width: 1000px;
+            list-style: none;
+            flex-wrap: wrap;
+            width: 1000px;
+            justify-content: space-between;
+            
+        }
+        ul li {
+            width: 200px;
+            height: 360px;
+            background-color: red;
+            margin: 10px;
+        }
+        ul li:last-child:nth-child(4n + 2) {
+            margin-right: calc((100% - 200px)/3*2);
+        }
+        ul li:last-child:nth-child(4n + 3) {
+            margin-right: calc((100% - 200px)/3*1);
+        }
+        .sanjiao {
+            width: 0px;
+            border-top: 100px solid red;
+            border-bottom: 100px solid transparent;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            
+        }
         .outer {
             font-size: 20px;
             width: 1000px;
@@ -69,6 +108,20 @@
             return a.age - b.age
         })
         console.log(newStudent);
+
+        const testURL = 'https://a.b.com/?name=tom&age=18'; 
+         const testURL2 = 'https://www.huawei.com/?jxd=1&age=9999&sex=man&ccccc=aaaaa';
+        function parseURL(testURL) {
+            let str = testURL.split('?')[1]
+            let arr = str.split('&')
+            let result = {}
+            for(let i = 0;i < arr.length;i++) {
+                let node = arr[i].split('=')
+                result[node[0]] = node[1]
+            }
+            return result
+        }
+        console.log(parseURL(testURL2));
     </script>
 </body>
 
