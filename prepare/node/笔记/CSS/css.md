@@ -152,4 +152,17 @@ display:-webkit-box;         // 作为弹性伸缩盒子模型显示。
 #### bfc的特点和作用
 
 
+### ios系统中元素被触摸时产生的半透明灰色遮罩怎么去掉
+```css
+a,button,input,textarea {
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+```
 
+### 禁止ios和android用户选中文字
+```css
+html,body {
+    user-select:none;
+    -webkit-user-select:none
+}
+```
