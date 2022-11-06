@@ -17,6 +17,7 @@
   <div class="footer">footer</div> -->
   <!-- <input type="color" name="" id=""> -->
   <div id="block"></div>
+  <div id="trans"></div>
 </body>
 <style>
   body {
@@ -24,7 +25,16 @@
     height: 2000px;
     width: 100%;
   }
-
+  #trans {
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+    transition: transform 1s easy;
+  }
+  body:hover {
+    transform: translate(1000px,500px);
+    transition-duration: 2s;
+  }
   #block {
     width: 200px;
     height: 300px;
@@ -219,6 +229,34 @@
     return res
   }
   console.log(newArr._filter(item => item > 10));
+
+
+  const testURL2 = 'https://www.huawei.com/?jxd=1&age=9999&sex=man&ccccc=aaaaa';
+  function urlToObj(url) {
+    let arr = url.split('?')[1].split('&')
+    let obj = {}
+    for(let i = 0;i < arr.length;i++) {
+      [key,value] = arr[i].split('=')
+      obj[key] = value
+    }
+    return obj
+  }
+  console.log(urlToObj(testURL2))
+
+  let p1 = new Promise((resolve,reject) => {
+    return reject(1)
+  })
+  let p2 = new Promise((resolve,reject) => {
+    return resolve(2)
+  })
+  let p3 = new Promise((resolve,reject) => {
+    return resolve(3)
+  })
+  p2.then(res => {
+    console.log(res)
+  },e => {
+    console.log(e)
+  })
 </script>
 
 </html>

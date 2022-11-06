@@ -79,6 +79,15 @@
 		// dingwei.style.position = 'absolute'
 		dingwei.style.left = (document.body.scrollWidth - dingwei.offsetWidth) / 2 + 'px'
 		dingwei.style.top = (document.body.scrollHeight - dingwei.offsetHeight) / 2 + 'px'
+
+		let a = {
+			aa: 11,
+			bb: 22
+		}
+		let b = a
+		b.aa = 12
+		console.log(a);
+		console.log(b);
 	</script>
 </body>
 

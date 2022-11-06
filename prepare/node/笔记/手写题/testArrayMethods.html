@@ -19,10 +19,10 @@
                 if(timer) {
                     clearTimeout(timer)
                 }
-                let context = this
-                let arg = arguments
+                // let context = this
+                // let arg = arguments
                 timer = setTimeout(() => {
-                    callback.call(context,arg)
+                    callback.call(this,arguments)
                 },delay)
             }
         }
@@ -42,6 +42,22 @@
         window,onscroll = throttle(function() {
             console.log('测试节流');
         },500)
+        window.val = 1
+        var json = {
+            val: 10,
+            dbl: function() {
+                this.val *= 2
+            }
+        }
+        json.dbl()
+        var dbl = json.dbl
+        dbl()
+        json.dbl.call(window)
+        console.log(window.val + json.val)
+
+        let a = 0
+        console.log(a)
+        a += 1
     </script>
     <style>
         body{

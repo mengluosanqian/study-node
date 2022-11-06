@@ -11,4 +11,4 @@
 11. Vue 怎么用 vm.$set() 解决对象新增属性不能响应的问题？ -- end
 12. Vue 中的 key 有什么作用？ -- end
 13. 实现vuex
-14. watch和watchEffect
+14. watch和watchEffect 
